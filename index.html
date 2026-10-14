@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outreach — Websites. Engineered.</title>
+    <script>
+      // always open at the top: no scroll restore on reload/back, no jump to a #section from the URL
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+      const oxTop = () => window.scrollTo(0, 0);
+      oxTop(); addEventListener('DOMContentLoaded', oxTop); addEventListener('load', () => { oxTop(); requestAnimationFrame(oxTop); });
+      addEventListener('pageshow', (e) => { if (e.persisted) oxTop(); });
+    </script>
     <script src="./theme.js"></script>
     <script src="./lang.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
