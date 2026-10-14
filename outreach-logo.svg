@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="260" viewBox="0 0 1080 260" fill="none" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="210" viewBox="20 14 680 210" fill="none" role="img" aria-labelledby="title desc">
   <title id="title">Outreach</title>
   <desc id="desc">Bold orange gradient identity for Outreach, a web development and hosting company.</desc>
   <defs>
@@ -20,6 +20,4 @@
   <path d="M34 58 115 27 196 58V164L115 212 34 164V58Z" stroke="url(#ember)" stroke-width="5" opacity=".8"/>
   <circle cx="115" cy="101" r="7" fill="#FFAB5F"/>
   <text x="250" y="143" fill="url(#type)" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="88" font-weight="900" letter-spacing="-2.5">Outreach</text>
-  <path d="M257 169H799" stroke="url(#type)" stroke-width="3" opacity=".8"/>
-  <text x="260" y="205" fill="#E87935" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="16" font-weight="750" letter-spacing="5.5">WEB DEVELOPMENT  ·  HOSTING</text>
 </svg>

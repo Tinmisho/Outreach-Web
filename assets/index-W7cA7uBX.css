@@ -164,3 +164,20 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;bac
 /* hide the vertical scrollbar (scrolling itself still works) */
 html,body{scrollbar-width:none;-ms-overflow-style:none}
 html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+/* logo without the tagline: same mark size */
+.ox-brand__logo{height:56px}
+.ox-site__logo img{height:clamp(36px,4vw,52px)}
+@media (width<=560px){.ox-brand__logo{height:40px}}
+/* grid: fades out around the laptop and phone on the first screen (--gh: 1 at the top, 0 once scrolled) */
+body::before{-webkit-mask-image:radial-gradient(ellipse 38% 50% at 72% 52%,rgb(0 0 0/calc(1 - var(--gh,1))) 35%,#000 100%),radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 38% 50% at 72% 52%,rgb(0 0 0/calc(1 - var(--gh,1))) 35%,#000 100%),radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%);-webkit-mask-composite:source-in;mask-composite:intersect}
+@media (width<900px),(max-aspect-ratio:6/5){body::before{-webkit-mask-image:radial-gradient(ellipse 48% 30% at 50% 66%,rgb(0 0 0/calc(1 - var(--gh,1))) 35%,#000 100%),radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 48% 30% at 50% 66%,rgb(0 0 0/calc(1 - var(--gh,1))) 35%,#000 100%),radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%)}}
+/* phones: headline at the top, the 3D phone in the lower part of the screen */
+@media (width<760px) and (max-aspect-ratio:1/1){
+  .hero{align-items:start;padding-top:88px}
+  .hero__stack{gap:14px}
+  .hero__title{font-size:clamp(1.9rem,8.6vw,2.4rem);line-height:1.08}
+  .hero__lede{font-size:.92rem;line-height:1.55;max-width:34ch}
+  .hero__actions{flex-wrap:nowrap;gap:10px}
+  .hero__actions .btn{width:auto;height:42px;padding:0 16px;font-size:13px}
+  .hero__hint{display:none}
+}

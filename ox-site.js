@@ -5,7 +5,7 @@
   const html = `
   <div class="ox-site__inner">
     <nav class="ox-site__nav" aria-label="Main">
-      <a class="ox-site__logo" href="#ox-site" aria-label="Outreach home"><img src="./outreach-logo.svg" alt="Outreach — web development and hosting" width="1080" height="260"></a>
+      <a class="ox-site__logo" href="#ox-site" aria-label="Outreach home"><img src="./outreach-logo.svg" alt="Outreach — web development and hosting" width="680" height="210"></a>
       <div class="ox-site__links">
         <a href="#showcase">What we do</a>
         <a href="#cta">How it works</a>
@@ -51,6 +51,9 @@
     requestAnimationFrame(() => dispatchEvent(new Event('resize')));
     return true;
   };
+  // the grid fades around the devices on the first screen; bring it back as the page scrolls on
+  const gridHole = () => { const h = document.querySelector('.hero'); const k = h ? Math.min(Math.max(scrollY / ((h.offsetHeight || innerHeight) * 0.6), 0), 1) : 1; document.body.style.setProperty('--gh', (1 - k).toFixed(3)); };
+  addEventListener('scroll', gridHole, { passive: true }); addEventListener('load', gridHole); gridHole();
   if (!mount()) {
     const mo = new MutationObserver(() => { if (mount()) mo.disconnect(); });
     mo.observe(document.getElementById('root') || document.body, { childList: true, subtree: true });

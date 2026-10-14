@@ -55,18 +55,18 @@ const __lpGeo = (o) =>
   });
 
 /** Keyboard: 5 rows in a MacBook layout (the function row is the Touch Bar), each row scaled to the same width. */
-const __lpKW = 2.24, __lpTBz = -0.88, __lpTBd = 0.085;
+const __lpKW = 2.6, __lpTBz = -0.925, __lpTBd = 0.11;
 function __lpKeys() {
   const o = __lpNew();
   const W = __lpKW, gap = 0.016, top = 0.1;
   const rows = [
-    { d: 0.152, k: [...Array(13).fill(1), 1.5] },
-    { d: 0.152, k: [1.5, ...Array(13).fill(1)] },
-    { d: 0.152, k: [1.8, ...Array(11).fill(1), 1.8] },
-    { d: 0.152, k: [2.3, ...Array(10).fill(1), 2.3] },
-    { d: 0.152, k: [1, 1, 1, 1.25, 5.4, 1.25, 1, 1, 1] },
+    { d: 0.158, k: [...Array(13).fill(1), 1.5] },
+    { d: 0.158, k: [1.5, ...Array(13).fill(1)] },
+    { d: 0.158, k: [1.8, ...Array(11).fill(1), 1.8] },
+    { d: 0.158, k: [2.3, ...Array(10).fill(1), 2.3] },
+    { d: 0.158, k: [1, 1, 1, 1.25, 5.4, 1.25, 1, 1, 1] },
   ];
-  let z = __lpTBz + __lpTBd + gap * 1.5;
+  let z = __lpTBz + __lpTBd + gap * 1.6;
   for (const row of rows) {
     const units = row.k.reduce((s, x) => s + x, 0);
     const unit = (W - gap * (row.k.length - 1)) / units;
@@ -84,48 +84,40 @@ function __lpKeys() {
 /** Touch Bar: glowing strip above the keyboard (esc, navigation, search, theme swatches, brightness, volume). */
 function __lpTouchBar() {
   const cv = document.createElement(`canvas`);
-  cv.width = 2048; cv.height = 84;
-  const g = cv.getContext(`2d`), H = 84, mid = H / 2;
-  g.fillStyle = `#050506`; g.fillRect(0, 0, 2048, H);
-  const key = (x, w, fill = `#2c2c2e`) => { g.fillStyle = fill; g.beginPath(); g.roundRect(x, 10, w, H - 20, 10); g.fill(); };
+  cv.width = 2048; cv.height = 96;
+  const g = cv.getContext(`2d`), H = 96, mid = H / 2;
+  g.fillStyle = `#07070a`; g.fillRect(0, 0, 2048, H);
+  const grad = (x0, x1) => { const t = g.createLinearGradient(x0, 0, x1, 0); t.addColorStop(0, __oxT.a); t.addColorStop(.5, __oxT.b); t.addColorStop(1, __oxT.c); return t; };
+  const key = (x, w, fill = `#3a3a40`) => { g.fillStyle = fill; g.beginPath(); g.roundRect(x, 9, w, H - 18, 14); g.fill(); };
   g.textBaseline = `middle`; g.textAlign = `center`;
   // esc
-  key(16, 120); g.fillStyle = `#f2f2f7`; g.font = `500 28px system-ui, sans-serif`; g.fillText(`esc`, 76, mid + 1);
+  key(14, 130, `#4a4a52`); g.fillStyle = `#ffffff`; g.font = `600 32px system-ui, sans-serif`; g.fillText(`esc`, 79, mid + 1);
   // back / forward
-  key(170, 86); key(262, 86);
-  g.strokeStyle = `#f2f2f7`; g.lineWidth = 5; g.lineCap = `round`; g.lineJoin = `round`;
-  g.beginPath(); g.moveTo(220, mid - 13); g.lineTo(207, mid); g.lineTo(220, mid + 13); g.stroke();
-  g.beginPath(); g.moveTo(298, mid - 13); g.lineTo(311, mid); g.lineTo(298, mid + 13); g.stroke();
-  // search pill
-  key(372, 560, `#1c1c1e`);
-  g.strokeStyle = `#8e8e93`; g.lineWidth = 4; g.beginPath(); g.arc(410, mid - 3, 11, 0, Math.PI * 2); g.stroke();
-  g.beginPath(); g.moveTo(418, mid + 5); g.lineTo(427, mid + 14); g.stroke();
-  g.textAlign = `left`; g.fillStyle = `#8e8e93`; g.font = `400 27px system-ui, sans-serif`; g.fillText(`outreach`, 444, mid + 1);
-  // theme swatches
-  [__oxT.a, __oxT.b, __oxT.c, __oxT.amber].forEach((c, i) => { g.fillStyle = c; g.beginPath(); g.arc(1000 + i * 70, mid, 22, 0, Math.PI * 2); g.fill(); });
+  key(166, 92); key(266, 92);
+  g.strokeStyle = `#ffffff`; g.lineWidth = 6; g.lineCap = `round`; g.lineJoin = `round`;
+  g.beginPath(); g.moveTo(219, mid - 15); g.lineTo(204, mid); g.lineTo(219, mid + 15); g.stroke();
+  g.beginPath(); g.moveTo(305, mid - 15); g.lineTo(320, mid); g.lineTo(305, mid + 15); g.stroke();
+  // search pill with a gradient edge
+  g.fillStyle = grad(380, 960); g.beginPath(); g.roundRect(378, 9, 584, H - 18, 16); g.fill();
+  g.fillStyle = `#16161b`; g.beginPath(); g.roundRect(382, 13, 576, H - 26, 13); g.fill();
+  g.strokeStyle = __oxT.b; g.lineWidth = 5; g.beginPath(); g.arc(422, mid - 3, 13, 0, Math.PI * 2); g.stroke();
+  g.beginPath(); g.moveTo(432, mid + 7); g.lineTo(443, mid + 18); g.stroke();
+  g.textAlign = `left`; g.fillStyle = `#ffffff`; g.font = `500 31px system-ui, sans-serif`; g.fillText(`outreach`, 462, mid + 1);
+  // theme swatches (glowing)
+  [__oxT.a, __oxT.b, __oxT.c, __oxT.amber].forEach((c, i) => { const x = 1020 + i * 74; g.shadowColor = c; g.shadowBlur = 18; g.fillStyle = c; g.beginPath(); g.arc(x, mid, 27, 0, Math.PI * 2); g.fill(); });
+  g.shadowBlur = 0;
   // brightness slider
-  key(1300, 460, `#1c1c1e`);
-  const sg = g.createLinearGradient(1350, 0, 1700, 0); sg.addColorStop(0, __oxT.a); sg.addColorStop(1, __oxT.b);
-  g.fillStyle = `#3a3a3c`; g.beginPath(); g.roundRect(1350, mid - 4, 370, 8, 4); g.fill();
-  g.fillStyle = sg; g.beginPath(); g.roundRect(1350, mid - 4, 250, 8, 4); g.fill();
-  g.fillStyle = `#f2f2f7`; g.beginPath(); g.arc(1600, mid, 15, 0, Math.PI * 2); g.fill();
-  g.strokeStyle = `#f2f2f7`; g.lineWidth = 3; g.beginPath(); g.arc(1325, mid, 7, 0, Math.PI * 2); g.stroke();
-  for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; g.beginPath(); g.moveTo(1325 + Math.cos(a) * 11, mid + Math.sin(a) * 11); g.lineTo(1325 + Math.cos(a) * 15, mid + Math.sin(a) * 15); g.stroke(); }
+  key(1318, 450, `#1e1e24`);
+  g.fillStyle = `#4a4a52`; g.beginPath(); g.roundRect(1384, mid - 6, 360, 12, 6); g.fill();
+  g.fillStyle = grad(1384, 1640); g.beginPath(); g.roundRect(1384, mid - 6, 256, 12, 6); g.fill();
+  g.fillStyle = `#ffffff`; g.shadowColor = __oxT.b; g.shadowBlur = 14; g.beginPath(); g.arc(1640, mid, 19, 0, Math.PI * 2); g.fill(); g.shadowBlur = 0;
+  g.strokeStyle = __oxT.amber; g.lineWidth = 4; g.beginPath(); g.arc(1350, mid, 9, 0, Math.PI * 2); g.stroke();
+  for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; g.beginPath(); g.moveTo(1350 + Math.cos(a) * 14, mid + Math.sin(a) * 14); g.lineTo(1350 + Math.cos(a) * 19, mid + Math.sin(a) * 19); g.stroke(); }
   // volume + mute
-  key(1784, 110); key(1904, 110);
-  const spk = (x) => { g.fillStyle = `#f2f2f7`; g.beginPath(); g.moveTo(x - 14, mid - 7); g.lineTo(x - 6, mid - 7); g.lineTo(x + 4, mid - 15); g.lineTo(x + 4, mid + 15); g.lineTo(x - 6, mid + 7); g.lineTo(x - 14, mid + 7); g.closePath(); g.fill(); };
-  spk(1830); g.strokeStyle = `#f2f2f7`; g.lineWidth = 3.5; g.beginPath(); g.arc(1836, mid, 10, -0.9, 0.9); g.stroke(); g.beginPath(); g.arc(1836, mid, 18, -0.9, 0.9); g.stroke();
-  spk(1952); g.beginPath(); g.moveTo(1964, mid - 8); g.lineTo(1980, mid + 8); g.moveTo(1980, mid - 8); g.lineTo(1964, mid + 8); g.stroke();
-  return cv;
-}
-
-/** Speaker grille: a fine grid of holes, drawn on a transparent canvas. */
-function __lpGrille() {
-  const cv = document.createElement(`canvas`);
-  cv.width = 96; cv.height = 512;
-  const g = cv.getContext(`2d`);
-  g.fillStyle = `rgba(28,29,33,.78)`;
-  for (let y = 6; y < 512; y += 11) for (let x = 6 + ((y / 11) % 2) * 5; x < 96; x += 11) { g.beginPath(); g.arc(x, y, 2.6, 0, Math.PI * 2); g.fill(); }
+  key(1786, 118); key(1914, 118);
+  const spk = (x) => { g.fillStyle = `#ffffff`; g.beginPath(); g.moveTo(x - 16, mid - 8); g.lineTo(x - 7, mid - 8); g.lineTo(x + 5, mid - 17); g.lineTo(x + 5, mid + 17); g.lineTo(x - 7, mid + 8); g.lineTo(x - 16, mid + 8); g.closePath(); g.fill(); };
+  spk(1834); g.strokeStyle = __oxT.b; g.lineWidth = 4; g.beginPath(); g.arc(1841, mid, 11, -0.9, 0.9); g.stroke(); g.beginPath(); g.arc(1841, mid, 20, -0.9, 0.9); g.stroke();
+  spk(1962); g.strokeStyle = __oxT.c; g.beginPath(); g.moveTo(1975, mid - 9); g.lineTo(1993, mid + 9); g.moveTo(1993, mid - 9); g.lineTo(1975, mid + 9); g.stroke();
   return cv;
 }
 
@@ -137,6 +129,7 @@ function __lpScreen() {
   const LT = !0;
   const BG = LT ? `#faf7f2` : `#07070c`, FG = LT ? `#1c1612` : `#f4f5fb`, MUT = LT ? `#5f564d` : `#a6abc4`,
     GRID = LT ? `rgba(0,0,0,.06)` : `rgba(255,255,255,.05)`, CARD = LT ? `rgba(0,0,0,.04)` : `rgba(255,255,255,.06)`, LINE = LT ? `rgba(0,0,0,.14)` : `rgba(255,255,255,.16)`;
+  g.beginPath(); g.roundRect(0, 0, 1600, 990, 34); g.clip(); // rounded display corners
   g.fillStyle = BG; g.fillRect(0, 0, 1600, 990);
   g.strokeStyle = GRID; g.lineWidth = 1;
   for (let x = 0; x < 1600; x += 56) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 990); g.stroke(); }
@@ -151,7 +144,7 @@ function __lpScreen() {
   g.fillStyle = FG; g.font = `700 40px system-ui, sans-serif`; g.fillText(`outreach.`, 142, 89);
   g.fillStyle = MUT; g.font = `500 26px system-ui, sans-serif`;
   [`What we do`, `How it works`, `Pricing`].forEach((t, i) => g.fillText(t, 820 + i * 200, 85));
-  { const im = new Image(); im.onload = () => { g.fillStyle = BG; g.fillRect(70, 34, 440, 84); g.filter = `hue-rotate(${__oxT.hue})`; g.drawImage(im, 74, 34, 349, 84); g.filter = `none`; if (__lpTex) __lpTex.needsUpdate = !0; }; im.src = `./outreach-logo.svg`; }
+  { const im = new Image(); im.onload = () => { g.fillStyle = BG; g.fillRect(70, 34, 440, 84); g.filter = `hue-rotate(${__oxT.hue})`; g.drawImage(im, 74, 34, 272, 84); g.filter = `none`; if (__lpTex) __lpTex.needsUpdate = !0; }; im.src = `./outreach-logo.svg`; }
   g.fillStyle = __oxT.a; g.beginPath(); g.roundRect(1380, 50, 150, 54, 12); g.fill();
   g.fillStyle = `#0c0b10`; g.font = `700 24px system-ui, sans-serif`; g.fillText(`Let's talk ↗`, 1400, 85);
   // hero
@@ -183,20 +176,21 @@ function __lpScreen() {
 }
 
 let __lpCache = null;
-let __lpScreenMesh = null, __lpLook = null, __lpLayer = null, __lpBezel = null, __lpBrand = null, __lpTex = null, __lpPaused = !1, __lpResume = null;
+let __lpBezelGeo = null, __lpScreenMesh = null, __lpLook = null, __lpLayer = null, __lpBezel = null, __lpBrand = null, __lpTex = null, __lpPaused = !1, __lpResume = null;
 /** 0 -> 1 over the first 85% of the hero scroll, smoothstepped. */
+/** Phones (narrow portrait screens) show only the phone, centred, and the dive goes into its screen. */
+const __lpIsMobile = () => innerWidth < 760 && innerWidth / innerHeight < 1;
 const __lpDive = (h) => { const x = Math.min(Math.max(h / 0.85, 0), 1); return x * x * (3 - 2 * x); };
 const __lpData = () =>
   (__lpCache ??= {
-    base: __lpBox(__lpNew(), 3.0, 0.09, 2.05, 0.045, 4, 0, 0.045, 0),
-    deck: __lpBox(__lpNew(), 2.7, 0.004, 1.02, 0.002, 1, 0, 0.0895, -0.405),
+    base: __lpSlab(3.0, 2.05, 0.09, 0.13, 10),
+    deck: __lpBox(__lpNew(), 2.72, 0.004, 1.07, 0.002, 1, 0, 0.0895, -0.41),
     keys: __lpKeys(),
-    pad: __lpBox(__lpNew(), 1.5, 0.004, 0.8, 0.03, 3, 0, 0.0905, 0.53),
+    pad: __lpBox(__lpNew(), 1.5, 0.004, 0.76, 0.03, 3, 0, 0.0905, 0.57),
     tb: __lpBox(__lpNew(), __lpKW - __lpTBd - 0.02, 0.01, __lpTBd, 0.008, 2, -(__lpTBd + 0.02) / 2, 0.093, __lpTBz + __lpTBd / 2),
     tid: __lpBox(__lpNew(), __lpTBd, 0.01, __lpTBd, 0.012, 2, __lpKW / 2 - __lpTBd / 2, 0.093, __lpTBz + __lpTBd / 2),
     tbScreen: __lpTouchBar(),
-    grille: __lpGrille(),
-    lid: __lpBox(__lpNew(), 3.0, 0.045, 2.03, 0.035, 4, 0, 0.0225, 1.015),
+    lid: __lpSlab(3.0, 2.03, 0.045, 0.13, 10),
     screen: __lpScreen(),
   });
 
@@ -243,7 +237,7 @@ function __lpPhoneScreen() {
   g.fillStyle = __oxT.a; g.beginPath(); g.roundRect(40, 128, 46, 46, 11); g.fill();
   g.fillStyle = `#1c1612`; g.font = `800 36px system-ui, sans-serif`; g.fillText(`Outreach`, 98, 164);
   g.fillStyle = `#1c1612`; [0, 14, 28].forEach((d) => g.fillRect(522, 136 + d, 38, 5));
-  { const im = new Image(); im.onload = () => { g.fillStyle = `#faf7f2`; g.fillRect(30, 116, 380, 74); g.filter = `hue-rotate(${__oxT.hue})`; g.drawImage(im, 34, 116, 307, 74); g.filter = `none`; if (__lpPhoneTex) __lpPhoneTex.needsUpdate = !0; }; im.src = `./outreach-logo.svg`; }
+  { const im = new Image(); im.onload = () => { g.fillStyle = `#faf7f2`; g.fillRect(30, 116, 380, 74); g.filter = `hue-rotate(${__oxT.hue})`; g.drawImage(im, 34, 116, 240, 74); g.filter = `none`; if (__lpPhoneTex) __lpPhoneTex.needsUpdate = !0; }; im.src = `./outreach-logo.svg`; }
   // hero
   g.fillStyle = __oxT.d; g.font = `600 20px ui-monospace, monospace`; g.fillText(`> DIGITAL ENGINEERING`, 44, 300);
   g.fillStyle = `#1c1612`; g.font = `800 96px system-ui, sans-serif`; g.fillText(`Websites.`, 38, 410);
@@ -273,13 +267,14 @@ function __lpPhone() {
     glass: __lpSlab(0.775, 1.595, 0.004, 0.118, 8),
     screen: __lpPhoneScreen(),
   });
+  const M = __lpIsMobile();
   return (0, f.jsxs)(`group`, {
-    position: [2.12, 0.8, 0.28], rotation: [-0.06, -0.42, 0],
+    position: M ? [0, -0.45, 0.3] : [2.12, 0.8, 0.28], rotation: M ? [0.05, -0.28, 0] : [-0.06, -0.42, 0], scale: M ? 1.05 : 1,
     children: [
       (0, f.jsxs)(`mesh`, { children: [__lpGeo(P.body), (0, f.jsx)(`meshStandardMaterial`, { color: `#a7abb2`, metalness: 0.5, roughness: 0.3, envMapIntensity: 0.45 })] }),
       (0, f.jsxs)(`mesh`, { position: [0, 0, 0.0445], children: [__lpGeo(P.glass), (0, f.jsx)(`meshStandardMaterial`, { color: `#060607`, metalness: 0.1, roughness: 0.12 })] }),
       (0, f.jsxs)(`mesh`, {
-        position: [0, 0, 0.0475],
+        position: [0, 0, 0.0475], ref: (o) => { if (M) __lpScreenMesh = o; },
         children: [
           (0, f.jsx)(`planeGeometry`, { args: [0.72, 1.555] }),
           (0, f.jsx)(`meshBasicMaterial`, { toneMapped: !1, transparent: !0, children: (0, f.jsx)(`canvasTexture`, { ref: (t) => { __lpPhoneTex = t; }, attach: `map`, args: [P.screen], colorSpace: `srgb`, anisotropy: 4 }) }),
@@ -297,16 +292,17 @@ function __lpLaptop({ groupRef, reduced }) {
   const D = __lpData();
   const lid = (0, d.useRef)(null), clock = (0, d.useRef)(0), inner = (0, d.useRef)(null);
   r((st, dt) => {
-    if (!lid.current) return;
     clock.current += Math.min(dt, 0.05);
     const k = reduced ? 1 : Math.min(Math.max((clock.current - 0.5) / 1.8, 0), 1);
     const eased = 1 - Math.pow(1 - k, 3);
     const open = eased * 108 * (1 - 0.92 * u.cta);
-    lid.current.rotation.x = -open * __lpDeg;
+    lid.current && (lid.current.rotation.x = -open * __lpDeg);
+    const M = __lpIsMobile();
+    if (M && inner.current && !inner.current.userData.phoneOnly) { inner.current.children.forEach((c, i) => { c.visible = i === 0; }); inner.current.userData.phoneOnly = !0; } // phones: only the phone (first child)
     if (inner.current) { // wide screens: devices on the right half, headline on the left (see .hero CSS)
       const wide = innerWidth >= 900 && innerWidth / innerHeight >= 1.2;
       const fit = Math.min(Math.max((innerWidth / innerHeight - 1.2) / 0.7, 0), 1); // 0 = 6:5 window, 1 = very wide
-      const tx = wide ? 0.95 + 0.5 * fit : -0.38, ts = wide ? 0.6 + 0.22 * fit : 0.98, k = 1 - Math.exp(-6 * Math.min(dt, 0.05));
+      const tx = M ? 0 : wide ? 0.95 + 0.5 * fit : -0.38, ts = M ? 1 : wide ? 0.6 + 0.22 * fit : 0.98, k = 1 - Math.exp(-6 * Math.min(dt, 0.05));
       inner.current.position.x += (tx - inner.current.position.x) * k;
       inner.current.scale.setScalar(inner.current.scale.x + (ts - inner.current.scale.x) * k);
     }
@@ -320,7 +316,7 @@ function __lpLaptop({ groupRef, reduced }) {
       scale: innerWidth >= 900 && innerWidth / innerHeight >= 1.2 ? 0.78 : 0.98,
       children: [
         (0, f.jsx)(__lpPhone, {}),
-        __lpMesh(__lpGeo(D.base), alu),
+        __lpMesh(__lpGeo(D.base), alu, { position: [0, 0.045, 0], rotation: [-Math.PI / 2, 0, 0] }),
         __lpMesh(__lpGeo(D.deck), (0, f.jsx)(`meshStandardMaterial`, { color: `#ccd0d6`, roughness: 0.42, metalness: 0.35, envMapIntensity: 0.35 })),
         __lpMesh(__lpGeo(D.keys), (0, f.jsx)(`meshStandardMaterial`, { color: `#202226`, roughness: 0.62, metalness: 0.05 })),
         __lpMesh(__lpGeo(D.pad), (0, f.jsx)(`meshStandardMaterial`, { color: `#e2e5e9`, roughness: 0.26, metalness: 0.25, envMapIntensity: 0.35 })),
@@ -331,11 +327,6 @@ function __lpLaptop({ groupRef, reduced }) {
             (0, f.jsx)(`meshBasicMaterial`, { toneMapped: !1, children: (0, f.jsx)(`canvasTexture`, { attach: `map`, args: [D.tbScreen], colorSpace: `srgb`, anisotropy: 4 }) })],
         }),
         __lpMesh(__lpGeo(D.tid), (0, f.jsx)(`meshStandardMaterial`, { color: `#1a1a1d`, roughness: 0.12, metalness: 0.6 })),
-        ...[-1, 1].map((sd) => (0, f.jsxs)(`mesh`, {
-          position: [sd * (__lpKW / 2 + 0.115), 0.0925, -0.37], rotation: [-Math.PI / 2, 0, 0],
-          children: [(0, f.jsx)(`planeGeometry`, { args: [0.17, 0.92] }),
-            (0, f.jsx)(`meshBasicMaterial`, { transparent: !0, depthWrite: !1, children: (0, f.jsx)(`canvasTexture`, { attach: `map`, args: [D.grille], colorSpace: `srgb` }) })],
-        }, `grille` + sd)),
         (0, f.jsxs)(`mesh`, {
           position: [0, 0.09, -1.0], rotation: [0, 0, Math.PI / 2],
           children: [(0, f.jsx)(`cylinderGeometry`, { args: [0.042, 0.042, 2.3, 32] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#9ca0a7`, metalness: 0.5, roughness: 0.35 })],
@@ -343,17 +334,17 @@ function __lpLaptop({ groupRef, reduced }) {
         (0, f.jsxs)(`group`, {
           ref: lid, position: [0, 0.09, -1.02],
           children: [
-            __lpMesh(__lpGeo(D.lid), alu),
+            __lpMesh(__lpGeo(D.lid), alu, { position: [0, 0.0225, 1.015], rotation: [-Math.PI / 2, 0, 0] }),
             (0, f.jsxs)(`mesh`, {
               position: [0, -0.0008, 1.015], rotation: [Math.PI / 2, 0, 0],
-              children: [(0, f.jsx)(`planeGeometry`, { args: [2.94, 1.97] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#050506`, roughness: 0.12, metalness: 0 })],
+              children: [__lpGeo(__lpBezelGeo ??= __lpSlab(2.94, 1.97, 0.0012, 0.1, 10)), (0, f.jsx)(`meshStandardMaterial`, { color: `#050506`, roughness: 0.12, metalness: 0 })],
             }),
             (0, f.jsxs)(`mesh`, {
-              ref: (o) => { __lpScreenMesh = o; }, position: [0, -0.0016, 1.045], rotation: [Math.PI / 2, 0, 0],
+              ref: (o) => { if (!__lpIsMobile()) __lpScreenMesh = o; }, position: [0, -0.0016, 1.045], rotation: [Math.PI / 2, 0, 0],
               children: [
                 (0, f.jsx)(`planeGeometry`, { args: [2.76, 1.71] }),
                 (0, f.jsx)(`meshBasicMaterial`, {
-                  toneMapped: !1,
+                  toneMapped: !1, transparent: !0,
                   children: (0, f.jsx)(`canvasTexture`, { ref: (t) => { __lpTex = t; }, attach: `map`, args: [D.screen], colorSpace: `srgb`, anisotropy: 4 }),
                 }),
               ],
