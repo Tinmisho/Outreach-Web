@@ -67,6 +67,49 @@
     tone(up ? 520 : 180, up ? 160 : 620, 0.9, 0.12, 'sine'); // soft tonal sweep under the air
   }
 
+  // ── cinematic sounds ──
+  const noiseBuf = (a) => {
+    if (!noise || noise.sampleRate !== a.sampleRate) {
+      noise = a.createBuffer(1, a.sampleRate * 1.2, a.sampleRate);
+      const d = noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    }
+    return noise;
+  };
+  // deep sub hit: falling sine + low rumble burst
+  function boom(vol = 0.6, len = 1.4) {
+    const a = ready(); if (!a) return;
+    const t = a.currentTime, o = a.createOscillator(), g = a.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(70, t); o.frequency.exponentialRampToValueAtTime(30, t + len);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    o.connect(g).connect(a.destination); o.start(t); o.stop(t + len + 0.05);
+    const n = a.createBufferSource(), f = a.createBiquadFilter(), ng = a.createGain();
+    n.buffer = noiseBuf(a); f.type = 'lowpass'; f.frequency.setValueAtTime(420, t); f.frequency.exponentialRampToValueAtTime(90, t + len);
+    ng.gain.setValueAtTime(0.0001, t); ng.gain.exponentialRampToValueAtTime(vol * 0.9, t + 0.015); ng.gain.exponentialRampToValueAtTime(0.0001, t + len * 0.8);
+    n.connect(f).connect(ng).connect(a.destination); n.start(t); n.stop(t + len);
+  }
+  // trailer "BRAAM": detuned brassy saws through a closing low-pass
+  function braam(vol = 0.22, len = 2.6) {
+    const a = ready(); if (!a) return;
+    const t = a.currentTime, f = a.createBiquadFilter(), g = a.createGain();
+    f.type = 'lowpass'; f.Q.value = 4; f.frequency.setValueAtTime(180, t); f.frequency.linearRampToValueAtTime(900, t + 0.12); f.frequency.exponentialRampToValueAtTime(140, t + len);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.06); g.gain.setTargetAtTime(0.0001, t + 0.5, len / 4);
+    for (const [fr, det] of [[55, 0], [55, 9], [110, -7], [82.4, 4]]) {
+      const o = a.createOscillator(); o.type = 'sawtooth'; o.frequency.value = fr; o.detune.value = det;
+      o.connect(f); o.start(t); o.stop(t + len + 0.1);
+    }
+    f.connect(g).connect(a.destination);
+    boom(0.55, 1.8);
+  }
+  // rising tension before the hit
+  function riser(len = 0.9) {
+    const a = ready(); if (!a) return;
+    const t = a.currentTime, n = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+    n.buffer = noiseBuf(a); n.loop = true; f.type = 'bandpass'; f.Q.value = 2.5;
+    f.frequency.setValueAtTime(250, t); f.frequency.exponentialRampToValueAtTime(3200, t + len);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.28, t + len * 0.95); g.gain.exponentialRampToValueAtTime(0.0001, t + len + 0.06);
+    n.connect(f).connect(g).connect(a.destination); n.start(t); n.stop(t + len + 0.1);
+  }
+
   // hover tick + click on interactive elements
   let lastHover = null, lastTick = 0;
   document.addEventListener('pointerover', (e) => {
@@ -90,14 +133,14 @@
   const heroProgress = () => { const h = document.querySelector('.hero'); return h ? Math.min(Math.max(scrollY / (h.offsetHeight || innerHeight), 0), 1) : 0; };
   addEventListener('scroll', () => {
     const p = heroProgress();
-    if (!inside && p > 0.55) { inside = true; whoosh(false); }
-    else if (inside && p < 0.45) { inside = false; whoosh(true); }
+    if (!inside && p > 0.55) { inside = true; riser(0.75); setTimeout(() => braam(), 700); }
+    else if (inside && p < 0.45) { inside = false; whoosh(true); boom(0.35, 1.1); }
   }, { passive: true });
 
   // "What we do" cards: a soft tick as the progress bar moves, a bright pop when a new card lights up
   const NOTES = [523, 659, 784, 1047]; // C E G C: each step climbs
   let lastActive = -1;
-  const pop = (i) => { const f = NOTES[i] || 880; tone(f * 0.6, f, 0.09, 0.22, 'triangle'); setTimeout(() => tone(f, f * 1.5, 0.16, 0.14, 'sine'), 55); };
+  const pop = (i) => { const f = NOTES[i] || 880; boom(0.45, 1.0); tone(f, f, 0.9, 0.06, 'sine'); tone(f * 1.5, f * 1.5, 0.7, 0.035, 'sine'); };
   const watchPanels = () => {
     const wrap = document.querySelector('.panels'); if (!wrap) return false;
     new MutationObserver(() => {
@@ -110,16 +153,32 @@
   };
   if (!watchPanels()) { const mo = new MutationObserver(() => { if (watchPanels()) mo.disconnect(); }); mo.observe(document.body, { childList: true, subtree: true }); }
 
-  // scrolling anywhere: a soft "detent" tick every ~110px, pitch follows the direction
-  let lastY = scrollY, acc = 0, lastScrollTick = 0;
+  // scrolling anywhere: a deep cinema rumble whose loudness follows scroll speed and fades out when you stop
+  let wind = null, lastY = scrollY, lastT = performance.now(), level = 0, raf = 0;
+  const windNode = (a) => {
+    if (wind && wind.a === a) return wind;
+    const len = a.sampleRate * 2, buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    let b = 0; for (let i = 0; i < len; i++) { b = (b + 0.02 * (Math.random() * 2 - 1)) / 1.02; d[i] = b * 3.5; } // brown noise: deep, not hissy
+    const src = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain(), sub = a.createOscillator(), sg = a.createGain();
+    src.buffer = buf; src.loop = true; f.type = 'lowpass'; f.Q.value = 1.4; f.frequency.value = 160; g.gain.value = 0;
+    sub.type = 'sine'; sub.frequency.value = 41; sg.gain.value = 0.55; // cinema sub-bass under the rumble
+    src.connect(f).connect(g); sub.connect(sg).connect(g); g.connect(a.destination); src.start(); sub.start();
+    return (wind = { a, f, g, sub });
+  };
+  const fade = () => {
+    level *= 0.94;
+    if (wind) wind.g.gain.setTargetAtTime(on ? level : 0, wind.a.currentTime, 0.05);
+    raf = level > 0.002 ? requestAnimationFrame(fade) : (wind && wind.g.gain.setTargetAtTime(0, wind.a.currentTime, 0.08), 0);
+  };
   addEventListener('scroll', () => {
-    const y = scrollY, d = y - lastY; lastY = y; acc += Math.abs(d);
-    const now = performance.now();
-    if (acc >= 110 && now - lastScrollTick > 55) {
-      acc = 0; lastScrollTick = now;
-      const f = d >= 0 ? 1500 : 1900;
-      tone(f, f * 0.7, 0.035, 0.1, 'triangle');
-    }
+    const now = performance.now(), y = scrollY, dy = y - lastY, dt = Math.max(now - lastT, 8);
+    lastY = y; lastT = now;
+    const a = ready(); if (!a) return;
+    const w = windNode(a), speed = Math.min(Math.abs(dy) / dt, 4); // px per ms
+    level = Math.min(0.5, Math.max(level, speed * 0.16));
+    w.f.frequency.setTargetAtTime(140 + speed * 110, a.currentTime, 0.1);
+    w.sub.frequency.setTargetAtTime(dy >= 0 ? 41 : 49, a.currentTime, 0.2);
+    if (!raf) raf = requestAnimationFrame(fade);
   }, { passive: true });
 
   // mute toggle
