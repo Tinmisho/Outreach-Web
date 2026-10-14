@@ -51,8 +51,14 @@
     requestAnimationFrame(() => dispatchEvent(new Event('resize')));
     return true;
   };
-  // the grid fades around the devices on the first screen; bring it back as the page scrolls on
-  const gridHole = () => { const h = document.querySelector('.hero'); const k = h ? Math.min(Math.max(scrollY / ((h.offsetHeight || innerHeight) * 0.6), 0), 1) : 1; document.body.style.setProperty('--gh', (1 - k).toFixed(3)); };
+  // background grid: on the first screen it fades around the devices (--gh); once the dive starts it disappears
+  // completely so it never crosses the laptop/phone (--go), and it comes back only after the dive is over
+  const gridHole = () => {
+    const h = document.querySelector('.hero'), H = (h && h.offsetHeight) || innerHeight, k = scrollY / H;
+    const go = k <= 0.02 ? 1 : k < 1 ? Math.max(0, 1 - (k - 0.02) / 0.12) : Math.min(1, (k - 1) / 0.4);
+    document.body.style.setProperty('--gh', k < 1 ? '1' : '0');
+    document.body.style.setProperty('--go', go.toFixed(3));
+  };
   addEventListener('scroll', gridHole, { passive: true }); addEventListener('load', gridHole); gridHole();
   if (!mount()) {
     const mo = new MutationObserver(() => { if (mount()) mo.disconnect(); });

@@ -124,19 +124,19 @@ function __lpTouchBar() {
 /** The screen: a mock of the Outreach site in the Firefox palette, drawn once into a canvas. */
 function __lpScreen() {
   const cv = document.createElement(`canvas`);
-  cv.width = 1600; cv.height = 990;
+  cv.width = 1600; cv.height = 1022;
   const g = cv.getContext(`2d`);
   const LT = !0;
   const BG = LT ? `#faf7f2` : `#07070c`, FG = LT ? `#1c1612` : `#f4f5fb`, MUT = LT ? `#5f564d` : `#a6abc4`,
     GRID = LT ? `rgba(0,0,0,.06)` : `rgba(255,255,255,.05)`, CARD = LT ? `rgba(0,0,0,.04)` : `rgba(255,255,255,.06)`, LINE = LT ? `rgba(0,0,0,.14)` : `rgba(255,255,255,.16)`;
-  g.beginPath(); g.roundRect(0, 0, 1600, 990, 34); g.clip(); // rounded display corners
-  g.fillStyle = BG; g.fillRect(0, 0, 1600, 990);
+  g.beginPath(); g.roundRect(0, 0, 1600, 1022, 34); g.clip(); // rounded display corners
+  g.fillStyle = BG; g.fillRect(0, 0, 1600, 1022);
   g.strokeStyle = GRID; g.lineWidth = 1;
-  for (let x = 0; x < 1600; x += 56) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 990); g.stroke(); }
-  for (let y = 0; y < 990; y += 56) { g.beginPath(); g.moveTo(0, y); g.lineTo(1600, y); g.stroke(); }
+  for (let x = 0; x < 1600; x += 56) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 1022); g.stroke(); }
+  for (let y = 0; y < 1022; y += 56) { g.beginPath(); g.moveTo(0, y); g.lineTo(1600, y); g.stroke(); }
   const glow = g.createRadialGradient(1150, 520, 20, 1150, 520, 520);
   glow.addColorStop(0, LT ? __oxT.rgba(.18) : __oxT.rgba(.35)); glow.addColorStop(1, __oxT.rgba(0));
-  g.fillStyle = glow; g.fillRect(0, 0, 1600, 990);
+  g.fillStyle = glow; g.fillRect(0, 0, 1600, 1022);
   // nav
   g.fillStyle = __oxT.a; g.beginPath(); g.roundRect(80, 52, 46, 46, 10); g.fill();
   g.strokeStyle = `#0c0b10`; g.lineWidth = 6; g.lineCap = `round`;
@@ -340,9 +340,9 @@ function __lpLaptop({ groupRef, reduced }) {
               children: [__lpGeo(__lpBezelGeo ??= __lpSlab(2.94, 1.97, 0.0012, 0.1, 10)), (0, f.jsx)(`meshStandardMaterial`, { color: `#050506`, roughness: 0.12, metalness: 0 })],
             }),
             (0, f.jsxs)(`mesh`, {
-              ref: (o) => { if (!__lpIsMobile()) __lpScreenMesh = o; }, position: [0, -0.0016, 1.045], rotation: [Math.PI / 2, 0, 0],
+              ref: (o) => { if (!__lpIsMobile()) __lpScreenMesh = o; }, position: [0, -0.0016, 1.03], rotation: [Math.PI / 2, 0, 0],
               children: [
-                (0, f.jsx)(`planeGeometry`, { args: [2.76, 1.71] }),
+                (0, f.jsx)(`planeGeometry`, { args: [2.88, 1.84] }),
                 (0, f.jsx)(`meshBasicMaterial`, {
                   toneMapped: !1, transparent: !0,
                   children: (0, f.jsx)(`canvasTexture`, { ref: (t) => { __lpTex = t; }, attach: `map`, args: [D.screen], colorSpace: `srgb`, anisotropy: 4 }),
