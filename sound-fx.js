@@ -160,7 +160,7 @@
     lastY = y; lastT = now;
     const a = ready(); if (!a) return;
     const w = windNode(a), speed = Math.min(Math.abs(dy) / dt, 4); // px per ms
-    level = Math.min(0.12, Math.max(level, speed * 0.04));
+    level = Math.min(0.07, Math.max(level, speed * 0.024));
     w.f.frequency.setTargetAtTime((dy >= 0 ? 800 : 1100) + speed * 300, a.currentTime, 0.1);
     if (!raf) raf = requestAnimationFrame(fade);
   }, { passive: true });
