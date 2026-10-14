@@ -190,3 +190,7 @@ body::before{opacity:var(--go,1)}
 .ox-sitefoot{position:relative;z-index:3;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center;padding:22px 24px 30px;border-top:1px solid #1c161214;background:var(--bg,#faf7f2);color:#5f564d;font-size:13px}
 .ox-sitefoot p{margin:0}.ox-sitefoot nav{display:flex;flex-wrap:wrap;gap:6px 18px}
 .ox-sitefoot a{color:#1c1612;text-decoration:none}.ox-sitefoot a:hover{color:var(--ox-d)}
+/* grid sits BEHIND the transparent 3D layer, so the laptop and phone always cover it */
+body::before{z-index:-1;-webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%)}
+@media (width<900px),(max-aspect-ratio:6/5){body::before{-webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 30%,transparent 80%)}}
+html{background:var(--bg,#faf7f2)}body{background:transparent!important}

@@ -58,3 +58,10 @@ address{font-style:normal;font-weight:600;margin:0 0 10px}
 .foot a:hover{color:var(--ox-d)}
 a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--ox-d);outline-offset:3px}
 @media (max-width:560px){.top{padding:14px 16px}.brand img{height:38px}main{padding:4px 16px 48px}.step{flex-direction:column;gap:6px}}
+.langs{display:flex;gap:4px;font:700 12px/1 ui-monospace,"JetBrains Mono",Menlo,monospace}
+.langs a{padding:7px 9px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--mut);background:#fff}
+.langs a[aria-current]{color:var(--fg);border-color:var(--ox-a)}
+.langs a:hover{color:var(--fg)}
+:lang(ka) body,body:lang(ka){font-family:"Noto Sans Georgian",Inter,system-ui,sans-serif}
+.nf{margin:0 0 26px}.nf h2{font-size:clamp(1.4rem,3vw,2rem);margin:0}
+.nf:lang(ka){font-family:"Noto Sans Georgian",Inter,system-ui,sans-serif}

@@ -6,6 +6,10 @@
   let lang;
   try { lang = localStorage.getItem(KEY); } catch {}
   if (!LANGS.includes(lang)) { const n = (navigator.language || '').slice(0, 2); lang = LANGS.includes(n) ? n : 'en'; }
+  // /ka/ and /ru/ are fixed-language copies of the home page (<html data-lang>); the root page is English for
+  // search engines but still follows a visitor's saved choice
+  const FIXED = document.documentElement.dataset.lang;
+  if (LANGS.includes(FIXED)) lang = FIXED;
   window.__oxLang = lang;
   document.documentElement.lang = lang;
   if (lang === 'ka') { // Georgian webfont: only downloaded when the page is in Georgian
@@ -159,7 +163,10 @@
       o.addEventListener('click', () => {
         if (l === lang) { pop.hidden = true; return; }
         try { localStorage.setItem(KEY, l); } catch {}
-        location.reload(); // the 3D scene and its canvas texts are rebuilt in the new language
+        // go to that language's own address (the 3D scene and its canvas texts are rebuilt in the new language)
+        const base = FIXED ? '../' : './';
+        const target = base + (l === 'en' ? '' : l + '/');
+        if (FIXED || l !== 'en') location.href = target; else location.reload();
       });
       pop.append(o);
     }
