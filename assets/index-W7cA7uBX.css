@@ -95,3 +95,40 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;bac
 .ox-theme__pop{flex-direction:column;align-items:stretch;gap:10px}
 .ox-theme__row{display:flex;align-items:center;gap:8px}
 .ox-theme__label{width:52px;font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:#5f564d}
+/* ── Outreach: "What we do" section ── */
+.showcase .eyebrow{font-family:ui-monospace,"JetBrains Mono",Menlo,monospace;letter-spacing:.14em;color:var(--ox-d)}
+.ox-grad{background:linear-gradient(100deg,var(--ox-a),var(--ox-b) 50%,var(--ox-c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.showcase__lede{max-width:52ch;margin-top:8px;color:#5f564d;font-size:1.05rem;line-height:1.6}
+.panels{position:relative;padding-top:22px;--sp:0}
+.panels__track{position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px;background:#1c161214;overflow:hidden}
+.panels__fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(var(--sp));background:linear-gradient(90deg,var(--ox-a),var(--ox-b),var(--ox-c));transition:transform .15s linear}
+.panel{background:#fff;border:1px solid #1c161214;border-radius:18px;opacity:.62;gap:12px;min-height:250px;padding:24px 22px 22px;overflow:hidden;box-shadow:0 8px 24px #3b220f0f;transform:translateY(8px)}
+.panel:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--ox-a),var(--ox-b),var(--ox-c));transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.panel.is-active,.panel.is-done{opacity:1;transform:none}
+.panel.is-active{border-color:color-mix(in srgb,var(--ox-a) 45%,transparent);box-shadow:0 26px 60px #3b220f24,0 0 0 4px color-mix(in srgb,var(--ox-a) 10%,transparent)}
+.panel.is-active:before,.panel.is-done:before{transform:scaleX(1)}
+.panel__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.panel__icon,.panel:nth-child(n) .panel__icon{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--ox-a) 10%,#fff);border:1px solid color-mix(in srgb,var(--ox-a) 22%,transparent);color:var(--ox-d);transition:background .4s,color .4s,box-shadow .4s}
+.panel.is-active .panel__icon{background:linear-gradient(135deg,var(--ox-a),var(--ox-c));color:#fff;border-color:transparent;box-shadow:0 10px 24px color-mix(in srgb,var(--ox-a) 40%,transparent)}
+.panel__num{font-size:2.6rem;font-weight:700;line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.2px #1c161230;transition:-webkit-text-stroke-color .4s}
+.panel.is-active .panel__num{-webkit-text-stroke-color:color-mix(in srgb,var(--ox-a) 70%,transparent)}
+.panel.is-done .panel__num{-webkit-text-stroke-color:color-mix(in srgb,var(--ox-a) 40%,transparent)}
+.panel__title{font-size:1.25rem;letter-spacing:-.01em;color:#1c1612}
+.panel__body{color:#5f564d;font-size:.92rem;line-height:1.6}
+.panel__tag{justify-self:start;align-self:end;margin-top:6px;padding:5px 10px;border-radius:999px;font:600 .72rem/1 ui-monospace,"JetBrains Mono",Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ox-d);background:color-mix(in srgb,var(--ox-b) 18%,#fff);border:1px solid color-mix(in srgb,var(--ox-b) 40%,transparent)}
+.panel.is-done .panel__tag:before{content:"✓ "}
+@media (width<=900px){.panel{min-height:220px}}
+@media (width<=560px){.panel{min-height:0;opacity:1;transform:none}.panel__num{font-size:2rem}}
+@media (prefers-reduced-motion:reduce){.panel,.panel:before,.panels__fill{transition:none}}
+/* bigger cards */
+.showcase__inner{width:min(1320px,100%)}
+.panels{gap:20px}
+.panel{min-height:340px;padding:32px 28px 28px;gap:14px;border-radius:22px}
+.panel__icon,.panel:nth-child(n) .panel__icon{width:56px;height:56px;border-radius:15px}
+.panel__icon svg{width:26px;height:26px}
+.panel__num{font-size:3.4rem}
+.panel__title{font-size:1.5rem}
+.panel__body{font-size:1.02rem;line-height:1.65}
+.panel__tag{font-size:.78rem;padding:7px 12px}
+@media (width<=900px){.panel{min-height:280px}}
+@media (width<=560px){.panel{min-height:0;padding:24px 20px}.panel__num{font-size:2.4rem}.panel__title{font-size:1.3rem}}
