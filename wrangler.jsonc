@@ -1,6 +1,6 @@
 {
   // Cloudflare Workers static site. Only ./public is published (never the repo itself).
-  "name": "outreach-web",
+  "name": "outreach",
   "compatibility_date": "2026-10-12",
   "assets": {
     "directory": "./public",
