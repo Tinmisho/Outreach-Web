@@ -165,6 +165,9 @@
     if (!raf) raf = requestAnimationFrame(fade);
   }, { passive: true });
 
+  // "Built for real businesses" gallery: the same glass ting when a new example comes to the middle
+  addEventListener('ox:card', (e) => pop((e.detail || 0) % 4));
+
   // mute toggle
   btn = document.createElement('button');
   btn.className = 'ox-sound'; btn.type = 'button';
