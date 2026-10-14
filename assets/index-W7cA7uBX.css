@@ -161,3 +161,6 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;bac
 :lang(ka) .hero__title{font-size:clamp(1.9rem,3.4vw,3.3rem);line-height:1.12}
 :lang(ru) .hero__title{font-size:clamp(2rem,3.9vw,3.8rem)}
 .ox-lang__pop[hidden]{display:none}
+/* hide the vertical scrollbar (scrolling itself still works) */
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}

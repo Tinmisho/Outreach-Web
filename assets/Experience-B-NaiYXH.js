@@ -54,19 +54,19 @@ const __lpGeo = (o) =>
     ],
   });
 
-/** Keyboard: 6 rows in a typical laptop layout, each row scaled to the same width. */
+/** Keyboard: 5 rows in a MacBook layout (the function row is the Touch Bar), each row scaled to the same width. */
+const __lpKW = 2.24, __lpTBz = -0.88, __lpTBd = 0.085;
 function __lpKeys() {
   const o = __lpNew();
-  const W = 2.6, gap = 0.016, top = 0.1;
+  const W = __lpKW, gap = 0.016, top = 0.1;
   const rows = [
-    { d: 0.085, k: Array(14).fill(1) },
     { d: 0.152, k: [...Array(13).fill(1), 1.5] },
     { d: 0.152, k: [1.5, ...Array(13).fill(1)] },
     { d: 0.152, k: [1.8, ...Array(11).fill(1), 1.8] },
     { d: 0.152, k: [2.3, ...Array(10).fill(1), 2.3] },
     { d: 0.152, k: [1, 1, 1, 1.25, 5.4, 1.25, 1, 1, 1] },
   ];
-  let z = -0.88;
+  let z = __lpTBz + __lpTBd + gap * 1.5;
   for (const row of rows) {
     const units = row.k.reduce((s, x) => s + x, 0);
     const unit = (W - gap * (row.k.length - 1)) / units;
@@ -79,6 +79,54 @@ function __lpKeys() {
     z += row.d + gap;
   }
   return o;
+}
+
+/** Touch Bar: glowing strip above the keyboard (esc, navigation, search, theme swatches, brightness, volume). */
+function __lpTouchBar() {
+  const cv = document.createElement(`canvas`);
+  cv.width = 2048; cv.height = 84;
+  const g = cv.getContext(`2d`), H = 84, mid = H / 2;
+  g.fillStyle = `#050506`; g.fillRect(0, 0, 2048, H);
+  const key = (x, w, fill = `#2c2c2e`) => { g.fillStyle = fill; g.beginPath(); g.roundRect(x, 10, w, H - 20, 10); g.fill(); };
+  g.textBaseline = `middle`; g.textAlign = `center`;
+  // esc
+  key(16, 120); g.fillStyle = `#f2f2f7`; g.font = `500 28px system-ui, sans-serif`; g.fillText(`esc`, 76, mid + 1);
+  // back / forward
+  key(170, 86); key(262, 86);
+  g.strokeStyle = `#f2f2f7`; g.lineWidth = 5; g.lineCap = `round`; g.lineJoin = `round`;
+  g.beginPath(); g.moveTo(220, mid - 13); g.lineTo(207, mid); g.lineTo(220, mid + 13); g.stroke();
+  g.beginPath(); g.moveTo(298, mid - 13); g.lineTo(311, mid); g.lineTo(298, mid + 13); g.stroke();
+  // search pill
+  key(372, 560, `#1c1c1e`);
+  g.strokeStyle = `#8e8e93`; g.lineWidth = 4; g.beginPath(); g.arc(410, mid - 3, 11, 0, Math.PI * 2); g.stroke();
+  g.beginPath(); g.moveTo(418, mid + 5); g.lineTo(427, mid + 14); g.stroke();
+  g.textAlign = `left`; g.fillStyle = `#8e8e93`; g.font = `400 27px system-ui, sans-serif`; g.fillText(`outreach`, 444, mid + 1);
+  // theme swatches
+  [__oxT.a, __oxT.b, __oxT.c, __oxT.amber].forEach((c, i) => { g.fillStyle = c; g.beginPath(); g.arc(1000 + i * 70, mid, 22, 0, Math.PI * 2); g.fill(); });
+  // brightness slider
+  key(1300, 460, `#1c1c1e`);
+  const sg = g.createLinearGradient(1350, 0, 1700, 0); sg.addColorStop(0, __oxT.a); sg.addColorStop(1, __oxT.b);
+  g.fillStyle = `#3a3a3c`; g.beginPath(); g.roundRect(1350, mid - 4, 370, 8, 4); g.fill();
+  g.fillStyle = sg; g.beginPath(); g.roundRect(1350, mid - 4, 250, 8, 4); g.fill();
+  g.fillStyle = `#f2f2f7`; g.beginPath(); g.arc(1600, mid, 15, 0, Math.PI * 2); g.fill();
+  g.strokeStyle = `#f2f2f7`; g.lineWidth = 3; g.beginPath(); g.arc(1325, mid, 7, 0, Math.PI * 2); g.stroke();
+  for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; g.beginPath(); g.moveTo(1325 + Math.cos(a) * 11, mid + Math.sin(a) * 11); g.lineTo(1325 + Math.cos(a) * 15, mid + Math.sin(a) * 15); g.stroke(); }
+  // volume + mute
+  key(1784, 110); key(1904, 110);
+  const spk = (x) => { g.fillStyle = `#f2f2f7`; g.beginPath(); g.moveTo(x - 14, mid - 7); g.lineTo(x - 6, mid - 7); g.lineTo(x + 4, mid - 15); g.lineTo(x + 4, mid + 15); g.lineTo(x - 6, mid + 7); g.lineTo(x - 14, mid + 7); g.closePath(); g.fill(); };
+  spk(1830); g.strokeStyle = `#f2f2f7`; g.lineWidth = 3.5; g.beginPath(); g.arc(1836, mid, 10, -0.9, 0.9); g.stroke(); g.beginPath(); g.arc(1836, mid, 18, -0.9, 0.9); g.stroke();
+  spk(1952); g.beginPath(); g.moveTo(1964, mid - 8); g.lineTo(1980, mid + 8); g.moveTo(1980, mid - 8); g.lineTo(1964, mid + 8); g.stroke();
+  return cv;
+}
+
+/** Speaker grille: a fine grid of holes, drawn on a transparent canvas. */
+function __lpGrille() {
+  const cv = document.createElement(`canvas`);
+  cv.width = 96; cv.height = 512;
+  const g = cv.getContext(`2d`);
+  g.fillStyle = `rgba(28,29,33,.78)`;
+  for (let y = 6; y < 512; y += 11) for (let x = 6 + ((y / 11) % 2) * 5; x < 96; x += 11) { g.beginPath(); g.arc(x, y, 2.6, 0, Math.PI * 2); g.fill(); }
+  return cv;
 }
 
 /** The screen: a mock of the Outreach site in the Firefox palette, drawn once into a canvas. */
@@ -143,7 +191,11 @@ const __lpData = () =>
     base: __lpBox(__lpNew(), 3.0, 0.09, 2.05, 0.045, 4, 0, 0.045, 0),
     deck: __lpBox(__lpNew(), 2.7, 0.004, 1.02, 0.002, 1, 0, 0.0895, -0.405),
     keys: __lpKeys(),
-    pad: __lpBox(__lpNew(), 1.22, 0.004, 0.74, 0.03, 3, 0, 0.0905, 0.56),
+    pad: __lpBox(__lpNew(), 1.5, 0.004, 0.8, 0.03, 3, 0, 0.0905, 0.53),
+    tb: __lpBox(__lpNew(), __lpKW - __lpTBd - 0.02, 0.01, __lpTBd, 0.008, 2, -(__lpTBd + 0.02) / 2, 0.093, __lpTBz + __lpTBd / 2),
+    tid: __lpBox(__lpNew(), __lpTBd, 0.01, __lpTBd, 0.012, 2, __lpKW / 2 - __lpTBd / 2, 0.093, __lpTBz + __lpTBd / 2),
+    tbScreen: __lpTouchBar(),
+    grille: __lpGrille(),
     lid: __lpBox(__lpNew(), 3.0, 0.045, 2.03, 0.035, 4, 0, 0.0225, 1.015),
     screen: __lpScreen(),
   });
@@ -224,7 +276,7 @@ function __lpPhone() {
   return (0, f.jsxs)(`group`, {
     position: [2.12, 0.8, 0.28], rotation: [-0.06, -0.42, 0],
     children: [
-      (0, f.jsxs)(`mesh`, { children: [__lpGeo(P.body), (0, f.jsx)(`meshStandardMaterial`, { color: `#a7abb2`, metalness: 0.5, roughness: 0.3 })] }),
+      (0, f.jsxs)(`mesh`, { children: [__lpGeo(P.body), (0, f.jsx)(`meshStandardMaterial`, { color: `#a7abb2`, metalness: 0.5, roughness: 0.3, envMapIntensity: 0.45 })] }),
       (0, f.jsxs)(`mesh`, { position: [0, 0, 0.0445], children: [__lpGeo(P.glass), (0, f.jsx)(`meshStandardMaterial`, { color: `#060607`, metalness: 0.1, roughness: 0.12 })] }),
       (0, f.jsxs)(`mesh`, {
         position: [0, 0, 0.0475],
@@ -259,7 +311,7 @@ function __lpLaptop({ groupRef, reduced }) {
       inner.current.scale.setScalar(inner.current.scale.x + (ts - inner.current.scale.x) * k);
     }
   });
-  const alu = (0, f.jsx)(`meshStandardMaterial`, { color: `#d3d6db`, metalness: 0.45, roughness: 0.3 });
+  const alu = (0, f.jsx)(`meshStandardMaterial`, { color: `#dcdfe4`, metalness: 0.4, roughness: 0.3, envMapIntensity: 0.35 });
   return (0, f.jsx)(`group`, {
     ref: groupRef,
     children: (0, f.jsxs)(`group`, {
@@ -269,9 +321,21 @@ function __lpLaptop({ groupRef, reduced }) {
       children: [
         (0, f.jsx)(__lpPhone, {}),
         __lpMesh(__lpGeo(D.base), alu),
-        __lpMesh(__lpGeo(D.deck), (0, f.jsx)(`meshStandardMaterial`, { color: `#c2c6cc`, roughness: 0.42, metalness: 0.4 })),
+        __lpMesh(__lpGeo(D.deck), (0, f.jsx)(`meshStandardMaterial`, { color: `#ccd0d6`, roughness: 0.42, metalness: 0.35, envMapIntensity: 0.35 })),
         __lpMesh(__lpGeo(D.keys), (0, f.jsx)(`meshStandardMaterial`, { color: `#202226`, roughness: 0.62, metalness: 0.05 })),
-        __lpMesh(__lpGeo(D.pad), (0, f.jsx)(`meshStandardMaterial`, { color: `#dadde2`, roughness: 0.26, metalness: 0.3 })),
+        __lpMesh(__lpGeo(D.pad), (0, f.jsx)(`meshStandardMaterial`, { color: `#e2e5e9`, roughness: 0.26, metalness: 0.25, envMapIntensity: 0.35 })),
+        __lpMesh(__lpGeo(D.tb), (0, f.jsx)(`meshStandardMaterial`, { color: `#0b0b0c`, roughness: 0.18, metalness: 0.2 })),
+        (0, f.jsxs)(`mesh`, {
+          position: [-(__lpTBd + 0.02) / 2, 0.0985, __lpTBz + __lpTBd / 2], rotation: [-Math.PI / 2, 0, 0],
+          children: [(0, f.jsx)(`planeGeometry`, { args: [__lpKW - __lpTBd - 0.03, __lpTBd - 0.012] }),
+            (0, f.jsx)(`meshBasicMaterial`, { toneMapped: !1, children: (0, f.jsx)(`canvasTexture`, { attach: `map`, args: [D.tbScreen], colorSpace: `srgb`, anisotropy: 4 }) })],
+        }),
+        __lpMesh(__lpGeo(D.tid), (0, f.jsx)(`meshStandardMaterial`, { color: `#1a1a1d`, roughness: 0.12, metalness: 0.6 })),
+        ...[-1, 1].map((sd) => (0, f.jsxs)(`mesh`, {
+          position: [sd * (__lpKW / 2 + 0.115), 0.0925, -0.37], rotation: [-Math.PI / 2, 0, 0],
+          children: [(0, f.jsx)(`planeGeometry`, { args: [0.17, 0.92] }),
+            (0, f.jsx)(`meshBasicMaterial`, { transparent: !0, depthWrite: !1, children: (0, f.jsx)(`canvasTexture`, { attach: `map`, args: [D.grille], colorSpace: `srgb` }) })],
+        }, `grille` + sd)),
         (0, f.jsxs)(`mesh`, {
           position: [0, 0.09, -1.0], rotation: [0, 0, Math.PI / 2],
           children: [(0, f.jsx)(`cylinderGeometry`, { args: [0.042, 0.042, 2.3, 32] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#9ca0a7`, metalness: 0.5, roughness: 0.35 })],
