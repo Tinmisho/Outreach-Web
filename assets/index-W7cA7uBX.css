@@ -182,3 +182,4 @@ body::before{-webkit-mask-image:radial-gradient(ellipse 38% 50% at 72% 52%,rgb(0
   .hero__hint{display:none}
 }
 body::before{opacity:var(--go,1)}
+.hero__hint{transition:opacity .25s linear}

@@ -58,6 +58,8 @@
     const go = k <= 0.02 ? 1 : k < 1 ? Math.max(0, 1 - (k - 0.02) / 0.12) : Math.min(1, (k - 1) / 0.4);
     document.body.style.setProperty('--gh', k < 1 ? '1' : '0');
     document.body.style.setProperty('--go', go.toFixed(3));
+    const hint = document.querySelector('.hero__hint'); // the little "scroll" hint fades out as soon as you scroll
+    if (hint) { const o = Math.max(0, 1 - scrollY / 150); hint.style.opacity = (o * 0.6).toFixed(3); hint.style.visibility = o === 0 ? 'hidden' : ''; }
   };
   addEventListener('scroll', gridHole, { passive: true }); addEventListener('load', gridHole); gridHole();
   if (!mount()) {
