@@ -8,6 +8,11 @@
   if (!LANGS.includes(lang)) { const n = (navigator.language || '').slice(0, 2); lang = LANGS.includes(n) ? n : 'en'; }
   window.__oxLang = lang;
   document.documentElement.lang = lang;
+  if (lang === 'ka') { // Georgian webfont: only downloaded when the page is in Georgian
+    const f = document.createElement('link'); f.rel = 'stylesheet';
+    f.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap';
+    document.head.append(f);
+  }
 
   // [selector, index, mode, {en, ka, ru}] — mode: 'html' replaces the element, 'text' only its first text (keeps icons)
   const T = [
@@ -62,7 +67,7 @@
     ['.ox-theme__label', 0, 'html', { en: 'Classic', ka: 'კლასიკური', ru: 'Классика' }],
     ['.ox-theme__label', 1, 'html', { en: 'Mixed', ka: 'შერეული', ru: 'Смешанные' }],
   ];
-  const TITLE = { en: 'Outreach — Websites. Engineered.', ka: 'Outreach — ვებსაიტები, ზუსტად აწყობილი.', ru: 'Outreach — Сайты под ключ.' };
+  const TITLE = { en: 'Outreach — Website design & hosting in Tbilisi', ka: 'Outreach — ვებსაიტების შექმნა და ჰოსტინგი თბილისში', ru: 'Outreach — Разработка и хостинг сайтов в Тбилиси' };
 
   // Text drawn on the laptop and phone screens (canvas). [en]: {ka, ru, room}: room = how much wider than the
   // English text a translation may be before it is scaled down to fit.

@@ -144,7 +144,7 @@ function __lpScreen() {
   g.fillStyle = FG; g.font = `700 40px system-ui, sans-serif`; g.fillText(`outreach.`, 142, 89);
   g.fillStyle = MUT; g.font = `500 26px system-ui, sans-serif`;
   [`What we do`, `How it works`, `Pricing`].forEach((t, i) => g.fillText(t, 820 + i * 200, 85));
-  { const im = new Image(); im.onload = () => { g.fillStyle = BG; g.fillRect(70, 34, 440, 84); g.filter = `hue-rotate(${__oxT.hue})`; g.drawImage(im, 74, 34, 272, 84); g.filter = `none`; if (__lpTex) __lpTex.needsUpdate = !0; }; im.src = `./outreach-logo.svg`; }
+  { const im = new Image(); im.onload = () => { g.fillStyle = BG; g.fillRect(70, 34, 440, 84); g.drawImage(im, 74, 34, 272, 84); if (__lpTex) __lpTex.needsUpdate = !0; }; im.src = window.__oxLogo || `./outreach-logo.svg`; }
   g.fillStyle = __oxT.a; g.beginPath(); g.roundRect(1380, 50, 150, 54, 12); g.fill();
   g.fillStyle = `#0c0b10`; g.font = `700 24px system-ui, sans-serif`; g.fillText(`Let's talk ↗`, 1400, 85);
   // hero
@@ -237,7 +237,7 @@ function __lpPhoneScreen() {
   g.fillStyle = __oxT.a; g.beginPath(); g.roundRect(40, 128, 46, 46, 11); g.fill();
   g.fillStyle = `#1c1612`; g.font = `800 36px system-ui, sans-serif`; g.fillText(`Outreach`, 98, 164);
   g.fillStyle = `#1c1612`; [0, 14, 28].forEach((d) => g.fillRect(522, 136 + d, 38, 5));
-  { const im = new Image(); im.onload = () => { g.fillStyle = `#faf7f2`; g.fillRect(30, 116, 380, 74); g.filter = `hue-rotate(${__oxT.hue})`; g.drawImage(im, 34, 116, 240, 74); g.filter = `none`; if (__lpPhoneTex) __lpPhoneTex.needsUpdate = !0; }; im.src = `./outreach-logo.svg`; }
+  { const im = new Image(); im.onload = () => { g.fillStyle = `#faf7f2`; g.fillRect(30, 116, 380, 74); g.drawImage(im, 34, 116, 240, 74); if (__lpPhoneTex) __lpPhoneTex.needsUpdate = !0; }; im.src = window.__oxLogo || `./outreach-logo.svg`; }
   // hero
   g.fillStyle = __oxT.d; g.font = `600 20px ui-monospace, monospace`; g.fillText(`> DIGITAL ENGINEERING`, 44, 300);
   g.fillStyle = `#1c1612`; g.font = `800 96px system-ui, sans-serif`; g.fillText(`Websites.`, 38, 410);

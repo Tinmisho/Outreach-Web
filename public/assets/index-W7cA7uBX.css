@@ -183,3 +183,10 @@ body::before{-webkit-mask-image:radial-gradient(ellipse 38% 50% at 72% 52%,rgb(0
 }
 body::before{opacity:var(--go,1)}
 .hero__hint{transition:opacity .25s linear}
+/* logos are drawn in the theme colours by theme.js (no colour filter) */
+.ox-brand__logo,.ox-site__logo img{filter:none}
+.ox-brand:hover .ox-brand__logo{filter:brightness(1.06)}
+/* crawlable site footer under the 3D page */
+.ox-sitefoot{position:relative;z-index:3;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center;padding:22px 24px 30px;border-top:1px solid #1c161214;background:var(--bg,#faf7f2);color:#5f564d;font-size:13px}
+.ox-sitefoot p{margin:0}.ox-sitefoot nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+.ox-sitefoot a{color:#1c1612;text-decoration:none}.ox-sitefoot a:hover{color:var(--ox-d)}

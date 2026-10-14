@@ -1,0 +1,27 @@
+# Outreach
+
+> Outreach is a web studio in Tbilisi, Georgia. It designs, builds, hosts and maintains fast, mobile-ready websites for small businesses. Clients see a working demo before paying, then rent the site monthly or buy it outright. Languages: Georgian, English, Russian.
+
+## Pages
+
+- [Home](https://outreach-web.mishogorgadze.workers.dev/): interactive 3D overview of Outreach.
+- [Services](https://outreach-web.mishogorgadze.workers.dev/services/): design & build, hosting & care, rent or own, add-ons.
+- [How it works](https://outreach-web.mishogorgadze.workers.dev/how-it-works/): demo first, pay after; frequently asked questions.
+- [Pricing](https://outreach-web.mishogorgadze.workers.dev/pricing/): monthly plans, setup fees and buyout.
+- [Contact](https://outreach-web.mishogorgadze.workers.dev/contact/): how to reach the team.
+
+## Plans
+
+- START: 100 ₾/month (setup 150 ₾). A site for your business. Includes: Your own .ge domain, Hosting and SSL, One change a month.
+- CHAT: 160 ₾/month (setup 150 ₾). A site that answers questions. Includes: Everything in START, FAQ chat for your customers, Two changes a month.
+- PRO: 250 ₾/month (setup 250 ₾). A site that collects enquiries. Includes: Everything in CHAT, Booking and contact forms, Google Business profile.
+- PAY: 350 ₾/month (setup 450 ₾). A site that takes payment. Includes: Everything in PRO, Online payments, Money goes straight to your bank.
+
+Monthly billing, cancel with 30 days notice, setup charged once. Hosting, SSL and changes included.
+
+## FAQ
+
+- What happens if I stop paying? The domain is registered in your name from day one, so it stays yours. We hand over DNS control within five working days, and export your form data as a spreadsheet.
+- Can I buy the site instead of renting? Yes. Buying outright runs 2,000–4,200 ₾ depending on the package. After twelve paid months the buyout price drops, reaching 60% at two years.
+- Do I need to understand any of this? No. You know your business, we handle the website. We ask for your text and photos and do the rest.
+- How fast does it go live? Setup takes five working days once we have your content. Changes after that are two to three working days depending on your package.

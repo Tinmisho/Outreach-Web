@@ -5,7 +5,7 @@
   const html = `
   <div class="ox-site__inner">
     <nav class="ox-site__nav" aria-label="Main">
-      <a class="ox-site__logo" href="#ox-site" aria-label="Outreach home"><img src="./outreach-logo.svg" alt="Outreach — web development and hosting" width="680" height="210"></a>
+      <a class="ox-site__logo" href="#ox-site" aria-label="Outreach home"><img src="${window.__oxLogo || './outreach-logo.svg'}" alt="Outreach — web development and hosting" width="680" height="210"></a>
       <div class="ox-site__links">
         <a href="#showcase">What we do</a>
         <a href="#cta">How it works</a>
@@ -62,6 +62,12 @@
     if (hint) { const o = Math.max(0, 1 - scrollY / 150); hint.style.opacity = (o * 0.6).toFixed(3); hint.style.visibility = o === 0 ? 'hidden' : ''; }
   };
   addEventListener('scroll', gridHole, { passive: true }); addEventListener('load', gridHole); gridHole();
+  // ?chat=contact (links from the other pages) opens the assistant on that topic
+  const chatTopic = new URLSearchParams(location.search).get('chat');
+  if (chatTopic) addEventListener('load', () => setTimeout(() => {
+    const fab = document.querySelector('.ox-chat-fab'); if (fab) fab.click();
+    setTimeout(() => { const chip = document.querySelector(`.ox-chip[data-key="${chatTopic}"]`); if (chip) chip.click(); }, 900);
+  }, 600));
   if (!mount()) {
     const mo = new MutationObserver(() => { if (mount()) mo.disconnect(); });
     mo.observe(document.getElementById('root') || document.body, { childList: true, subtree: true });

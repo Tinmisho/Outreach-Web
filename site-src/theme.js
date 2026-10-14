@@ -27,6 +27,12 @@
     link.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
   };
   syncFavicon(t);
+  // The full logo in the selected palette (same drawing as outreach-logo.svg). Used by the header logo,
+  // the page inside the laptop and the laptop/phone screens, so every logo matches the chosen theme.
+  const logoSvg = (theme) => `<svg xmlns="http://www.w3.org/2000/svg" width="680" height="210" viewBox="20 14 680 210" fill="none"><defs><linearGradient id="e" x1="31" y1="31" x2="203" y2="208" gradientUnits="userSpaceOnUse"><stop stop-color="${theme.amber}"/><stop offset=".48" stop-color="${theme.a}"/><stop offset="1" stop-color="${theme.d}"/></linearGradient><linearGradient id="t" x1="264" y1="74" x2="866" y2="160" gradientUnits="userSpaceOnUse"><stop stop-color="${theme.amber}"/><stop offset="1" stop-color="${theme.a}"/></linearGradient></defs><path d="M43 67 115 39 187 67V159L115 201 43 159V67Z" fill="url(#e)"/><path d="M66 80 115 61 164 80V137L115 166 66 137V80Z" fill="#0B1420"/><path d="M66 80 115 101 164 80M115 101V166" stroke="#FFF5E9" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M82 91H99M131 91H148" stroke="#FFF5E9" stroke-width="6" stroke-linecap="round"/><path d="M82 123 97 130M133 130 148 123" stroke="${theme.amber}" stroke-width="7" stroke-linecap="round"/><path d="M34 58 115 27 196 58V164L115 212 34 164V58Z" stroke="url(#e)" stroke-width="5" opacity=".8"/><circle cx="115" cy="101" r="7" fill="${theme.amber}"/><text x="250" y="143" fill="url(#t)" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="88" font-weight="900" letter-spacing="-2.5">Outreach</text></svg>`;
+  window.__oxLogo = `data:image/svg+xml,${encodeURIComponent(logoSvg(t))}`;
+  const paintLogos = () => document.querySelectorAll('img[src$="outreach-logo.svg"]').forEach((im) => { im.src = window.__oxLogo; });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paintLogos); else paintLogos();
   const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(',');
   window.__oxThemes = THEMES;
   window.__oxTheme = { name, ...t, hue: t.hue + 'deg', rgba: (al) => `rgba(${rgb(t.a)},${al})` };
