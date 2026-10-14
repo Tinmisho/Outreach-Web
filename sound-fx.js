@@ -94,6 +94,23 @@
     else if (inside && p < 0.45) { inside = false; whoosh(true); }
   }, { passive: true });
 
+  // "What we do" cards: a soft tick as the progress bar moves, a bright pop when a new card lights up
+  const NOTES = [523, 659, 784, 1047]; // C E G C: each step climbs
+  let lastStep = -1, lastActive = -1;
+  const pop = (i) => { const f = NOTES[i] || 880; tone(f * 0.6, f, 0.09, 0.22, 'triangle'); setTimeout(() => tone(f, f * 1.5, 0.16, 0.14, 'sine'), 55); };
+  const watchPanels = () => {
+    const wrap = document.querySelector('.panels'); if (!wrap) return false;
+    new MutationObserver(() => {
+      const sp = parseFloat(wrap.style.getPropertyValue('--sp')) || 0;
+      const step = Math.floor(sp * 24);
+      if (step !== lastStep) { if (lastStep >= 0 && sp > 0 && sp < 1) tone(2400, 1800, 0.025, 0.05, 'sine'); lastStep = step; }
+      const act = [...wrap.querySelectorAll('[data-panel]')].findIndex((el) => el.classList.contains('is-active'));
+      if (act !== lastActive) { if (lastActive >= 0) pop(act); lastActive = act; }
+    }).observe(wrap, { attributes: true, subtree: true, attributeFilter: ['style', 'class'] });
+    return true;
+  };
+  if (!watchPanels()) { const mo = new MutationObserver(() => { if (watchPanels()) mo.disconnect(); }); mo.observe(document.body, { childList: true, subtree: true }); }
+
   // mute toggle
   btn = document.createElement('button');
   btn.className = 'ox-sound'; btn.type = 'button';

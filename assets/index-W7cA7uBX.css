@@ -132,3 +132,32 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;bac
 .panel__tag{font-size:.78rem;padding:7px 12px}
 @media (width<=900px){.panel{min-height:280px}}
 @media (width<=560px){.panel{min-height:0;padding:24px 20px}.panel__num{font-size:2.4rem}.panel__title{font-size:1.3rem}}
+/* pop */
+.panels{perspective:1200px}
+.panel{transform:translateY(14px) scale(.95);opacity:.55;transition:opacity .5s,transform .6s cubic-bezier(.2,1.4,.4,1),border-color .5s,box-shadow .6s}
+.panel.is-done{transform:scale(.98);opacity:.92}
+.panel.is-active{z-index:2;transform:translateY(-18px) scale(1.06);border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,var(--ox-a),var(--ox-b),var(--ox-c)) border-box;box-shadow:0 40px 80px -10px color-mix(in srgb,var(--ox-a) 35%,transparent),0 18px 36px #3b220f1f;animation:ox-pop .7s cubic-bezier(.2,1.5,.4,1)}
+.panel.is-active:after{content:"";position:absolute;inset:-40% -20% auto;height:80%;background:radial-gradient(closest-side,color-mix(in srgb,var(--ox-b) 28%,transparent),transparent);pointer-events:none;animation:ox-glow 3s ease-in-out infinite alternate}
+.panel.is-active .panel__icon{animation:ox-icon .8s cubic-bezier(.2,1.6,.4,1)}
+.panel.is-active .panel__num{-webkit-text-stroke-width:1.6px}
+.panel:hover{transform:translateY(-8px) scale(1.01);opacity:1}
+.panel.is-active:hover{transform:translateY(-22px) scale(1.07)}
+@keyframes ox-pop{0%{transform:translateY(14px) scale(.95)}60%{transform:translateY(-24px) scale(1.09)}100%{transform:translateY(-18px) scale(1.06)}}
+@keyframes ox-icon{0%{transform:scale(.6) rotate(-20deg)}70%{transform:scale(1.18) rotate(6deg)}100%{transform:none}}
+@keyframes ox-glow{from{opacity:.5;transform:translateX(-10%)}to{opacity:1;transform:translateX(10%)}}
+@media (width<=560px){.panel,.panel.is-done,.panel.is-active,.panel:hover{transform:none;animation:none}}
+@media (prefers-reduced-motion:reduce){.panel,.panel.is-active,.panel.is-active:after,.panel.is-active .panel__icon{animation:none}}
+.panels{padding-top:44px}
+/* language switcher */
+.ox-lang{position:fixed;top:20px;right:124px;z-index:50;height:40px;min-width:46px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font:700 .8rem/1 ui-monospace,"JetBrains Mono",Menlo,monospace;letter-spacing:.04em;cursor:pointer}
+.ox-lang:hover{border-color:color-mix(in srgb,var(--ox-a) 50%,transparent)}
+.ox-lang__pop{position:fixed;top:68px;right:116px;z-index:61;display:grid;gap:4px;padding:8px;border-radius:14px;background:#fffdf9;border:1px solid #00000017;box-shadow:0 16px 40px #3b220f2e;min-width:170px}
+.ox-lang__opt{display:flex;align-items:center;gap:12px;padding:9px 12px;border:0;border-radius:10px;background:none;color:#1c1612;font:500 .95rem/1.2 inherit;cursor:pointer;text-align:left}
+.ox-lang__opt b{min-width:26px;font:700 .78rem/1 ui-monospace,Menlo,monospace;color:var(--ox-d)}
+.ox-lang__opt:hover{background:color-mix(in srgb,var(--ox-a) 8%,#fff)}
+.ox-lang__opt.is-on{background:color-mix(in srgb,var(--ox-a) 14%,#fff)}
+@media (width<=560px){.ox-lang{top:14px;right:110px}.ox-lang__pop{top:60px;right:14px}}
+:lang(ka) body,:lang(ka) button,:lang(ka) input{font-family:"Noto Sans Georgian",Inter,system-ui,sans-serif}
+:lang(ka) .hero__title{font-size:clamp(1.9rem,3.4vw,3.3rem);line-height:1.12}
+:lang(ru) .hero__title{font-size:clamp(2rem,3.9vw,3.8rem)}
+.ox-lang__pop[hidden]{display:none}
