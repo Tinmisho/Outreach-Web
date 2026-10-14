@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="260" viewBox="0 0 1080 260" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Outreach</title>
+  <desc id="desc">Bold orange gradient identity for Outreach, a web development and hosting company.</desc>
+  <defs>
+    <linearGradient id="ember" x1="31" y1="31" x2="203" y2="208" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFC078"/>
+      <stop offset=".48" stop-color="#FF963F"/>
+      <stop offset="1" stop-color="#E76D2E"/>
+    </linearGradient>
+    <linearGradient id="type" x1="264" y1="74" x2="866" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB66C"/>
+      <stop offset="1" stop-color="#E87935"/>
+    </linearGradient>
+  </defs>
+  <path d="M43 67 115 39 187 67V159L115 201 43 159V67Z" fill="url(#ember)"/>
+  <path d="M66 80 115 61 164 80V137L115 166 66 137V80Z" fill="#0B1420"/>
+  <path d="M66 80 115 101 164 80M115 101V166" stroke="#FFF5E9" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M82 91H99M131 91H148" stroke="#FFF5E9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M82 123 97 130M133 130 148 123" stroke="#FFAB5F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M34 58 115 27 196 58V164L115 212 34 164V58Z" stroke="url(#ember)" stroke-width="5" opacity=".8"/>
+  <circle cx="115" cy="101" r="7" fill="#FFAB5F"/>
+  <text x="250" y="143" fill="url(#type)" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="88" font-weight="900" letter-spacing="-2.5">Outreach</text>
+  <path d="M257 169H799" stroke="url(#type)" stroke-width="3" opacity=".8"/>
+  <text x="260" y="205" fill="#E87935" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="16" font-weight="750" letter-spacing="5.5">WEB DEVELOPMENT  ·  HOSTING</text>
+</svg>

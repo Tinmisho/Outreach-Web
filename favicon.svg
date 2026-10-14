@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><linearGradient id="ember" x1="8" y1="5" x2="55" y2="59" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC078"/><stop offset=".48" stop-color="#FF963F"/><stop offset="1" stop-color="#E76D2E"/></linearGradient></defs>
+  <path d="M32 2 57 12v34L32 61 7 46V12L32 2Z" fill="url(#ember)"/>
+  <path d="m32 10 18 7v25L32 53 14 42V17l18-7Z" fill="#0B1420"/>
+  <path d="m14 17 18 9 18-9M32 26v27" fill="none" stroke="#FFF5E9" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 21h7m10 0h7m-24 12 7 3m10 0 7-3" fill="none" stroke="#FFAB5F" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M4 10 32 1l28 9v38L32 63 4 47V10Z" fill="none" stroke="url(#ember)" stroke-width="2" opacity=".85"/>
+</svg>
