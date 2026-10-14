@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://outreach-web.mishogorgadze.workers.dev/sitemap.xml
+Sitemap: https://outreach.pre-production.workers.dev/sitemap.xml

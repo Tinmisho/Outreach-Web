@@ -1,14 +1,14 @@
 # Outreach
 
-> Outreach is a web studio in Tbilisi, Georgia. It designs, builds, hosts and maintains fast, mobile-ready websites for small businesses. Clients see a working demo before paying, then rent the site monthly or buy it outright. The site is available in English, Georgian (https://outreach-web.mishogorgadze.workers.dev/ka/) and Russian (https://outreach-web.mishogorgadze.workers.dev/ru/).
+> Outreach is a web studio in Tbilisi, Georgia. It designs, builds, hosts and maintains fast, mobile-ready websites for small businesses. Clients see a working demo before paying, then rent the site monthly or buy it outright. The site is available in English, Georgian (https://outreach.pre-production.workers.dev/ka/) and Russian (https://outreach.pre-production.workers.dev/ru/).
 
 ## Pages
 
-- [Home](https://outreach-web.mishogorgadze.workers.dev/): Outreach designs, builds and hosts fast websites for small businesses in Georgia. See a working demo first, then rent from 100 ₾/month or buy it.
-- [Services](https://outreach-web.mishogorgadze.workers.dev/services/): Design and build, hosting and care, rent or own: everything Outreach does for small businesses in Georgia, in plain words.
-- [How it works](https://outreach-web.mishogorgadze.workers.dev/how-it-works/): We build your website first and send you a link. You look at it on your phone, then decide to rent or buy. No lock-in.
-- [Pricing](https://outreach-web.mishogorgadze.workers.dev/pricing/): START 100 ₾, CHAT 160 ₾, PRO 250 ₾, PAY 350 ₾ a month with hosting, SSL and changes included. Buy outright from 2,000 ₾.
-- [Contact](https://outreach-web.mishogorgadze.workers.dev/contact/): Talk to Outreach about a website for your business. Based in Tbilisi, working with small businesses across Georgia.
+- [Home](https://outreach.pre-production.workers.dev/): Outreach designs, builds and hosts fast websites for small businesses in Georgia. See a working demo first, then rent from 100 ₾/month or buy it.
+- [Services](https://outreach.pre-production.workers.dev/services/): Design and build, hosting and care, rent or own: everything Outreach does for small businesses in Georgia, in plain words.
+- [How it works](https://outreach.pre-production.workers.dev/how-it-works/): We build your website first and send you a link. You look at it on your phone, then decide to rent or buy. No lock-in.
+- [Pricing](https://outreach.pre-production.workers.dev/pricing/): START 100 ₾, CHAT 160 ₾, PRO 250 ₾, PAY 350 ₾ a month with hosting, SSL and changes included. Buy outright from 2,000 ₾.
+- [Contact](https://outreach.pre-production.workers.dev/contact/): Talk to Outreach about a website for your business. Based in Tbilisi, working with small businesses across Georgia.
 
 ## Plans
 

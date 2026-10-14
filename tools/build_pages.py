@@ -13,7 +13,7 @@ Georgian plan / step / FAQ texts are the official ones from the main Outreach si
 """
 import json, pathlib, re, subprocess, shutil, datetime, html
 
-SITE = "https://outreach-web.mishogorgadze.workers.dev"   # canonical origin (no trailing slash)
+SITE = "https://outreach.pre-production.workers.dev"   # canonical origin (no trailing slash)
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PUB = ROOT / "public"
 SRC = ROOT / "site-src"
