@@ -34,7 +34,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
 - Logo = hexagon mark + "Outreach" only (no underline or tagline).
 - Liquid glass (experiment) is gated on `<html data-glass=on>` from `liquid-glass.js`; `?glass=0` or
   `window.__oxGlass.toggle()` shows the flat site. Its CSS sits at the end of `public/site.css` and of
-  `public/assets/index-*.css` — keep the two in step.
+  `public/assets/index-*.css` — keep the two in step. On the 3D page the glass also needs
+  `data-scene=off`, which `liquid-glass.js` sets once the dive is over: backdrop-filter over the live
+  WebGL canvas cost the scene its laptop and phone, so nothing there is translucent until it stops.
 - Sounds stay light and airy (no bass, no "braam"). Browsers only allow sound after the first click/keypress.
 - Business facts come from the main Outreach site (WebB-Site): plans START 100 / CHAT 160 / PRO 250 / PAY 350 ₾
   per month, Tbilisi, Georgia. No real phone/email/street yet — never invent them.
