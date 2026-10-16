@@ -310,3 +310,59 @@ html[data-glass=on][data-scene=off] .ox-site__device{background:#ffffff4d;box-sh
 }
 @media (width<=760px){html[data-glass=on][data-scene=off] .ox-site__nav{padding:10px 12px;border-radius:18px}}
 @media (prefers-reduced-motion:reduce){html[data-glass=on][data-scene=off] .ox-site__nav:after{transition:none}}
+/* ── plans on the home page (pricing-home.js), after the example businesses ───────────────────────── */
+.ox-price{position:relative;z-index:2;background-color:var(--bg);padding:clamp(60px,9vh,110px) clamp(20px,5vw,84px) clamp(70px,10vh,120px);
+  background-image:linear-gradient(#0000000d 1px,transparent 1px),linear-gradient(90deg,#0000000d 1px,transparent 1px);background-size:56px 56px}
+.ox-price__inner{max-width:1180px;margin:0 auto;display:grid;gap:clamp(24px,4vh,44px)}
+.ox-price__head{display:grid;gap:10px;max-width:760px}
+.ox-price__eyebrow{margin:0;font-family:ui-monospace,"JetBrains Mono",Menlo,monospace;color:var(--ox-d);letter-spacing:.06em;font-size:14px}
+.ox-price__title{margin:0;font-size:clamp(34px,5.4vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.02;color:var(--fg)}
+.ox-price__title .ox-grad{background:linear-gradient(100deg,var(--ox-a),var(--ox-b) 50%,var(--ox-c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ox-price__lede{margin:0;color:var(--muted);font-size:clamp(15px,1.5vw,18px);max-width:58ch}
+.ox-price__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ox-plan{position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px 24px;border-radius:22px;
+  background:#fff;border:1px solid #1c161214;box-shadow:0 14px 34px #3b220f14;overflow:hidden}
+.ox-plan:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--ox-a),var(--ox-b),var(--ox-c))}
+.ox-plan--lead{border-color:color-mix(in srgb,var(--ox-a) 45%,transparent);box-shadow:0 26px 56px color-mix(in srgb,var(--ox-a) 22%,transparent)}
+.ox-plan__name{margin:0;font-size:1.05rem;letter-spacing:.04em;color:var(--fg)}
+.ox-plan__price{margin:0;color:var(--fg);font-size:1rem}
+.ox-plan__price strong{font-size:2.1rem;letter-spacing:-.02em}
+.ox-plan__price span{color:var(--muted);font-size:.9rem}
+.ox-plan__sum{margin:0;color:var(--muted);font-size:.95rem}
+.ox-plan__feats{margin:4px 0 0;padding:0;list-style:none;flex:1}
+.ox-plan__feats li{position:relative;padding:7px 0 7px 22px;border-top:1px solid #1c161214;color:var(--fg);font-size:.95rem}
+.ox-plan__feats li:before{content:"✓";position:absolute;left:0;color:var(--ox-d);font-weight:700}
+.ox-plan__setup{margin:8px 0 0;color:var(--muted);font-size:13px}
+.ox-price__foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;
+  padding:26px 24px;border-radius:22px;border:1px solid #1c161214;background:#fff}
+.ox-price__own{max-width:62ch}
+.ox-price__own h3{margin:0 0 6px;font-size:1.15rem;color:var(--fg)}
+.ox-price__own p{margin:0;color:var(--muted);font-size:.95rem}
+.ox-price__actions{display:flex;flex-wrap:wrap;gap:12px}
+.ox-price__btn{display:inline-flex;align-items:center;min-height:50px;padding:0 22px;border-radius:12px;border:1px solid #00000024;
+  background:#fff;color:var(--fg);font-weight:700;font-size:16px;text-decoration:none}
+.ox-price__btn--primary{background:var(--ox-a);border-color:transparent;color:#1a0f08;
+  box-shadow:0 10px 26px color-mix(in srgb,var(--ox-a) 24%,transparent)}
+.ox-price__btn:hover{transform:translateY(-2px);transition:transform .2s}
+@media (width<=900px){.ox-price__grid{grid-template-columns:repeat(2,1fr)}}
+@media (width<=560px){.ox-price__grid{grid-template-columns:1fr}.ox-price__foot{padding:22px 18px}}
+/* the glass material, on the same terms as the laptop page: only once the 3D scene has stopped */
+html[data-glass=on][data-scene=off] .ox-price:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(38vw 38vw at 8% 10%,color-mix(in srgb,var(--ox-b) 24%,transparent),transparent 70%),
+    radial-gradient(34vw 34vw at 94% 30%,color-mix(in srgb,var(--ox-a) 18%,transparent),transparent 72%),
+    radial-gradient(40vw 40vw at 60% 98%,color-mix(in srgb,var(--ox-c) 15%,transparent),transparent 74%)}
+html[data-glass=on][data-scene=off] .ox-price__inner{position:relative;z-index:1}
+html[data-glass=on][data-scene=off] .ox-plan,html[data-glass=on][data-scene=off] .ox-price__foot{
+  background:#ffffffeb;border-color:#ffffffb3;box-shadow:inset 0 1px 0 #ffffffe6,inset 0 -1px 0 #ffffff80,inset 0 0 26px #ffffff59,0 18px 44px #3b220f1f}
+html[data-glass=on][data-scene=off] .ox-plan--lead{border-color:color-mix(in srgb,var(--ox-a) 45%,#fff);
+  box-shadow:inset 0 1px 0 #ffffffe6,inset 0 0 26px #ffffff59,0 24px 54px color-mix(in srgb,var(--ox-a) 24%,transparent)}
+html[data-glass=on][data-scene=off] .ox-price__btn{background:#ffffffeb;border-color:#ffffffbf;box-shadow:inset 0 1px 0 #ffffffe6,0 8px 20px #3b220f14}
+html[data-glass=on][data-scene=off] .ox-price__btn--primary{border-color:transparent;
+  background:linear-gradient(170deg,color-mix(in srgb,var(--ox-a) 86%,#fff),var(--ox-a));
+  box-shadow:inset 0 1px 0 #ffffff8c,0 10px 26px color-mix(in srgb,var(--ox-a) 30%,transparent)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html[data-glass=on][data-scene=off] .ox-plan,html[data-glass=on][data-scene=off] .ox-price__foot,
+  html[data-glass=on][data-scene=off] .ox-price__btn{background:#ffffff94;
+    -webkit-backdrop-filter:blur(14px) saturate(170%) brightness(1.04);backdrop-filter:blur(14px) saturate(170%) brightness(1.04)}
+  html[data-glass=on][data-scene=off] .ox-price__btn--primary{background:linear-gradient(170deg,color-mix(in srgb,var(--ox-a) 86%,#fff),var(--ox-a))}
+}

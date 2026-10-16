@@ -13,7 +13,7 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
     (`Experience-*.js` = laptop/phone scene, `index-*.js` = page + scroll triggers, `index-*.css` = styles).
     There is no source for it; keep edits small and check syntax with `node --check` (copy to `.mjs`).
 - `site-src/` — readable sources of the site scripts (theme, language, chat, sounds, cursor, laptop page,
-  example-businesses gallery, liquid glass). Edit these, never the minified copies in `public/`.
+  example-businesses gallery, home-page plans, liquid glass). Edit these, never the minified copies in `public/`.
 - `tools/build_pages.py` — run after any change: minifies `site-src/` into `public/` and generates the
   content pages (services, how-it-works, pricing, contact in EN/KA/RU), `/ka/` + `/ru/` home copies, 404,
   titles/descriptions/canonicals/hreflang/JSON-LD, sitemap.xml, robots.txt, llms.txt, _headers.
@@ -38,5 +38,7 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   `data-scene=off`, which `liquid-glass.js` sets once the dive is over: backdrop-filter over the live
   WebGL canvas cost the scene its laptop and phone, so nothing there is translucent until it stops.
 - Sounds stay light and airy (no bass, no "braam"). Browsers only allow sound after the first click/keypress.
+- The home-page plans (`site-src/pricing-home.js`) repeat the numbers and wording of `/pricing/`;
+  `PLAN_PRICES` / `PLANS` in `tools/build_pages.py` is the source of both — change them together.
 - Business facts come from the main Outreach site (WebB-Site): plans START 100 / CHAT 160 / PRO 250 / PAY 350 ₾
   per month, Tbilisi, Georgia. No real phone/email/street yet — never invent them.
