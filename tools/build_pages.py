@@ -235,6 +235,7 @@ def shell(slug, lang, body, extra_ld=()):
 {head(slug, lang, extra_ld)}
     <link rel="icon" type="image/svg+xml" href="{up}favicon.svg">
     <script src="{up}theme.js"></script>
+    <script src="{up}liquid-glass.js"></script>
     <link rel="stylesheet" href="{up}site.css">{font}
   </head>
   <body>
@@ -336,6 +337,7 @@ def build_404():
     <meta name="robots" content="noindex,follow">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <script src="/theme.js"></script>
+    <script src="/liquid-glass.js"></script>
     <link rel="stylesheet" href="/site.css">
     <link rel="stylesheet" href="{GEORGIAN_FONT}">
   </head>

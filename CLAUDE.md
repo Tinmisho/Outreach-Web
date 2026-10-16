@@ -13,7 +13,7 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
     (`Experience-*.js` = laptop/phone scene, `index-*.js` = page + scroll triggers, `index-*.css` = styles).
     There is no source for it; keep edits small and check syntax with `node --check` (copy to `.mjs`).
 - `site-src/` — readable sources of the site scripts (theme, language, chat, sounds, cursor, laptop page,
-  example-businesses gallery). Edit these, never the minified copies in `public/`.
+  example-businesses gallery, liquid glass). Edit these, never the minified copies in `public/`.
 - `tools/build_pages.py` — run after any change: minifies `site-src/` into `public/` and generates the
   content pages (services, how-it-works, pricing, contact in EN/KA/RU), `/ka/` + `/ru/` home copies, 404,
   titles/descriptions/canonicals/hreflang/JSON-LD, sitemap.xml, robots.txt, llms.txt, _headers.
@@ -32,6 +32,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
 - Light mode only. Default theme: Firefox orange (#FF7139 / #FFBD4F / #FF4F5E, text-orange #E8590C, bg #FAF7F2).
   Other themes are a switcher option; logos are drawn in the theme colours by `theme.js` (`window.__oxLogo`).
 - Logo = hexagon mark + "Outreach" only (no underline or tagline).
+- Liquid glass (experiment) is gated on `<html data-glass=on>` from `liquid-glass.js`; `?glass=0` or
+  `window.__oxGlass.toggle()` shows the flat site. Its CSS sits at the end of `public/site.css` and of
+  `public/assets/index-*.css` — keep the two in step.
 - Sounds stay light and airy (no bass, no "braam"). Browsers only allow sound after the first click/keypress.
 - Business facts come from the main Outreach site (WebB-Site): plans START 100 / CHAT 160 / PRO 250 / PAY 350 ₾
   per month, Tbilisi, Georgia. No real phone/email/street yet — never invent them.
