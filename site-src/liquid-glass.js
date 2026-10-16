@@ -2,6 +2,8 @@
 // specular highlight that follows the pointer, in the spirit of Apple's Liquid Glass material.
 // Everything is gated on <html data-glass="on">, so the flat site is one attribute away:
 //   ?glass=0 in the URL, or window.__oxGlass.toggle() in the console. The choice is remembered.
+// Content pages only: the 3D home page carries no glass CSS, because the translucent panes there
+// cost the scene its laptop and phone. Leave it that way until the two are known to get along.
 (() => {
   const KEY = 'outreach.glass';
   // People who ask their OS for less transparency get the flat site unless they chose glass here.
@@ -21,8 +23,7 @@
 
   // The highlight: the surface under the pointer keeps it in --gx/--gy and fades --gl in.
   // One element at a time, one update per frame — the 3D page cannot afford more.
-  const SEL = '.glass,.card,.step,.note,.cta,.faq details,.btn,.top,.langs a,' +
-              '.ox-site__nav,.ox-site__btn,.ox-chat,.ox-theme,.ox-theme__pop';
+  const SEL = '.glass,.card,.step,.note,.cta,.faq details,.btn,.top,.langs a';
   let queued = 0, lit = null;
   const clear = () => {
     if (!lit) return;

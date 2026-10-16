@@ -279,38 +279,3 @@ body{overflow-x:clip}
 @keyframes oxPulse{to{stroke-dashoffset:0}}
 @media (width<760px){.ox-biz{height:calc(var(--n,9) * 40vh + 100vh)}.ox-biz__card{flex-basis:82vw;padding:12px 12px 14px}.ox-mock__hero{min-height:118px}.art{height:110px}.ox-biz__lede{display:none}}
 @media (prefers-reduced-motion:reduce){.art *{animation:none!important}}
-/* ── liquid glass (experiment) ─ home page chrome. Active only while <html data-glass=on>
-   (liquid-glass.js); ?glass=0 restores the flat page. Same material as site.css: a colour field to
-   refract, a translucent pane with a bright rim, and a pointer-following highlight (--gx/--gy).
-   Blur radii stay small here: the 3D scene is already paying for the GPU. */
-html[data-glass=on]{--gpane:#ffffffeb;--grim:#ffffffe6;--gblur:14px}
-html[data-glass=on] .ox-site{background-color:transparent}
-html[data-glass=on] .ox-site:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-color:var(--bg);
-  background-image:radial-gradient(40vw 40vw at 10% 4%,color-mix(in srgb,var(--ox-b) 30%,transparent),transparent 70%),
-    radial-gradient(36vw 36vw at 92% 18%,color-mix(in srgb,var(--ox-a) 24%,transparent),transparent 72%),
-    radial-gradient(44vw 44vw at 64% 96%,color-mix(in srgb,var(--ox-c) 18%,transparent),transparent 74%)}
-html[data-glass=on] .ox-site__nav{position:relative;padding:12px clamp(14px,1.6vw,22px);border-radius:22px;
-  border:1px solid #ffffffb3;background:var(--gpane);
-  box-shadow:inset 0 1px 0 var(--grim),inset 0 -1px 0 #ffffff80,0 14px 34px #3b220f1a}
-html[data-glass=on] .ox-site__nav:after,html[data-glass=on] .ox-chat:after{content:"";position:absolute;inset:0;
-  border-radius:inherit;pointer-events:none;z-index:0;
-  background:radial-gradient(220px circle at var(--gx,24%) var(--gy,-10%),#ffffffc9,#fff0 62%);
-  opacity:calc(.5 + .5*var(--gl,0));transition:opacity .35s ease}
-html[data-glass=on] .ox-site__nav>*,html[data-glass=on] .ox-chat>*{position:relative;z-index:1}
-html[data-glass=on] .ox-site__btn{background:var(--gpane);border-color:#ffffffbf;
-  box-shadow:inset 0 1px 0 var(--grim),0 8px 20px #3b220f14}
-html[data-glass=on] .ox-site__btn--primary{background:linear-gradient(170deg,color-mix(in srgb,var(--ox-a) 86%,#fff),var(--ox-a));
-  border-color:transparent;box-shadow:inset 0 1px 0 #ffffff8c,0 10px 26px color-mix(in srgb,var(--ox-a) 30%,transparent)}
-html[data-glass=on] .ox-site__device{background:#ffffff4d;box-shadow:inset 0 1px 0 #ffffffb3}
-html[data-glass=on] .ox-chat,html[data-glass=on] .ox-theme__pop{position:fixed;background:var(--gpane);border-color:#ffffffb3;
-  box-shadow:inset 0 1px 0 var(--grim),inset 0 -1px 0 #ffffff80,0 24px 60px #3b220f33}
-html[data-glass=on] .ox-theme{background:var(--gpane);border-color:#ffffffb3;box-shadow:inset 0 1px 0 var(--grim),0 8px 20px #3b220f14}
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  html[data-glass=on]{--gpane:#ffffff94}
-  html[data-glass=on] .ox-site__nav,html[data-glass=on] .ox-site__btn,html[data-glass=on] .ox-chat,
-  html[data-glass=on] .ox-theme,html[data-glass=on] .ox-theme__pop{
-    -webkit-backdrop-filter:blur(var(--gblur)) saturate(170%) brightness(1.04);
-    backdrop-filter:blur(var(--gblur)) saturate(170%) brightness(1.04)}
-}
-@media (width<=760px){html[data-glass=on]{--gblur:10px}html[data-glass=on] .ox-site__nav{padding:10px 12px;border-radius:18px}}
-@media (prefers-reduced-motion:reduce){html[data-glass=on] .ox-site__nav:after,html[data-glass=on] .ox-chat:after{transition:none}}
