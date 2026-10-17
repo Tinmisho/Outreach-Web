@@ -25,7 +25,7 @@
       </div>
       <div class="ox-site__device" aria-hidden="true">
         <span class="ox-bar ox-bar--accent"></span><span class="ox-bar"></span><span class="ox-bar ox-bar--short"></span>
-        <div class="ox-tiles"><span><i style="background:var(--ox-a)"></i></span><span><i style="background:var(--ox-b)"></i></span><span><i style="background:var(--ox-c)"></i></span></div>
+        <div class="ox-tiles"><span><i style="background:var(--ox-a)"></i></span><span><i style="background:color-mix(in srgb,var(--ox-a) 55%,#fff)"></i></span><span><i style="background:color-mix(in srgb,var(--ox-a) 28%,#fff)"></i></span></div>
       </div>
     </div>
     <ul class="ox-site__features">

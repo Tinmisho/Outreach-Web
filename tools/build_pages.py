@@ -348,8 +348,11 @@ def intro(slug, lang):
 def cta(slug, lang):
     t = UI[lang]
     home = "../" * slug.count("/")  # from a content page to this language's home
+    # on the pricing page itself, "see pricing" would point at the page you are reading
+    second = (f'<a class="btn" href="{home}how-it-works/">{esc(t["nav"]["how-it-works/"])}</a>' if slug == "pricing/"
+              else f'<a class="btn" href="{home}pricing/">{esc(t["see_pricing"])}</a>')
     return (f'<section class="cta"><h2>{esc(t["cta_h"])}</h2><p>{esc(t["cta_p"])}</p>'
-            f'<p class="actions"><a class="btn btn--primary" href="{home}?chat=contact">{esc(t["talk"])}</a><a class="btn" href="{home}pricing/">{esc(t["see_pricing"])}</a></p></section>')
+            f'<p class="actions"><a class="btn btn--primary" href="{home}?chat=contact">{esc(t["talk"])}</a>{second}</p></section>')
 
 
 def li(items):

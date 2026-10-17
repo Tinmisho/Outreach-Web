@@ -36,6 +36,10 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   `theme.js`: there is no switcher and a theme stored by an older visit is ignored. The other palettes stay in
   the file for reference. Logos are drawn in the palette by `theme.js` (`window.__oxLogo`).
 - Logo = hexagon mark + "Outreach" only (no underline or tagline).
+- One accent. `--ox-a` carries the interface; `--ox-b` / `--ox-c` are for the logo, the favicon, the 3D
+  scene and the two hero titles only — not for bars, buttons, panels or tints. The demo businesses in
+  the gallery keep their own palettes: they are meant to look like other people's brands.
+- Motion is unhurried: 400–600ms with a soft ease-out, and nothing loops on its own.
 - Liquid glass (experiment) is gated on `<html data-glass=on>` from `liquid-glass.js`; `?glass=0` or
   `window.__oxGlass.toggle()` shows the flat site. Its CSS sits at the end of `public/site.css` and of
   `public/assets/index-*.css` — keep the two in step. On the 3D page the glass also needs
