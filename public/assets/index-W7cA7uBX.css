@@ -243,7 +243,7 @@ body{overflow-x:clip}
 .ox-biz__meter i{flex:1;height:3px;border-radius:3px;background:#1c161214;overflow:hidden}
 .ox-biz__meter b{display:block;height:100%;transform-origin:left;transform:scaleX(0);background:var(--ox-a)}
 /* little animations inside the example sites (only the cards near the middle animate) */
-.art{position:relative;height:128px;overflow:hidden}
+.ox-mock__shot{position:relative;height:128px;border-radius:10px;overflow:hidden}.ox-mock__shot .art{position:absolute;inset:0;height:100%}.ox-mock__shot.has-shot .art{display:none}.ox-mock__photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}.ox-mock__item b{position:relative;overflow:hidden}.ox-mock__thumb{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}.art{position:relative;height:128px;overflow:hidden}
 .ox-biz__card:not(.is-near) .art,.ox-biz__card:not(.is-near) .art *{animation-play-state:paused!important}
 .art--petals i{position:absolute;top:-16px;width:11px;height:15px;border-radius:70% 0 70% 0;background:var(--acc);opacity:.85;animation:oxPetal 3.4s linear infinite}
 .art--petals i:nth-child(1){left:8%;animation-delay:0s}.art--petals i:nth-child(2){left:24%;animation-delay:-1.2s;background:#f6a6bb}.art--petals i:nth-child(3){left:40%;animation-delay:-2.3s}

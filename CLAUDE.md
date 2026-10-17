@@ -12,6 +12,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   - `public/assets/` — the 3D app: a minified Vite/React Three Fiber/GSAP build that is edited in place
     (`Experience-*.js` = laptop/phone scene, `index-*.js` = page + scroll triggers, `index-*.css` = styles).
     There is no source for it; keep edits small and check syntax with `node --check` (copy to `.mjs`).
+  - `public/img/demos/` — the photographs the example websites in the gallery show. Slots and subjects are
+    listed in its README; `tools/demo_photos.py <folder>` crops and converts originals into them. A slot
+    with no photograph falls back to the drawn artwork, so the gallery never breaks on a missing file.
 - `site-src/` — readable sources of the site scripts (theme, language, chat, sounds, cursor, laptop page,
   example-businesses gallery, home-page plans, liquid glass). Edit these, never the minified copies in `public/`.
 - `tools/build_pages.py` — run after any change: minifies `site-src/` into `public/` and generates the
