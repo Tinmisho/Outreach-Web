@@ -25,6 +25,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
    The hero section's height is the scroll the 3D dive takes (now ~55vh, about one flick) — not a layout value.
    `ox-site.js` snaps that scroll: stop inside the hero and the page finishes the dive, or falls back to the
    top below a quarter. CSS `scroll-behavior` must stay `auto` (smooth fights it); in-page links glide via JS.
+   The dive value is eased in `index-*.js`: the scroll sets `__oxHeroT` and `E.hero` chases it with a
+   time-based decay (~60ms constant), so wheel notches glide instead of stepping. A numeric GSAP `scrub`
+   does not do this — it smooths an attached animation, and that trigger only writes a value in onUpdate.
 2. Preview locally only when needed, and stop the server + close the preview tab at the end of the round
    (the laptop overheats with the 3D page). Use a no-cache server; the preview browser caches hard.
 3. Commit (author Misho) and push. Mirror `public/` (minus `_headers`) into

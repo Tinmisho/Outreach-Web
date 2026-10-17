@@ -67,12 +67,12 @@
   // the way it always completes, the way a phone unlock catches a short swipe.
   const snapDive = (() => {
     const EASE = (x) => 1 - Math.pow(1 - x, 3);
-    let timer = 0, anim = 0, busy = false, want = -1;
+    let timer = 0, anim = 0, busy = false, want = -1, lastInput = 0;
     const glide = (to) => {
       const from = scrollY, span = to - from;
       if (!span) return;
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scrollTo(0, to); return; }
-      const t0 = performance.now(), ms = Math.min(420, Math.max(160, Math.abs(span) * 0.8));
+      const t0 = performance.now(), ms = Math.min(520, Math.max(220, Math.abs(span) * 1.1));
       busy = true; want = from;
       const step = (now) => {
         // the browser's own wheel momentum can still be moving the page: if it has taken over, stand down
@@ -87,14 +87,18 @@
     };
     const arm = () => {
       clearTimeout(timer);
+      // wait for the gesture to be properly over: a trackpad delivers in bursts with gaps between them,
+      // and snapping into one of those gaps feels like the page is pulling against your hand
       timer = setTimeout(() => {
         const h = document.querySelector('.hero');
-        if (!h || busy) return;
+        if (!h || busy || performance.now() - lastInput < 180) { arm(); return; }
         const H = h.offsetHeight, y = scrollY;
         if (y <= 1 || y >= H - 1) return;            // already at one end: nothing to do
         glide(y > H * 0.25 ? H : 0);                 // past a quarter of the way, the dive completes
-      }, 120);
+      }, 200);
     };
+    addEventListener('wheel', () => { lastInput = performance.now(); }, { passive: true });
+    addEventListener('touchmove', () => { lastInput = performance.now(); }, { passive: true });
     return arm;
   })();
   addEventListener('scroll', snapDive, { passive: true });
