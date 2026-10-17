@@ -143,37 +143,9 @@
     apply();
     mo.observe(document.body, { childList: true, subtree: true });
     setTimeout(() => mo.disconnect(), 15000);
-    mountSwitcher();
   };
   if (document.body) start(); else addEventListener('DOMContentLoaded', start);
 
-  // EN / ქა / RU switcher, next to the theme and sound buttons
-  function mountSwitcher() {
-    const btn = document.createElement('button');
-    btn.type = 'button'; btn.className = 'ox-lang'; btn.textContent = NAMES[lang];
-    btn.setAttribute('aria-haspopup', 'true'); btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', 'Language: ' + FULL[lang]); btn.title = FULL[lang];
-    const pop = document.createElement('div');
-    pop.className = 'ox-lang__pop'; pop.hidden = true; pop.setAttribute('role', 'menu');
-    for (const l of LANGS) {
-      const o = document.createElement('button');
-      o.type = 'button'; o.setAttribute('role', 'menuitemradio'); o.setAttribute('aria-checked', String(l === lang));
-      o.className = 'ox-lang__opt' + (l === lang ? ' is-on' : ''); o.lang = l;
-      o.innerHTML = `<b>${NAMES[l]}</b><span>${FULL[l]}</span>`;
-      o.addEventListener('click', () => {
-        if (l === lang) { pop.hidden = true; return; }
-        try { localStorage.setItem(KEY, l); } catch {}
-        // go to that language's own address (the 3D scene and its canvas texts are rebuilt in the new language)
-        const base = FIXED ? '../' : './';
-        const target = base + (l === 'en' ? '' : l + '/');
-        if (FIXED || l !== 'en') location.href = target; else location.reload();
-      });
-      pop.append(o);
-    }
-    const toggle = (v) => { pop.hidden = !v; btn.setAttribute('aria-expanded', String(v)); };
-    btn.addEventListener('click', (e) => { e.stopPropagation(); toggle(pop.hidden); });
-    document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target)) toggle(false); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggle(false); });
-    document.body.append(btn, pop);
-  }
+  // No floating language pill: the language is chosen from the footer links (and Google serves the right
+  // one through hreflang). Everything above — detection, the stored choice, /ka/ and /ru/ — is unchanged.
 })();
