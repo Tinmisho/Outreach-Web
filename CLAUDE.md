@@ -33,7 +33,8 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
    does not do this — it smooths an attached animation, and that trigger only writes a value in onUpdate.
 2. Preview locally only when needed, and stop the server + close the preview tab at the end of the round
    (the laptop overheats with the 3D page). Use a no-cache server; the preview browser caches hard.
-3. Commit (author Misho) and push. Mirror `public/` (minus `_headers`) into
+3. Commit (author Claude <noreply@anthropic.com>, with `Co-Authored-By: Misho <mishogorgadze@icloud.com>`
+   so GitHub shows the commit as verified and Misho still gets the credit) and push. Mirror `public/` (minus `_headers`) into
    `~/Projects/Outreach/WebB-Demos/rc0xbuk4c2/` and push that repo too.
 
 ## Design rules
