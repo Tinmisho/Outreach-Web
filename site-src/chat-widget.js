@@ -14,9 +14,9 @@
       ru: 'Мы создаём быстрые сайты, удобные на телефоне, размещаем их и поддерживаем в актуальном состоянии. Сайт можно арендовать помесячно или купить полностью. Технические детали берём на себя.',
     },
     pricing: {
-      en: 'Monthly plans: START 100 ₾ · CHAT 160 ₾ · PRO 250 ₾ · PAY 350 ₾, plus a one-time setup fee. After 12 months of payments you can buy the site, and the buyout price keeps going down. No hourly billing: extras have fixed prices.',
-      ka: 'თვიური პაკეტები: START 100 ₾ · CHAT 160 ₾ · PRO 250 ₾ · PAY 350 ₾, პლუს ერთჯერადი გაშვების საფასური. 12 თვის შემდეგ საიტის გამოსყიდვა შეგიძლიათ და ფასი თანდათან მცირდება. საათობრივი ანაზღაურება არ არის, დამატებებს ფიქსირებული ფასი აქვს.',
-      ru: 'Тарифы в месяц: START 100 ₾ · CHAT 160 ₾ · PRO 250 ₾ · PAY 350 ₾, плюс разовая плата за запуск. Через 12 месяцев сайт можно выкупить, и цена выкупа продолжает снижаться. Без почасовой оплаты: у дополнений фиксированные цены.',
+      en: 'Monthly plans: BASIC 100 ₾ · PLUS 160 ₾ · PRO 250 ₾ · MAX 350 ₾, plus a one-time setup fee of 150–450 ₾. Pay a year up front and it is 10% less. Minimum term 3 months, then 30 days notice. You can buy the site outright for 2,000–4,200 ₾. No hourly billing: extras have fixed prices.',
+      ka: 'თვიური პაკეტები: BASIC 100 ₾ · PLUS 160 ₾ · PRO 250 ₾ · MAX 350 ₾, პლუს ერთჯერადი setup 150–450 ₾. წლიური წინასწარი გადახდისას −10%. მინიმალური ვადა 3 თვე, შემდეგ 30 დღით ადრე შეტყობინებით. საიტის პირდაპირი ყიდვა 2,000–4,200 ₾. საათობრივი ანაზღაურება არ არის, დამატებებს ფიქსირებული ფასი აქვს.',
+      ru: 'Тарифы в месяц: BASIC 100 ₾ · PLUS 160 ₾ · PRO 250 ₾ · MAX 350 ₾, плюс разовый запуск 150–450 ₾. При оплате за год −10%. Минимальный срок 3 месяца, далее с уведомлением за 30 дней. Сайт можно купить целиком за 2 000–4 200 ₾. Без почасовой оплаты: у дополнений фиксированные цены.',
     },
     time: {
       en: 'A typical site goes live in about 1–2 weeks once we have your content (texts, photos, logo). We show you a demo first, so you see it before you pay.',

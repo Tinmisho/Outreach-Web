@@ -7,17 +7,17 @@
 - [Home](https://outreach.pre-production.workers.dev/): Outreach designs, builds and hosts fast websites for small businesses in Georgia. See a working demo first, then rent from 100 ₾/month or buy it.
 - [Services](https://outreach.pre-production.workers.dev/services/): Design and build, hosting and care, rent or own: everything Outreach does for small businesses in Georgia, in plain words.
 - [How it works](https://outreach.pre-production.workers.dev/how-it-works/): We build your website first and send you a link. You look at it on your phone, then decide to rent or buy. No lock-in.
-- [Pricing](https://outreach.pre-production.workers.dev/pricing/): START 100 ₾, CHAT 160 ₾, PRO 250 ₾, PAY 350 ₾ a month with hosting, SSL and changes included. Buy outright from 2,000 ₾.
+- [Pricing](https://outreach.pre-production.workers.dev/pricing/): BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ a month with hosting, SSL, daily backups and changes included. Buy outright from 2,000 ₾.
 - [Contact](https://outreach.pre-production.workers.dev/contact/): Talk to Outreach about a website for your business. Based in Tbilisi, working with small businesses across Georgia.
 
 ## Plans
 
-- START: 100 ₾/month (setup 150 ₾). A site for your business. Includes: Your own .ge domain, Hosting and SSL, One change a month.
-- CHAT: 160 ₾/month (setup 150 ₾). A site that answers questions. Includes: Everything in START, FAQ chat for your customers, Two changes a month.
-- PRO: 250 ₾/month (setup 250 ₾). A site that collects enquiries. Includes: Everything in CHAT, Booking and contact forms, Google Business profile.
-- PAY: 350 ₾/month (setup 450 ₾). A site that takes payment. Includes: Everything in PRO, Online payments, Money goes straight to your bank.
+- BASIC: 100 ₾/month (setup 150 ₾, 1,200 ₾ a year paid up front, buy outright 2,000 ₾). A site for your business. Includes: Your own .ge domain, Hosting, SSL and daily backups, One change a month.
+- PLUS: 160 ₾/month (setup 150 ₾, 1,728 ₾ a year paid up front, buy outright 2,400 ₾). A site that answers questions. Includes: Everything in BASIC, FAQ chatbot with your own answers, One change a month plus a chatbot update.
+- PRO: 250 ₾/month (setup 250 ₾, 2,700 ₾ a year paid up front, buy outright 3,200 ₾). A site that collects enquiries. Includes: Everything in PLUS, Up to 2 booking or enquiry forms, Three changes a month, monthly report.
+- MAX: 350 ₾/month (setup 450 ₾, 3,780 ₾ a year paid up front, buy outright 4,200 ₾). A site that takes payment. Includes: Everything in PRO, Online payment, up to 10 products, Four changes a month.
 
-Monthly billing, cancel with 30 days notice, setup charged once. Hosting, SSL and changes included.
+Monthly billing, minimum term 3 months, then 30 days notice. Setup charged once. Hosting, SSL, daily backups and changes included. No hourly billing.
 
 ## FAQ
 

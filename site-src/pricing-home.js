@@ -9,43 +9,49 @@
   const HEAD = {
     eyebrow: { en: '> Pricing', ka: '> ფასები', ru: '> Цены' },
     title: { en: 'Simple <span class="ox-grad">monthly plans.</span>', ka: 'მარტივი <span class="ox-grad">თვიური პაკეტები.</span>', ru: 'Простые <span class="ox-grad">месячные тарифы.</span>' },
-    lede: { en: 'Monthly. Cancel with 30 days notice. Hosting, SSL and changes are always included.', ka: 'თვიური გადახდა. გაუქმება 30 დღით ადრე შეტყობინებით. ჰოსტინგი, SSL და ცვლილებები ყოველთვის შედის.', ru: 'Помесячно. Отмена с уведомлением за 30 дней. Хостинг, SSL и изменения всегда включены.' },
+    lede: { en: 'Every amount is in GEL and final, with no hourly billing. Minimum term 3 months, then 30 days notice. Hosting, SSL, daily backups and changes are always included.', ka: 'ყველა თანხა ლარშია და საბოლოოა, საათობრივი დათვლა არ გვაქვს. მინიმალური ვადა 3 თვე, შემდეგ 30 დღით ადრე. ჰოსტინგი, SSL, ყოველდღიური ასლი და ცვლილებები ყოველთვის შედის.', ru: 'Все суммы в лари и окончательные, почасовой оплаты нет. Минимальный срок 3 месяца, далее за 30 дней. Хостинг, SSL, ежедневные копии и изменения всегда включены.' },
     month: { en: '/ month', ka: '/ თვე', ru: '/ мес' },
     setup: { en: 'Setup {n} ₾, charged once', ka: 'Setup {n} ₾, ერთჯერადად', ru: 'Запуск {n} ₾, один раз' },
     own: { en: 'Want to own it?', ka: 'გსურთ საიტი იყიდოთ?', ru: 'Хотите купить сайт?' },
     own_body: { en: 'Buying outright runs 2,000–4,200 ₾ depending on the package. After twelve paid months the buyout price drops, reaching 60% at two years.', ka: 'სრული შესყიდვა პაკეტის მიხედვით 2,000–4,200 ₾ ღირს. 12 გადახდილი თვის შემდეგ ფასი იკლებს და ორ წელიწადში 60%-ს აღწევს.', ru: 'Покупка стоит 2 000–4 200 ₾ в зависимости от тарифа. После двенадцати оплаченных месяцев цена выкупа снижается и через два года составляет 60%.' },
     talk: { en: 'Talk to us ↗', ka: 'დაგვიკავშირდით ↗', ru: 'Связаться ↗' },
     all: { en: 'All the details', ka: 'ყველა დეტალი', ru: 'Все детали' },
+    buy: { en: 'Buy outright', ka: 'პირდაპირი ყიდვა', ru: 'Купить целиком' },
   };
 
   // name, ₾ per month, setup ₾ — the order matches PLANS below
-  const PRICES = [['START', 100, 150], ['CHAT', 160, 150], ['PRO', 250, 250], ['PAY', 350, 450]];
+  // name, ₾ per month, setup ₾, buyout ₾ — the packages table, same source as /pricing/
+  const PRICES = [['BASIC', 100, 150, 2000], ['PLUS', 160, 150, 2400], ['PRO', 250, 250, 3200], ['MAX', 350, 450, 4200]];
+  const TAG = { en: ['a site', '+ chatbot', '+ forms', '+ online payment'],
+                ka: ['საიტი', '+ ჩატბოტი', '+ ფორმები', '+ ონლაინ გადახდა'],
+                ru: ['сайт', '+ чат-бот', '+ формы', '+ онлайн-оплата'] };
   const PLANS = {
-    en: [['A site for your business.', ['Your own .ge domain', 'Hosting and SSL', 'One change a month']],
-         ['A site that answers questions.', ['Everything in START', 'FAQ chat for your customers', 'Two changes a month']],
-         ['A site that collects enquiries.', ['Everything in CHAT', 'Booking and contact forms', 'Google Business profile']],
-         ['A site that takes payment.', ['Everything in PRO', 'Online payments', 'Money goes straight to your bank']]],
-    ka: [['საიტი თქვენი ბიზნესისთვის.', ['თქვენი .ge დომენი', 'ჰოსტინგი და SSL', 'ერთი ცვლილება თვეში']],
-         ['საიტი, რომელიც კითხვებს პასუხობს.', ['ყველაფერი START-იდან', 'ჩატბოტი თქვენი კლიენტებისთვის', 'ორი ცვლილება თვეში']],
-         ['საიტი, რომელიც განაცხადებს აგროვებს.', ['ყველაფერი CHAT-იდან', 'ჯავშნისა და კონტაქტის ფორმები', 'Google Business პროფილი']],
-         ['საიტი, რომელიც გადახდას იღებს.', ['ყველაფერი PRO-დან', 'ონლაინ გადახდა', 'თანხა პირდაპირ თქვენს ანგარიშზე']]],
-    ru: [['Сайт для вашего бизнеса.', ['Ваш домен .ge', 'Хостинг и SSL', 'Одно изменение в месяц']],
-         ['Сайт, который отвечает на вопросы.', ['Всё из START', 'Чат-бот для ваших клиентов', 'Два изменения в месяц']],
-         ['Сайт, который собирает заявки.', ['Всё из CHAT', 'Формы бронирования и обратной связи', 'Профиль Google Business']],
-         ['Сайт, который принимает оплату.', ['Всё из PRO', 'Онлайн-оплата', 'Деньги идут прямо на ваш счёт']]],
+    en: [['A site for your business.', ['Your own .ge domain', 'Hosting, SSL and daily backups', 'One change a month']],
+         ['A site that answers questions.', ['Everything in BASIC', 'FAQ chatbot with your own answers', 'One change a month plus a chatbot update']],
+         ['A site that collects enquiries.', ['Everything in PLUS', 'Up to 2 booking or enquiry forms', 'Three changes a month, monthly report']],
+         ['A site that takes payment.', ['Everything in PRO', 'Online payment, up to 10 products', 'Four changes a month']]],
+    ka: [['საიტი თქვენი ბიზნესისთვის.', ['თქვენი .ge დომენი', 'ჰოსტინგი, SSL და ყოველდღიური ასლი', 'ერთი ცვლილება თვეში']],
+         ['საიტი, რომელიც კითხვებს პასუხობს.', ['ყველაფერი BASIC-იდან', 'FAQ ჩატბოტი თქვენი პასუხებით', 'ერთი ცვლილება თვეში და ჩატბოტის განახლება']],
+         ['საიტი, რომელიც განაცხადებს აგროვებს.', ['ყველაფერი PLUS-იდან', 'ჯავშნის / მოთხოვნის ფორმები (≤ 2)', 'სამი ცვლილება თვეში, ყოველთვიური ანგარიში']],
+         ['საიტი, რომელიც გადახდას იღებს.', ['ყველაფერი PRO-დან', 'ონლაინ გადახდა, ≤ 10 პროდუქტი', 'ოთხი ცვლილება თვეში']]],
+    ru: [['Сайт для вашего бизнеса.', ['Ваш домен .ge', 'Хостинг, SSL и ежедневные копии', 'Одно изменение в месяц']],
+         ['Сайт, который отвечает на вопросы.', ['Всё из BASIC', 'FAQ-чат-бот с вашими ответами', 'Одно изменение в месяц плюс обновление чат-бота']],
+         ['Сайт, который собирает заявки.', ['Всё из PLUS', 'Формы брони и заявок (до 2)', 'Три изменения в месяц, ежемесячный отчёт']],
+         ['Сайт, который принимает оплату.', ['Всё из PRO', 'Онлайн-оплата, до 10 товаров', 'Четыре изменения в месяц']]],
   };
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[m]);
   const plans = PLANS[L] || PLANS.en;
   const base = L === 'en' ? '' : '../';          // /ka/ and /ru/ sit one level deeper
 
-  const card = ([name, price, setup], i) => `
+  const card = ([name, price, setup, buyout], i) => `
     <article class="ox-plan${i === 1 ? ' ox-plan--lead' : ''}" data-i="${i}">
-      <h3 class="ox-plan__name">${esc(name)}</h3>
+      <h3 class="ox-plan__name">${esc(name)} <span class="ox-plan__tag">${esc((TAG[L] || TAG.en)[i])}</span></h3>
       <p class="ox-plan__price"><strong>${price}</strong> ₾ <span>${esc(t(HEAD.month))}</span></p>
       <p class="ox-plan__sum">${esc(plans[i][0])}</p>
       <ul class="ox-plan__feats">${plans[i][1].map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
       <p class="ox-plan__setup">${esc(t(HEAD.setup).replace('{n}', setup))}</p>
+      <p class="ox-plan__setup">${esc(t(HEAD.buy))}: <strong>${buyout.toLocaleString('en-US')} ₾</strong></p>
     </article>`;
 
   const html = `

@@ -22,6 +22,7 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
 ## Workflow
 
 1. Edit, then `python3 tools/build_pages.py`.
+   The hero section's height is the scroll the 3D dive takes (now ~55vh, about one flick) — not a layout value.
 2. Preview locally only when needed, and stop the server + close the preview tab at the end of the round
    (the laptop overheats with the 3D page). Use a no-cache server; the preview browser caches hard.
 3. Commit (author Misho) and push. Mirror `public/` (minus `_headers`) into
@@ -29,8 +30,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
 
 ## Design rules
 
-- Light mode only. Default theme: Firefox orange (#FF7139 / #FFBD4F / #FF4F5E, text-orange #E8590C, bg #FAF7F2).
-  Other themes are a switcher option; logos are drawn in the theme colours by `theme.js` (`window.__oxLogo`).
+- Light mode only. The palette is Sunset (#FF6B6B / #FFD166 / #C77DFF, text #D6336C, bg #FAF7F2), fixed in
+  `theme.js`: there is no switcher and a theme stored by an older visit is ignored. The other palettes stay in
+  the file for reference. Logos are drawn in the palette by `theme.js` (`window.__oxLogo`).
 - Logo = hexagon mark + "Outreach" only (no underline or tagline).
 - Liquid glass (experiment) is gated on `<html data-glass=on>` from `liquid-glass.js`; `?glass=0` or
   `window.__oxGlass.toggle()` shows the flat site. Its CSS sits at the end of `public/site.css` and of
@@ -38,7 +40,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   `data-scene=off`, which `liquid-glass.js` sets once the dive is over: backdrop-filter over the live
   WebGL canvas cost the scene its laptop and phone, so nothing there is translucent until it stops.
 - Sounds stay light and airy (no bass, no "braam"). Browsers only allow sound after the first click/keypress.
-- The home-page plans (`site-src/pricing-home.js`) repeat the numbers and wording of `/pricing/`;
-  `PLAN_PRICES` / `PLANS` in `tools/build_pages.py` is the source of both — change them together.
-- Business facts come from the main Outreach site (WebB-Site): plans START 100 / CHAT 160 / PRO 250 / PAY 350 ₾
-  per month, Tbilisi, Georgia. No real phone/email/street yet — never invent them.
+- The packages table is the source of every price: `PLAN_PRICES` / `PLANS` / `INCLUDED` / `MATRIX` / `TERMS`
+  in `tools/build_pages.py`. `site-src/pricing-home.js` (home cards) and `site-src/chat-widget.js` repeat
+  parts of it — change them together.
+- Business facts: packages BASIC 100 / PLUS 160 / PRO 250 / MAX 350 ₾ per month, setup 150 / 150 / 250 / 450 ₾,
+  a year up front 1,200 / 1,728 / 2,700 / 3,780 ₾ (−10%, BASIC setup free), buyout 2,000 / 2,400 / 3,200 / 4,200 ₾.
+  Minimum term 3 months, then 30 days notice. Tbilisi, Georgia. No real phone/email/street yet — never invent them.

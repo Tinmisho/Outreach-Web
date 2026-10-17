@@ -42,17 +42,17 @@ UI = {
            "tagline": "Websites, hosting and care · Tbilisi, Georgia", "crumbs": "Breadcrumb", "langs": "Language",
            "cta_h": "Want to see your website first?", "cta_p": "Tell us the name of your business. We will build something and send you a link.",
            "talk": "Talk to us", "see_pricing": "See pricing", "month": "/ month", "setup": "Setup {n} ₾, charged once", "own": "Want to own it?",
-           "questions": "Questions"},
+           "questions": "Questions", "year": "/ year, paid up front", "setup_free": "setup free", "buyout": "Buy the site outright", "in_every": "In every package", "compare": "What each package does", "plan": "Package", "addons": "Add-ons"},
     "ka": {"nav": {"": "მთავარი", "services/": "სერვისები", "how-it-works/": "როგორ ვმუშაობთ", "pricing/": "ფასები", "contact/": "კონტაქტი"},
            "tagline": "ვებსაიტები, ჰოსტინგი და მხარდაჭერა · თბილისი, საქართველო", "crumbs": "ნავიგაციის ბილიკი", "langs": "ენა",
            "cta_h": "გსურთ ჯერ თქვენი ვებსაიტი ნახოთ?", "cta_p": "გვითხარით თქვენი ბიზნესის სახელი. რაღაცას ავაწყობთ და ბმულს გამოგიგზავნით.",
            "talk": "დაგვიკავშირდით", "see_pricing": "ფასების ნახვა", "month": "/ თვე", "setup": "Setup {n} ₾, ერთჯერადად", "own": "გსურთ საიტი იყიდოთ?",
-           "questions": "კითხვები"},
+           "questions": "კითხვები", "year": "/ წელი, წინასწარ", "setup_free": "setup უფასოა", "buyout": "საიტის პირდაპირი ყიდვა", "in_every": "რა შედის ყველა პაკეტში", "compare": "რას აკეთებს თითოეული პაკეტი", "plan": "პაკეტი", "addons": "დამატებები"},
     "ru": {"nav": {"": "Главная", "services/": "Услуги", "how-it-works/": "Как мы работаем", "pricing/": "Цены", "contact/": "Контакты"},
            "tagline": "Сайты, хостинг и поддержка · Тбилиси, Грузия", "crumbs": "Навигационная цепочка", "langs": "Язык",
            "cta_h": "Хотите сначала увидеть свой сайт?", "cta_p": "Назовите ваш бизнес. Мы сделаем сайт и пришлём вам ссылку.",
            "talk": "Связаться", "see_pricing": "Смотреть цены", "month": "/ мес", "setup": "Запуск {n} ₾, один раз", "own": "Хотите купить сайт?",
-           "questions": "Вопросы"},
+           "questions": "Вопросы", "year": "/ год, предоплатой", "setup_free": "запуск бесплатно", "buyout": "Купить сайт целиком", "in_every": "Что входит в каждый пакет", "compare": "Что умеет каждый пакет", "plan": "Пакет", "addons": "Дополнения"},
 }
 
 META = {  # slug -> lang -> (title, description)
@@ -65,9 +65,9 @@ META = {  # slug -> lang -> (title, description)
     "how-it-works/": {"en": ("How it works: demo first, pay after | Outreach", "We build your website first and send you a link. You look at it on your phone, then decide to rent or buy. No lock-in."),
                       "ka": ("როგორ ვმუშაობთ: ჯერ დემო, შემდეგ გადახდა | Outreach", "ჯერ ვაწყობთ თქვენს ვებსაიტს და ბმულს გიგზავნით. ნახავთ ტელეფონში, შემდეგ წყვეტთ — იქირავოთ თუ იყიდოთ. მიბმის გარეშე."),
                       "ru": ("Как мы работаем: сначала демо, потом оплата | Outreach", "Сначала мы делаем ваш сайт и присылаем ссылку. Вы смотрите его на телефоне и решаете: арендовать или купить. Без обязательств.")},
-    "pricing/": {"en": ("Website pricing from 100 ₾/month — Plans | Outreach", "START 100 ₾, CHAT 160 ₾, PRO 250 ₾, PAY 350 ₾ a month with hosting, SSL and changes included. Buy outright from 2,000 ₾."),
-                 "ka": ("ვებსაიტის ფასები 100 ₾-დან თვეში — პაკეტები | Outreach", "START 100 ₾, CHAT 160 ₾, PRO 250 ₾, PAY 350 ₾ თვეში — ჰოსტინგი, SSL და ცვლილებები შედის. სრული შესყიდვა 2,000 ₾-დან."),
-                 "ru": ("Цены на сайты от 100 ₾ в месяц — Тарифы | Outreach", "START 100 ₾, CHAT 160 ₾, PRO 250 ₾, PAY 350 ₾ в месяц: хостинг, SSL и изменения включены. Покупка сайта от 2 000 ₾.")},
+    "pricing/": {"en": ("Website pricing from 100 ₾/month — Plans | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ a month with hosting, SSL, daily backups and changes included. Buy outright from 2,000 ₾."),
+                 "ka": ("ვებსაიტის ფასები 100 ₾-დან თვეში — პაკეტები | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ თვეში — ჰოსტინგი, SSL, ყოველდღიური ასლი და ცვლილებები შედის. სრული შესყიდვა 2,000 ₾-დან."),
+                 "ru": ("Цены на сайты от 100 ₾ в месяц — Тарифы | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ в месяц: хостинг, SSL, ежедневные копии и изменения включены. Покупка сайта от 2 000 ₾.")},
     "contact/": {"en": ("Contact Outreach — Web studio in Tbilisi, Georgia", "Talk to Outreach about a website for your business. Based in Tbilisi, working with small businesses across Georgia."),
                  "ka": ("კონტაქტი — Outreach, ვებ სტუდია თბილისში", "მოგვიყევით თქვენს ბიზნესზე და ვებსაიტზე ვისაუბროთ. ვართ თბილისში და ვმუშაობთ მცირე ბიზნესებთან მთელ საქართველოში."),
                  "ru": ("Контакты — Outreach, веб-студия в Тбилиси", "Расскажите о своём бизнесе, и мы обсудим ваш сайт. Мы в Тбилиси и работаем с малым бизнесом по всей Грузии.")},
@@ -80,28 +80,107 @@ INTRO = {  # slug -> lang -> (eyebrow, h1, lede)
     "how-it-works/": {"en": ("How it works", "Demo first. You decide after.", "We build your website before you pay anything, so you see exactly what you get."),
                       "ka": ("როგორ ვმუშაობთ", "ჯერ დემო. შემდეგ თქვენ წყვეტთ.", "ვებსაიტს ვაწყობთ მანამ, სანამ რამეს გადაიხდით — ზუსტად ხედავთ, რას იღებთ."),
                       "ru": ("Как мы работаем", "Сначала демо. Решаете потом.", "Мы делаем ваш сайт до любой оплаты, поэтому вы точно видите, что получаете.")},
-    "pricing/": {"en": ("Pricing", "Simple monthly plans.", "Monthly. Cancel with 30 days notice. Setup is charged once. Hosting, SSL and changes are always included."),
-                 "ka": ("ფასები", "მარტივი თვიური პაკეტები.", "თვიური გადახდა. გაუქმება 30 დღით ადრე შეტყობინებით. setup ერთხელ იხდება. ჰოსტინგი, SSL და ცვლილებები ყოველთვის შედის."),
-                 "ru": ("Цены", "Простые ежемесячные тарифы.", "Оплата помесячно. Отмена с уведомлением за 30 дней. Запуск оплачивается один раз. Хостинг, SSL и изменения всегда включены.")},
+    "pricing/": {"en": ("Pricing", "Simple monthly plans.", "Every amount is in GEL and final. We do not bill by the hour. Minimum term 3 months, then 30 days notice. Hosting, SSL, daily backups and changes are always included."),
+                 "ka": ("ფასები", "მარტივი თვიური პაკეტები.", "ყველა თანხა ლარშია და საბოლოოა. საათობრივი დათვლა არ გვაქვს. მინიმალური ვადა 3 თვე, შემდეგ შეწყვეტა 30 დღით ადრე. ჰოსტინგი, SSL, ყოველდღიური ასლი და ცვლილებები ყოველთვის შედის."),
+                 "ru": ("Цены", "Простые ежемесячные тарифы.", "Все суммы в лари и окончательные. Почасовой оплаты нет. Минимальный срок 3 месяца, далее отмена с уведомлением за 30 дней. Хостинг, SSL, ежедневные копии и изменения всегда включены.")},
     "contact/": {"en": ("Contact", "Let's build your website.", "Tell us what you do and we'll come back with a plan and a price. No jargon, no surprises."),
                  "ka": ("კონტაქტი", "ავაწყოთ თქვენი ვებსაიტი.", "მოგვიყევით რას აკეთებთ და დაგიბრუნდებით გეგმითა და ფასით. ზედმეტი ტერმინებისა და სიურპრიზების გარეშე."),
                  "ru": ("Контакты", "Давайте создадим ваш сайт.", "Расскажите, чем вы занимаетесь, и мы вернёмся с планом и ценой. Без жаргона и сюрпризов.")},
 }
 
-PLAN_PRICES = [("START", 100, 150), ("CHAT", 160, 150), ("PRO", 250, 250), ("PAY", 350, 450)]
+# name, ₾ per month, setup ₾, annual prepay ₾, buyout ₾   (the packages table is the source: BASIC/PLUS/PRO/MAX)
+PLAN_PRICES = [("BASIC", 100, 150, 1200, 2000), ("PLUS", 160, 150, 1728, 2400),
+               ("PRO", 250, 250, 2700, 3200), ("MAX", 350, 450, 3780, 4200)]
+PLAN_TAG = {  # the one-line label under each name in the table
+    "en": ["a site", "+ chatbot", "+ forms", "+ online payment"],
+    "ka": ["საიტი", "+ ჩატბოტი", "+ ფორმები", "+ ონლაინ გადახდა"],
+    "ru": ["сайт", "+ чат-бот", "+ формы", "+ онлайн-оплата"],
+}
 PLANS = {  # lang -> [(summary, [includes])] in PLAN_PRICES order
-    "en": [("A site for your business.", ["Your own .ge domain", "Hosting and SSL", "One change a month"]),
-           ("A site that answers questions.", ["Everything in START", "FAQ chat for your customers", "Two changes a month"]),
-           ("A site that collects enquiries.", ["Everything in CHAT", "Booking and contact forms", "Google Business profile"]),
-           ("A site that takes payment.", ["Everything in PRO", "Online payments", "Money goes straight to your bank"])],
-    "ka": [("საიტი თქვენი ბიზნესისთვის.", ["თქვენი .ge დომენი", "ჰოსტინგი და SSL", "ერთი ცვლილება თვეში"]),
-           ("საიტი, რომელიც კითხვებს პასუხობს.", ["ყველაფერი START-იდან", "ჩატბოტი თქვენი კლიენტებისთვის", "ორი ცვლილება თვეში"]),
-           ("საიტი, რომელიც განაცხადებს აგროვებს.", ["ყველაფერი CHAT-იდან", "ჯავშნისა და კონტაქტის ფორმები", "Google Business პროფილი"]),
-           ("საიტი, რომელიც გადახდას იღებს.", ["ყველაფერი PRO-დან", "ონლაინ გადახდა", "თანხა პირდაპირ თქვენს ანგარიშზე"])],
-    "ru": [("Сайт для вашего бизнеса.", ["Ваш домен .ge", "Хостинг и SSL", "Одно изменение в месяц"]),
-           ("Сайт, который отвечает на вопросы.", ["Всё из START", "Чат-бот для ваших клиентов", "Два изменения в месяц"]),
-           ("Сайт, который собирает заявки.", ["Всё из CHAT", "Формы бронирования и обратной связи", "Профиль Google Business"]),
-           ("Сайт, который принимает оплату.", ["Всё из PRO", "Онлайн-оплата", "Деньги идут прямо на ваш счёт"])],
+    "en": [("A site for your business.", ["Your own .ge domain", "Hosting, SSL and daily backups", "One change a month"]),
+           ("A site that answers questions.", ["Everything in BASIC", "FAQ chatbot with your own answers", "One change a month plus a chatbot update"]),
+           ("A site that collects enquiries.", ["Everything in PLUS", "Up to 2 booking or enquiry forms", "Three changes a month, monthly report"]),
+           ("A site that takes payment.", ["Everything in PRO", "Online payment, up to 10 products", "Four changes a month"])],
+    "ka": [("საიტი თქვენი ბიზნესისთვის.", ["თქვენი .ge დომენი", "ჰოსტინგი, SSL და ყოველდღიური ასლი", "ერთი ცვლილება თვეში"]),
+           ("საიტი, რომელიც კითხვებს პასუხობს.", ["ყველაფერი BASIC-იდან", "FAQ ჩატბოტი თქვენი პასუხებით", "ერთი ცვლილება თვეში და ჩატბოტის განახლება"]),
+           ("საიტი, რომელიც განაცხადებს აგროვებს.", ["ყველაფერი PLUS-იდან", "ჯავშნის / მოთხოვნის ფორმები (≤ 2)", "სამი ცვლილება თვეში, ყოველთვიური ანგარიში"]),
+           ("საიტი, რომელიც გადახდას იღებს.", ["ყველაფერი PRO-დან", "ონლაინ გადახდა, ≤ 10 პროდუქტი", "ოთხი ცვლილება თვეში"])],
+    "ru": [("Сайт для вашего бизнеса.", ["Ваш домен .ge", "Хостинг, SSL и ежедневные копии", "Одно изменение в месяц"]),
+           ("Сайт, который отвечает на вопросы.", ["Всё из BASIC", "FAQ-чат-бот с вашими ответами", "Одно изменение в месяц плюс обновление чат-бота"]),
+           ("Сайт, который собирает заявки.", ["Всё из PLUS", "Формы брони и заявок (до 2)", "Три изменения в месяц, ежемесячный отчёт"]),
+           ("Сайт, который принимает оплату.", ["Всё из PRO", "Онлайн-оплата, до 10 товаров", "Четыре изменения в месяц"])],
+}
+# what every package carries
+INCLUDED = {
+    "en": ["A site that works on a phone, hosting, SSL, domain management, daily backups",
+           "Privacy policy text", "A .ge domain in your name — the first year is in the setup fee"],
+    "ka": ["მობილურზე მორგებული საიტი, ჰოსტინგი, SSL, დომენის მართვა, ყოველდღიური ასლი",
+           "კონფიდენციალურობის პოლიტიკის ტექსტი", "დომენი (.ge) თქვენს სახელზე — პირველი წელი setup-ში"],
+    "ru": ["Сайт, адаптированный под телефон, хостинг, SSL, управление доменом, ежедневные копии",
+           "Текст политики конфиденциальности", "Домен .ge на ваше имя — первый год входит в запуск"],
+}
+# comparison rows: (section, label, [BASIC, PLUS, PRO, MAX]) — "+" marks a yes, "-" a no
+MATRIX = {
+    "en": [("Service", "Changes a month", ["1", "1 + chatbot update", "3", "4"]),
+           ("Service", "Change done within", ["3 working days", "3 working days", "2 working days", "2 working days"]),
+           ("Service", "Response to a fault", ["1 working day", "1 working day", "4 working hours", "4 working hours; payment the same day"]),
+           ("Features", "FAQ chatbot, with answers you approve", ["-", "+", "+", "+"]),
+           ("Features", "Booking / enquiry forms (up to 2)", ["-", "-", "+", "+"]),
+           ("Features", "Short monthly report (visits, calls)", ["-", "-", "+", "+"]),
+           ("Features", "Google Business Profile link", ["-", "-", "+", "+"]),
+           ("Features", "Online payment (up to 10 products or services)", ["-", "-", "-", "+"]),
+           ("Add-ons", "AI chatbot", ["-", "+60 ₾ / month, +100 ₾ once", "+60 ₾ / month, +100 ₾ once", "+60 ₾ / month, +100 ₾ once"]),
+           ("Add-ons", "Extra language (EN / RU)", ["+15 ₾ / month, +150 ₾ once"] * 4)],
+    "ka": [("მომსახურება", "ცვლილებები თვეში", ["1", "1 + ჩატბოტის განახლება", "3", "4"]),
+           ("მომსახურება", "ცვლილების შესრულების ვადა", ["3 სამუშაო დღე", "3 სამუშაო დღე", "2 სამუშაო დღე", "2 სამუშაო დღე"]),
+           ("მომსახურება", "ხარვეზზე რეაგირება", ["1 სამუშაო დღე", "1 სამუშაო დღე", "4 სამუშაო საათი", "4 სამუშაო საათი; გადახდაზე იმავე დღეს"]),
+           ("ფუნქციები", "FAQ ჩატბოტი (თქვენი დადასტურებული პასუხებით)", ["-", "+", "+", "+"]),
+           ("ფუნქციები", "ჯავშნის / მოთხოვნის ფორმები (≤ 2)", ["-", "-", "+", "+"]),
+           ("ფუნქციები", "ყოველთვიური მოკლე ანგარიში (ვიზიტები, ზარები)", ["-", "-", "+", "+"]),
+           ("ფუნქციები", "Google Business Profile-ის ბმული", ["-", "-", "+", "+"]),
+           ("ფუნქციები", "ონლაინ გადახდა (≤ 10 პროდუქტი / სერვისი)", ["-", "-", "-", "+"]),
+           ("დამატებები", "AI ჩატბოტი", ["-", "+60 ₾ / თვე, +100 ₾ ერთჯერადი", "+60 ₾ / თვე, +100 ₾ ერთჯერადი", "+60 ₾ / თვე, +100 ₾ ერთჯერადი"]),
+           ("დამატებები", "დამატებითი ენა (EN / RU)", ["+15 ₾ / თვე, +150 ₾ ერთჯერადი"] * 4)],
+    "ru": [("Обслуживание", "Изменений в месяц", ["1", "1 + обновление чат-бота", "3", "4"]),
+           ("Обслуживание", "Срок выполнения изменения", ["3 рабочих дня", "3 рабочих дня", "2 рабочих дня", "2 рабочих дня"]),
+           ("Обслуживание", "Реакция на сбой", ["1 рабочий день", "1 рабочий день", "4 рабочих часа", "4 рабочих часа; по оплате — в тот же день"]),
+           ("Функции", "FAQ-чат-бот с вашими утверждёнными ответами", ["-", "+", "+", "+"]),
+           ("Функции", "Формы брони и заявок (до 2)", ["-", "-", "+", "+"]),
+           ("Функции", "Короткий ежемесячный отчёт (визиты, звонки)", ["-", "-", "+", "+"]),
+           ("Функции", "Ссылка на профиль Google Business", ["-", "-", "+", "+"]),
+           ("Функции", "Онлайн-оплата (до 10 товаров или услуг)", ["-", "-", "-", "+"]),
+           ("Дополнения", "AI-чат-бот", ["-", "+60 ₾ / мес, +100 ₾ разово", "+60 ₾ / мес, +100 ₾ разово", "+60 ₾ / мес, +100 ₾ разово"]),
+           ("Дополнения", "Дополнительный язык (EN / RU)", ["+15 ₾ / мес, +150 ₾ разово"] * 4)],
+}
+# the three notes under the table: (heading, [paragraphs])
+TERMS = {
+    "en": [("How payment works", [
+             "Subscription: the setup fee is due within 5 working days of signing, the monthly fee in advance. Minimum term is 3 months, after that you can stop with 30 days notice.",
+             "The setup fee covers: a .ge domain for one year, SSL, your text, up to 15 photos, your logo and colours, and two rounds of corrections before launch.",
+             "You can move up a package at any time, from the following month."]),
+           ("What counts as one change", [
+             "One request on one page: up to 100 words of text, or up to 10 lines in a price list or menu, or opening hours / phone / address, or replacing up to 3 photos, or one banner.",
+             "An extra change is 20 ₾. Bundles: 3 changes for 50 ₾, 10 changes for 150 ₾. A same-day change (ordered before 14:00) is +30 ₾."]),
+           ("Not included in any package", [
+             "Writing text from scratch, photo and video shoots, logo design, advertising and its budget, running social media, email hosting, bookkeeping, and the payment provider's commission."])],
+    "ka": [("როგორ ხდება გადახდა", [
+             "გამოწერა: setup ხელმოწერიდან 5 სამუშაო დღეში, ყოველთვიური საფასური წინასწარ. მინიმალური ვადა 3 თვე, შემდეგ შეწყვეტა 30 დღით ადრე შეტყობინებით.",
+             "setup-ში შედის: .ge დომენი 1 წელი, SSL, თქვენი ტექსტი, ≤ 15 ფოტო, ლოგო, ფერები და 2 რაუნდი შესწორება გაშვებამდე.",
+             "პაკეტის აწევა შესაძლებელია ნებისმიერ დროს, მომდევნო თვიდან."]),
+           ("რა არის ერთი ცვლილება", [
+             "ერთი მოთხოვნა ერთ გვერდზე: ტექსტი ≤ 100 სიტყვა, ან ≤ 10 სტრიქონი ფასებში / მენიუში, ან საათები / ტელეფონი / მისამართი, ან ≤ 3 ფოტოს ჩანაცვლება, ან ერთი ბანერი.",
+             "დამატებითი ცვლილება — 20 ₾. პაკეტი: 3 ცვლილება — 50 ₾, 10 ცვლილება — 150 ₾. სასწრაფო ცვლილება იმავე დღეს (14:00-მდე) — +30 ₾."]),
+           ("არც ერთ პაკეტში არ შედის", [
+             "ტექსტის წერა ნულიდან, ფოტო- და ვიდეოგადაღება, ლოგოს შექმნა, რეკლამა და მისი ბიუჯეტი, სოციალური ქსელების წარმოება, ელფოსტის ჰოსტინგი, ბუღალტერია, გადახდის პროვაიდერის საკომისიო."])],
+    "ru": [("Как проходит оплата", [
+             "Подписка: запуск оплачивается в течение 5 рабочих дней после подписания, ежемесячная плата — заранее. Минимальный срок 3 месяца, далее можно расторгнуть с уведомлением за 30 дней.",
+             "В запуск входит: домен .ge на год, SSL, ваш текст, до 15 фотографий, логотип, цвета и два круга правок до запуска.",
+             "Перейти на старший пакет можно в любой момент, со следующего месяца."]),
+           ("Что считается одним изменением", [
+             "Один запрос на одной странице: текст до 100 слов, или до 10 строк в прайсе или меню, или часы работы / телефон / адрес, или замена до 3 фотографий, или один баннер.",
+             "Дополнительное изменение — 20 ₾. Пакеты: 3 изменения — 50 ₾, 10 изменений — 150 ₾. Срочное изменение в тот же день (до 14:00) — +30 ₾."]),
+           ("Не входит ни в один пакет", [
+             "Написание текста с нуля, фото- и видеосъёмка, создание логотипа, реклама и её бюджет, ведение социальных сетей, почтовый хостинг, бухгалтерия, комиссия платёжного провайдера."])],
 }
 STEPS = {
     "en": [("We build it.", "Before we ever call you. Your business, your photos, your prices: a real site, not a mockup."),
@@ -134,7 +213,7 @@ SERVICES = {
            ("Hosting & care", "Hosting, SSL, updates and fixes are part of every plan. We keep the site running, you keep running your business.",
             ["Hosting and SSL included", "Monthly changes included", "Problems fixed for you"]),
            ("Rent or own", "Start monthly with no big upfront cost. After twelve paid months you can buy the site, and the buyout price keeps going down.",
-            ["From 100 ₾ a month", "Cancel with 30 days notice", "Buy outright from 2,000 ₾"]),
+            ["From 100 ₾ a month", "Minimum 3 months, then 30 days notice", "Buy outright from 2,000 ₾"]),
            ("Grow with it", "Add a FAQ chat, booking and contact forms, a Google Business profile or online payments when you need them.",
             ["FAQ chat for customers", "Booking and contact forms", "Online payments to your bank"])],
     "ka": [("დიზაინი და აწყობა", "სწრაფი, მობილურზე მორგებული ვებსაიტი თქვენი ბიზნესისთვის: თქვენი ტექსტები, ფოტოები და ფასები. მოქმედ დემოს გადახდამდე ნახავთ.",
@@ -142,7 +221,7 @@ SERVICES = {
            ("ჰოსტინგი და მოვლა", "ჰოსტინგი, SSL, განახლებები და შესწორებები ყველა პაკეტშია. საიტს ჩვენ ვუვლით, თქვენ კი ბიზნესს.",
             ["ჰოსტინგი და SSL შედის ფასში", "ყოველთვიური ცვლილებები შედის ფასში", "პრობლემებს ჩვენ ვაგვარებთ"]),
            ("იქირავეთ ან იყიდეთ", "დაიწყეთ თვიურად, დიდი წინასწარი ხარჯის გარეშე. 12 გადახდილი თვის შემდეგ საიტის გამოსყიდვა შეგიძლიათ და ფასი თანდათან მცირდება.",
-            ["100 ₾-დან თვეში", "გაუქმება 30 დღით ადრე შეტყობინებით", "სრული შესყიდვა 2,000 ₾-დან"]),
+            ["100 ₾-დან თვეში", "მინიმალური ვადა 3 თვე, შემდეგ 30 დღით ადრე", "სრული შესყიდვა 2,000 ₾-დან"]),
            ("გაიზარდეთ საიტთან ერთად", "დაამატეთ ჩატბოტი, ჯავშნისა და კონტაქტის ფორმები, Google Business პროფილი ან ონლაინ გადახდა, როცა დაგჭირდებათ.",
             ["ჩატბოტი კლიენტებისთვის", "ჯავშნისა და კონტაქტის ფორმები", "ონლაინ გადახდა თქვენს ანგარიშზე"])],
     "ru": [("Дизайн и разработка", "Быстрый сайт, удобный на телефоне и сделанный под ваш бизнес: ваши тексты, фото и цены. Рабочее демо вы увидите ещё до оплаты.",
@@ -150,7 +229,7 @@ SERVICES = {
            ("Хостинг и поддержка", "Хостинг, SSL, обновления и исправления входят в каждый тариф. Мы следим за сайтом, вы — за бизнесом.",
             ["Хостинг и SSL включены", "Ежемесячные изменения включены", "Проблемы решаем мы"]),
            ("Аренда или покупка", "Начните помесячно, без больших вложений. После 12 оплаченных месяцев сайт можно выкупить, и цена выкупа продолжает снижаться.",
-            ["От 100 ₾ в месяц", "Отмена с уведомлением за 30 дней", "Покупка сайта от 2 000 ₾"]),
+            ["От 100 ₾ в месяц", "Минимум 3 месяца, далее за 30 дней", "Покупка сайта от 2 000 ₾"]),
            ("Растите вместе с сайтом", "Добавьте чат-бота, формы бронирования и обратной связи, профиль Google Business или онлайн-оплату, когда понадобится.",
             ["Чат-бот для клиентов", "Формы бронирования и обратной связи", "Онлайн-оплата на ваш счёт"])],
 }
@@ -186,7 +265,7 @@ def business_ld(lang):
          "currenciesAccepted": "GEL", "knowsLanguage": ["ka", "en", "ru"],
          "makesOffer": [{"@type": "Offer", "name": f"{n}", "description": PLANS[lang][i][0], "price": p, "priceCurrency": "GEL",
                          "priceSpecification": {"@type": "UnitPriceSpecification", "price": p, "priceCurrency": "GEL", "billingDuration": "P1M", "unitText": "month"}}
-                        for i, (n, p, _) in enumerate(PLAN_PRICES)]}
+                        for i, (n, p, _, _a, _b) in enumerate(PLAN_PRICES)]}
     if b["street"]: o["address"]["streetAddress"] = b["street"]
     if b["telephone"]: o["telephone"] = b["telephone"]
     if b["email"]: o["email"] = b["email"]
@@ -299,15 +378,40 @@ def build_pages(lang):
     s = "pricing/"
     t = UI[lang]
     plans = "".join(
-        f'<article class="card plan{" plan--lead" if n == "CHAT" else ""}"><h2>{n}</h2><p class="price"><strong>{pr} ₾</strong> {esc(t["month"])}</p>'
-        f'<p>{esc(PLANS[lang][i][0])}</p>{li(PLANS[lang][i][1])}<p class="small">{esc(t["setup"].format(n=su))}</p></article>'
-        for i, (n, pr, su) in enumerate(PLAN_PRICES))
+        f'<article class="card plan{" plan--lead" if n == "PLUS" else ""}"><h2>{n} <span class="plan__tag">{esc(PLAN_TAG[lang][i])}</span></h2>'
+        f'<p class="price"><strong>{pr} ₾</strong> {esc(t["month"])}</p>'
+        f'<p>{esc(PLANS[lang][i][0])}</p>{li(PLANS[lang][i][1])}'
+        f'<p class="small">{esc(t["setup"].format(n=su))}</p>'
+        f'<p class="small">{yr:,} ₾ {esc(t["year"])}{" · " + esc(t["setup_free"]) if n == "BASIC" else " · −10%"}</p>'
+        f'<p class="small">{esc(t["buyout"])}: <strong>{bo:,} ₾</strong></p></article>'
+        for i, (n, pr, su, yr, bo) in enumerate(PLAN_PRICES))
+    every = f'<section class="note"><h2>{esc(t["in_every"])}</h2><ul class="ticks">' + \
+            "".join(f"<li>{esc(x)}</li>" for x in INCLUDED[lang]) + "</ul></section>"
+    rows, seen = "", None
+    for group, label, cells in MATRIX[lang]:
+        if group != seen:
+            rows += f'<tr class="matrix__group"><th colspan="5" scope="colgroup">{esc(group)}</th></tr>'
+            seen = group
+        tds = "".join(f'<td data-plan="{PLAN_PRICES[j][0]}">' +
+                      ('<span class="yes" aria-label="yes">✓</span>' if c == "+" else
+                       '<span class="no" aria-label="no">—</span>' if c == "-" else esc(c)) + "</td>"
+                      for j, c in enumerate(cells))
+        rows += f'<tr><th scope="row">{esc(label)}</th>{tds}</tr>'
+    heads = "".join(f'<th scope="col">{n}</th>' for n, *_ in PLAN_PRICES)
+    matrix = (f'<section class="matrix"><h2>{esc(t["compare"])}</h2><div class="matrix__scroll">'
+              f'<table><thead><tr><th scope="col">{esc(t["plan"])}</th>{heads}</tr></thead><tbody>{rows}</tbody></table>'
+              f'</div></section>')
+    terms = '<section class="grid grid--two terms">' + "".join(
+        f'<article class="card"><h2>{esc(h)}</h2>' + "".join(f"<p>{esc(x)}</p>" for x in ps) + "</article>"
+        for h, ps in TERMS[lang]) + "</section>"
     cat_ld = {"@type": "OfferCatalog", "name": META[s][lang][0], "itemListElement": [
         {"@type": "Offer", "name": n, "description": PLANS[lang][i][0] + " " + ", ".join(PLANS[lang][i][1]) + ".", "price": pr, "priceCurrency": "GEL", "url": url(s, lang),
          "priceSpecification": [{"@type": "UnitPriceSpecification", "price": pr, "priceCurrency": "GEL", "billingDuration": "P1M", "unitText": "month"},
-                                {"@type": "UnitPriceSpecification", "price": su, "priceCurrency": "GEL", "name": "Setup"}],
-         "seller": {"@id": url() + "#business"}} for i, (n, pr, su) in enumerate(PLAN_PRICES)]}
+                                {"@type": "UnitPriceSpecification", "price": su, "priceCurrency": "GEL", "name": "Setup"},
+                                {"@type": "UnitPriceSpecification", "price": yr, "priceCurrency": "GEL", "billingDuration": "P1Y", "unitText": "year"}],
+         "seller": {"@id": url() + "#business"}} for i, (n, pr, su, yr, bo) in enumerate(PLAN_PRICES)]}
     write(p + s + "index.html", shell(s, lang, f'{intro(s, lang)}\n      <section class="grid grid--plans">{plans}</section>\n'
+                                            f'      {every}\n      {matrix}\n      {terms}\n'
                                             f'      <section class="note"><h2>{esc(t["own"])}</h2><p>{esc(FAQ[lang][1][1])}</p></section>\n      {cta(s, lang)}', [cat_ld]))
 
     # contact
@@ -388,7 +492,8 @@ def build_files():
                         f"<priority>{'1.0' if not slug else '0.8'}</priority>{alts}</url>\n")
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset {ns}>\n' + "".join(rows) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /404.html\n\nSitemap: {url('sitemap.xml')}\n")
-    plans = "\n".join(f"- {n}: {p} ₾/month (setup {su} ₾). {PLANS['en'][i][0]} Includes: {', '.join(PLANS['en'][i][1])}." for i, (n, p, su) in enumerate(PLAN_PRICES))
+    plans = "\n".join(f"- {n}: {p} ₾/month (setup {su} ₾, {yr:,} ₾ a year paid up front, buy outright {bo:,} ₾). "
+                       f"{PLANS['en'][i][0]} Includes: {', '.join(PLANS['en'][i][1])}." for i, (n, p, su, yr, bo) in enumerate(PLAN_PRICES))
     faq = "\n".join(f"- {q} {a}" for q, a in FAQ["en"])
     pages = "\n".join(f"- [{UI['en']['nav'][s] if s else 'Home'}]({url(s)}): {META[s]['en'][1]}" for s in SLUGS)
     write("llms.txt", f"""# Outreach
@@ -403,7 +508,7 @@ def build_files():
 
 {plans}
 
-Monthly billing, cancel with 30 days notice, setup charged once. Hosting, SSL and changes included.
+Monthly billing, minimum term 3 months, then 30 days notice. Setup charged once. Hosting, SSL, daily backups and changes included. No hourly billing.
 
 ## FAQ
 
