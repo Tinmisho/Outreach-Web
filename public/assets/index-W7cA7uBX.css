@@ -149,10 +149,18 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;bac
 @media (prefers-reduced-motion:reduce){.panel,.panel.is-active,.panel.is-active:after,.panel.is-active .panel__icon{animation:none}}
 .panels{padding-top:44px}
 /* language switcher */
-@media (width<=560px){}
+.ox-lang{position:fixed;top:20px;right:74px;z-index:50;height:40px;min-width:46px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font:700 .8rem/1 ui-monospace,"JetBrains Mono",Menlo,monospace;letter-spacing:.04em;cursor:pointer}
+.ox-lang:hover{border-color:color-mix(in srgb,var(--ox-a) 50%,transparent)}
+.ox-lang__pop{position:fixed;top:68px;right:66px;z-index:61;display:grid;gap:4px;padding:8px;border-radius:14px;background:#fffdf9;border:1px solid #00000017;box-shadow:0 16px 40px #3b220f2e;min-width:170px}
+.ox-lang__opt{display:flex;align-items:center;gap:12px;padding:9px 12px;border:0;border-radius:10px;background:none;color:#1c1612;font:500 .95rem/1.2 inherit;cursor:pointer;text-align:left}
+.ox-lang__opt b{min-width:26px;font:700 .78rem/1 ui-monospace,Menlo,monospace;color:var(--ox-d)}
+.ox-lang__opt:hover{background:color-mix(in srgb,var(--ox-a) 8%,#fff)}
+.ox-lang__opt.is-on{background:color-mix(in srgb,var(--ox-a) 14%,#fff)}
+@media (width<=560px){.ox-lang{top:14px;right:60px}.ox-lang__pop{top:60px;right:14px}}
 :lang(ka) body,:lang(ka) button,:lang(ka) input{font-family:"Noto Sans Georgian",Inter,system-ui,sans-serif}
 :lang(ka) .hero__title{font-size:clamp(1.9rem,3.4vw,3.3rem);line-height:1.12}
 :lang(ru) .hero__title{font-size:clamp(2rem,3.9vw,3.8rem)}
+.ox-lang__pop[hidden]{display:none}
 /* hide the vertical scrollbar (scrolling itself still works) */
 html,body{scrollbar-width:none;-ms-overflow-style:none}
 html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}

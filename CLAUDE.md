@@ -39,8 +39,8 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   `public/assets/index-*.css` — keep the two in step. On the 3D page the glass also needs
   `data-scene=off`, which `liquid-glass.js` sets once the dive is over: backdrop-filter over the live
   WebGL canvas cost the scene its laptop and phone, so nothing there is translucent until it stops.
-- The home page's floating controls are the sound button and the chat bubble, nothing else. The language
-  is chosen from the footer links (and hreflang); `lang.js` still detects, stores and serves /ka/ + /ru/.
+- The home page's floating controls are the EN / ქა / RU button, the sound button and the chat bubble.
+  The language is chosen there, not in the footer; `lang.js` detects, stores and serves /ka/ + /ru/.
 - Sounds stay light and airy (no bass, no "braam"). Browsers only allow sound after the first click/keypress.
 - The packages table is the source of every price: `PLAN_PRICES` / `PLANS` / `INCLUDED` / `MATRIX` / `TERMS`
   in `tools/build_pages.py`. `site-src/pricing-home.js` (home cards) and `site-src/chat-widget.js` repeat

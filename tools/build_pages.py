@@ -467,9 +467,9 @@ def build_homes():
         s = re.sub(r"    <!-- seo:start -->.*?<!-- seo:end -->", lambda m: block, s, flags=re.S) if "<!-- seo:start -->" in s \
             else re.sub(r"    <title>.*?</title>", lambda m: block, s, count=1, flags=re.S)
         links = "".join(f'<a href="{s_}">{UI[lang]["nav"][s_]}</a>' for s_ in NAV)
-        langs = "".join(f'<a href="{"../" if lang != "en" else "./"}{PREFIX[l]}" hreflang="{l}" lang="{l}">{LANG_FULL[l]}</a>' for l in LANGS if l != lang)
+        # no language nav in the footer: the EN / ქა / RU button at the top of the page does that job
         foot = (f'<!-- seo-foot:start --><footer class="ox-sitefoot"><p><strong>Outreach</strong> · {UI[lang]["tagline"]}</p>'
-                f'<nav aria-label="Site">{links}</nav><nav aria-label="{UI[lang]["langs"]}">{langs}</nav></footer><!-- seo-foot:end -->')
+                f'<nav aria-label="Site">{links}</nav></footer><!-- seo-foot:end -->')
         s = re.sub(r"<!-- seo-foot:start -->.*?<!-- seo-foot:end -->", lambda m: foot, s, flags=re.S) if "<!-- seo-foot:start -->" in s \
             else s.replace("</body>", foot + "</body>", 1)
         s = re.sub(r'<html lang="[a-z]+"( data-lang="[a-z]+")?>', f'<html lang="{lang}"' + (f' data-lang="{lang}"' if lang != "en" else "") + ">", s, count=1)
