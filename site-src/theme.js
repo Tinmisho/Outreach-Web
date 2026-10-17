@@ -1,5 +1,5 @@
 // Colour themes. Runs before the page paints: sets CSS variables and window.__oxTheme for the 3D scene.
-// Default = Outreach orange (Firefox palette). Other themes are an option for now (switcher, top right).
+// The site's palette is Sunset. The other entries stay as a reference for the drawing code, but nothing switches them.
 (() => {
   const THEMES = {
     orange: { label: 'Orange', a: '#ff7139', b: '#ffbd4f', c: '#ff4f5e', d: '#e8590c', amber: '#ffb067', spark: '#ffcf8a', hue: 0 },
@@ -15,8 +15,9 @@
     gold:   { group: 'Mixed', label: 'Gold',   a: '#eab308', b: '#fde047', c: '#b45309', d: '#a16207', amber: '#fcd34d', spark: '#fef3c7', hue: 25 },
     rose:   { group: 'Mixed', label: 'Rose',   a: '#f472b6', b: '#fda4af', c: '#a78bfa', d: '#be185d', amber: '#fbcfe8', spark: '#fce7f3', hue: -50 },
   };
-  let name = 'orange';
-  try { const s = localStorage.getItem('outreach.theme'); if (s && THEMES[s]) name = s; } catch {}
+  // Sunset is the site's palette. The switcher is gone, and a theme stored by an older visit is ignored
+  // on purpose, so everyone sees the same colours.
+  const name = 'sunset';
   const t = THEMES[name];
   // Keep the browser tab mark in sync with the site's selected palette.
   const syncFavicon = (theme) => {
