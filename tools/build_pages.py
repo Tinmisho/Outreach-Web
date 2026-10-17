@@ -65,9 +65,9 @@ META = {  # slug -> lang -> (title, description)
     "how-it-works/": {"en": ("How it works: demo first, pay after | Outreach", "We build your website first and send you a link. You look at it on your phone, then decide to rent or buy. No lock-in."),
                       "ka": ("როგორ ვმუშაობთ: ჯერ დემო, შემდეგ გადახდა | Outreach", "ჯერ ვაწყობთ თქვენს ვებსაიტს და ბმულს გიგზავნით. ნახავთ ტელეფონში, შემდეგ წყვეტთ — იქირავოთ თუ იყიდოთ. მიბმის გარეშე."),
                       "ru": ("Как мы работаем: сначала демо, потом оплата | Outreach", "Сначала мы делаем ваш сайт и присылаем ссылку. Вы смотрите его на телефоне и решаете: арендовать или купить. Без обязательств.")},
-    "pricing/": {"en": ("Website pricing from 100 ₾/month — Plans | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ a month with hosting, SSL, daily backups and changes included. Buy outright from 2,000 ₾."),
-                 "ka": ("ვებსაიტის ფასები 100 ₾-დან თვეში — პაკეტები | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ თვეში — ჰოსტინგი, SSL, ყოველდღიური ასლი და ცვლილებები შედის. სრული შესყიდვა 2,000 ₾-დან."),
-                 "ru": ("Цены на сайты от 100 ₾ в месяц — Тарифы | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ в месяц: хостинг, SSL, ежедневные копии и изменения включены. Покупка сайта от 2 000 ₾.")},
+    "pricing/": {"en": ("Website pricing from 100 ₾/month — Plans | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ a month with hosting, SSL, daily backups, search engine basics and changes included. Buy outright from 2,000 ₾."),
+                 "ka": ("ვებსაიტის ფასები 100 ₾-დან თვეში — პაკეტები | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ თვეში — ჰოსტინგი, SSL, ყოველდღიური ასლი, SEO და ცვლილებები შედის. სრული შესყიდვა 2,000 ₾-დან."),
+                 "ru": ("Цены на сайты от 100 ₾ в месяц — Тарифы | Outreach", "BASIC 100 ₾, PLUS 160 ₾, PRO 250 ₾, MAX 350 ₾ в месяц: хостинг, SSL, ежедневные копии, базовое SEO и изменения включены. Покупка сайта от 2 000 ₾.")},
     "contact/": {"en": ("Contact Outreach — Web studio in Tbilisi, Georgia", "Talk to Outreach about a website for your business. Based in Tbilisi, working with small businesses across Georgia."),
                  "ka": ("კონტაქტი — Outreach, ვებ სტუდია თბილისში", "მოგვიყევით თქვენს ბიზნესზე და ვებსაიტზე ვისაუბროთ. ვართ თბილისში და ვმუშაობთ მცირე ბიზნესებთან მთელ საქართველოში."),
                  "ru": ("Контакты — Outreach, веб-студия в Тбилиси", "Расскажите о своём бизнесе, и мы обсудим ваш сайт. Мы в Тбилиси и работаем с малым бизнесом по всей Грузии.")},
@@ -80,9 +80,9 @@ INTRO = {  # slug -> lang -> (eyebrow, h1, lede)
     "how-it-works/": {"en": ("How it works", "Demo first. You decide after.", "We build your website before you pay anything, so you see exactly what you get."),
                       "ka": ("როგორ ვმუშაობთ", "ჯერ დემო. შემდეგ თქვენ წყვეტთ.", "ვებსაიტს ვაწყობთ მანამ, სანამ რამეს გადაიხდით — ზუსტად ხედავთ, რას იღებთ."),
                       "ru": ("Как мы работаем", "Сначала демо. Решаете потом.", "Мы делаем ваш сайт до любой оплаты, поэтому вы точно видите, что получаете.")},
-    "pricing/": {"en": ("Pricing", "Simple monthly plans.", "Every amount is in GEL and final. We do not bill by the hour. Minimum term 3 months, then 30 days notice. Hosting, SSL, daily backups and changes are always included."),
-                 "ka": ("ფასები", "მარტივი თვიური პაკეტები.", "ყველა თანხა ლარშია და საბოლოოა. საათობრივი დათვლა არ გვაქვს. მინიმალური ვადა 3 თვე, შემდეგ შეწყვეტა 30 დღით ადრე. ჰოსტინგი, SSL, ყოველდღიური ასლი და ცვლილებები ყოველთვის შედის."),
-                 "ru": ("Цены", "Простые ежемесячные тарифы.", "Все суммы в лари и окончательные. Почасовой оплаты нет. Минимальный срок 3 месяца, далее отмена с уведомлением за 30 дней. Хостинг, SSL, ежедневные копии и изменения всегда включены.")},
+    "pricing/": {"en": ("Pricing", "Simple monthly plans.", "Every amount is in GEL and final. We do not bill by the hour. Minimum term 3 months, then 30 days notice. Hosting, SSL, daily backups, search engine basics and changes are always included."),
+                 "ka": ("ფასები", "მარტივი თვიური პაკეტები.", "ყველა თანხა ლარშია და საბოლოოა. საათობრივი დათვლა არ გვაქვს. მინიმალური ვადა 3 თვე, შემდეგ შეწყვეტა 30 დღით ადრე. ჰოსტინგი, SSL, ყოველდღიური ასლი, SEO-ს საფუძვლები და ცვლილებები ყოველთვის შედის."),
+                 "ru": ("Цены", "Простые ежемесячные тарифы.", "Все суммы в лари и окончательные. Почасовой оплаты нет. Минимальный срок 3 месяца, далее отмена с уведомлением за 30 дней. Хостинг, SSL, ежедневные копии, базовое SEO и изменения всегда включены.")},
     "contact/": {"en": ("Contact", "Let's build your website.", "Tell us what you do and we'll come back with a plan and a price. No jargon, no surprises."),
                  "ka": ("კონტაქტი", "ავაწყოთ თქვენი ვებსაიტი.", "მოგვიყევით რას აკეთებთ და დაგიბრუნდებით გეგმითა და ფასით. ზედმეტი ტერმინებისა და სიურპრიზების გარეშე."),
                  "ru": ("Контакты", "Давайте создадим ваш сайт.", "Расскажите, чем вы занимаетесь, и мы вернёмся с планом и ценой. Без жаргона и сюрпризов.")},
@@ -113,10 +113,13 @@ PLANS = {  # lang -> [(summary, [includes])] in PLAN_PRICES order
 # what every package carries
 INCLUDED = {
     "en": ["A site that works on a phone, hosting, SSL, domain management, daily backups",
+           "Search engine basics: a title and description on every page, a sitemap, and structured data so Google can read the site",
            "Privacy policy text", "A .ge domain in your name — the first year is in the setup fee"],
     "ka": ["მობილურზე მორგებული საიტი, ჰოსტინგი, SSL, დომენის მართვა, ყოველდღიური ასლი",
+           "SEO-ს საფუძვლები: სათაური და აღწერა ყველა გვერდზე, საიტის რუკა და სტრუქტურირებული მონაცემები, რომ Google-მა საიტი წაიკითხოს",
            "კონფიდენციალურობის პოლიტიკის ტექსტი", "დომენი (.ge) თქვენს სახელზე — პირველი წელი setup-ში"],
     "ru": ["Сайт, адаптированный под телефон, хостинг, SSL, управление доменом, ежедневные копии",
+           "Базовое SEO: заголовок и описание на каждой странице, карта сайта и структурированные данные, чтобы Google прочитал сайт",
            "Текст политики конфиденциальности", "Домен .ge на ваше имя — первый год входит в запуск"],
 }
 # comparison rows: (section, label, [BASIC, PLUS, PRO, MAX]) — "+" marks a yes, "-" a no
@@ -508,7 +511,7 @@ def build_files():
 
 {plans}
 
-Monthly billing, minimum term 3 months, then 30 days notice. Setup charged once. Hosting, SSL, daily backups and changes included. No hourly billing.
+Monthly billing, minimum term 3 months, then 30 days notice. Setup charged once. Hosting, SSL, daily backups, search engine basics and changes included. No hourly billing.
 
 ## FAQ
 

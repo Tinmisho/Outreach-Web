@@ -9,7 +9,7 @@
   const HEAD = {
     eyebrow: { en: '> Pricing', ka: '> ფასები', ru: '> Цены' },
     title: { en: 'Simple <span class="ox-grad">monthly plans.</span>', ka: 'მარტივი <span class="ox-grad">თვიური პაკეტები.</span>', ru: 'Простые <span class="ox-grad">месячные тарифы.</span>' },
-    lede: { en: 'Every amount is in GEL and final, with no hourly billing. Minimum term 3 months, then 30 days notice. Hosting, SSL, daily backups and changes are always included.', ka: 'ყველა თანხა ლარშია და საბოლოოა, საათობრივი დათვლა არ გვაქვს. მინიმალური ვადა 3 თვე, შემდეგ 30 დღით ადრე. ჰოსტინგი, SSL, ყოველდღიური ასლი და ცვლილებები ყოველთვის შედის.', ru: 'Все суммы в лари и окончательные, почасовой оплаты нет. Минимальный срок 3 месяца, далее за 30 дней. Хостинг, SSL, ежедневные копии и изменения всегда включены.' },
+    lede: { en: 'Every amount is in GEL and final, with no hourly billing. Minimum term 3 months, then 30 days notice. Hosting, SSL, daily backups, search engine basics and changes are always included.', ka: 'ყველა თანხა ლარშია და საბოლოოა, საათობრივი დათვლა არ გვაქვს. მინიმალური ვადა 3 თვე, შემდეგ 30 დღით ადრე. ჰოსტინგი, SSL, ყოველდღიური ასლი, SEO-ს საფუძვლები და ცვლილებები ყოველთვის შედის.', ru: 'Все суммы в лари и окончательные, почасовой оплаты нет. Минимальный срок 3 месяца, далее за 30 дней. Хостинг, SSL, ежедневные копии, базовое SEO и изменения всегда включены.' },
     month: { en: '/ month', ka: '/ თვე', ru: '/ мес' },
     setup: { en: 'Setup {n} ₾, charged once', ka: 'Setup {n} ₾, ერთჯერადად', ru: 'Запуск {n} ₾, один раз' },
     own: { en: 'Want to own it?', ka: 'გსურთ საიტი იყიდოთ?', ru: 'Хотите купить сайт?' },

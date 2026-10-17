@@ -24,9 +24,9 @@
       ru: 'Обычно сайт запускается за 1–2 недели, когда у нас есть материалы (тексты, фото, логотип). Сначала мы показываем демо, чтобы вы увидели сайт до оплаты.',
     },
     hosting: {
-      en: 'Hosting, SSL and updates are included in every plan. We can use your existing domain or register a new one for you.',
-      ka: 'ჰოსტინგი, SSL და განახლებები ყველა პაკეტშია. შეგვიძლია თქვენი არსებული დომენი გამოვიყენოთ ან ახალი დაგირეგისტრიროთ.',
-      ru: 'Хостинг, SSL и обновления входят в каждый тариф. Можем использовать ваш домен или зарегистрировать новый.',
+      en: 'Hosting, SSL, daily backups, search engine basics (titles, descriptions, sitemap, structured data) and updates are included in every plan. We can use your existing domain or register a new one for you.',
+      ka: 'ჰოსტინგი, SSL, ყოველდღიური ასლი, SEO-ს საფუძვლები (სათაურები, აღწერები, საიტის რუკა, სტრუქტურირებული მონაცემები) და განახლებები ყველა პაკეტშია. შეგვიძლია თქვენი არსებული დომენი გამოვიყენოთ ან ახალი დაგირეგისტრიროთ.',
+      ru: 'Хостинг, SSL, ежедневные копии, базовое SEO (заголовки, описания, карта сайта, структурированные данные) и обновления входят в каждый тариф. Можем использовать ваш домен или зарегистрировать новый.',
     },
     contact: {
       en: "We'd love to talk! Leave your name and phone or email in a message here and our team will get back to you. (This chat is a demo for now: messages aren't sent yet.)",
