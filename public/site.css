@@ -100,7 +100,7 @@ html[data-glass=on] body{background-attachment:fixed}
 html[data-glass=on] body:before{content:"";position:fixed;inset:-10% -10% auto;height:120vh;z-index:-1;pointer-events:none;
   background:radial-gradient(44vw 44vw at 12% 6%,color-mix(in srgb,var(--ox-a) 18%,transparent),transparent 72%),
     radial-gradient(48vw 48vw at 80% 92%,color-mix(in srgb,var(--ox-a) 11%,transparent),transparent 76%);
-  filter:blur(18px);opacity:.75}
+  filter:blur(18px);opacity:.75;-webkit-mask-image:linear-gradient(#000 70%,#0000);mask-image:linear-gradient(#000 70%,#0000)}
 html[data-glass=on] .card,html[data-glass=on] .step,html[data-glass=on] .note,
 html[data-glass=on] .faq details,html[data-glass=on] .cta,html[data-glass=on] .glass{
   position:relative;background:var(--gpane);border-color:#ffffffb3;
