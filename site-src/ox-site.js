@@ -62,6 +62,54 @@
     if (hint) { const o = Math.max(0, 1 - scrollY / 150); hint.style.opacity = (o * 0.6).toFixed(3); hint.style.visibility = o === 0 ? 'hidden' : ''; }
   };
   addEventListener('scroll', gridHole, { passive: true }); addEventListener('load', gridHole); gridHole();
+  // The dive is an unlock, not a scrollbar: you cannot be left halfway inside the laptop screen. When the
+  // scrolling stops inside the hero, the page finishes the dive or falls back to the top. Past a quarter of
+  // the way it always completes, the way a phone unlock catches a short swipe.
+  const snapDive = (() => {
+    const EASE = (x) => 1 - Math.pow(1 - x, 3);
+    let timer = 0, anim = 0, busy = false, want = -1;
+    const glide = (to) => {
+      const from = scrollY, span = to - from;
+      if (!span) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scrollTo(0, to); return; }
+      const t0 = performance.now(), ms = Math.min(420, Math.max(160, Math.abs(span) * 0.8));
+      busy = true; want = from;
+      const step = (now) => {
+        // the browser's own wheel momentum can still be moving the page: if it has taken over, stand down
+        if (Math.abs(scrollY - want) > 8) { busy = false; anim = 0; arm(); return; }
+        const k = Math.min(1, (now - t0) / ms);
+        want = Math.round(from + span * EASE(k));
+        scrollTo(0, want);
+        if (k < 1) anim = requestAnimationFrame(step);
+        else { anim = 0; busy = false; arm(); }   // check once more, in case momentum nudged us off an end
+      };
+      anim = requestAnimationFrame(step);
+    };
+    const arm = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const h = document.querySelector('.hero');
+        if (!h || busy) return;
+        const H = h.offsetHeight, y = scrollY;
+        if (y <= 1 || y >= H - 1) return;            // already at one end: nothing to do
+        glide(y > H * 0.25 ? H : 0);                 // past a quarter of the way, the dive completes
+      }, 120);
+    };
+    return arm;
+  })();
+  addEventListener('scroll', snapDive, { passive: true });
+  addEventListener('wheel', snapDive, { passive: true });
+
+  // in-page links keep gliding even though CSS smooth scrolling is off (it fights the dive)
+  addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href') === '#') return;
+    const el = document.querySelector(a.getAttribute('href'));
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  });
+
   // ?chat=contact (links from the other pages) opens the assistant on that topic
   const chatTopic = new URLSearchParams(location.search).get('chat');
   if (chatTopic) addEventListener('load', () => setTimeout(() => {
