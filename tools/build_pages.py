@@ -11,7 +11,7 @@ Run after any content change:  python3 tools/build_pages.py
 Switching to a custom domain = change SITE below and run it again.
 Georgian plan / step / FAQ texts are the official ones from the main Outreach site (WebB-Site).
 """
-import json, pathlib, re, subprocess, shutil, datetime, html
+import json, os, pathlib, re, subprocess, shutil, datetime, html, tempfile
 
 SITE = "https://outreach.pre-production.workers.dev"   # canonical origin (no trailing slash)
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -539,12 +539,19 @@ Monthly billing, minimum term 3 months, then 30 days notice. Setup charged once.
 def minify_scripts():
     """site-src/*.js (readable) -> public/*.js (minified). Uses terser if available, else copies."""
     terser = shutil.which("terser") or str(pathlib.Path.home() / ".cache/outreach-min/node_modules/.bin/terser")
+    # the demo gallery only asks for photographs that exist, so a missing one is never a broken request
+    photos = sorted(p.stem for p in (PUB / "img" / "demos").glob("*.webp"))
     for f in sorted(SRC.glob("*.js")):
         out = PUB / f.name
+        text = f.read_text(encoding="utf-8").replace("/*@photos*/[]", json.dumps(photos))
+        with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8") as tmp:
+            tmp.write(text)
         try:
-            subprocess.run([terser, str(f), "--compress", "--mangle", "--comments", "false", "-o", str(out)], check=True, capture_output=True)
+            subprocess.run([terser, tmp.name, "--compress", "--mangle", "--comments", "false", "-o", str(out)], check=True, capture_output=True)
         except Exception:
-            shutil.copyfile(f, out)
+            out.write_text(text, encoding="utf-8")
+        finally:
+            os.unlink(tmp.name)
         print(f"  {f.name}: {f.stat().st_size} -> {out.stat().st_size} bytes")
 
 

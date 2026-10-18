@@ -1,36 +1,43 @@
 # Demo gallery photographs
 
-The eight example websites in the "Built for real businesses" section each show one photograph in their
-hero and one small photograph per priced item. Drop the originals in a folder — any size, any common
-format — named after the slot, and run:
+The eight example websites in the "Built for real businesses" section each show a hero photograph, one
+photograph per item on offer (six) and one beside their "about" text — 64 in all. Drop the originals in a
+folder, any size and any common format, named after the slot, and run:
 
     python3 tools/demo_photos.py <that folder>
 
-It centre-crops, resizes and writes the `.webp` files next to this README. A slot with no photograph
-keeps the drawn artwork the gallery shipped with, so filling them in a few at a time is fine.
-
-The hero wants a wide photograph (it is cropped to 480 × 360); the items are small squares-ish strips
-(320 × 88), so something simple and close-up reads best.
+It centre-crops, resizes and writes the `.webp` files next to this README (hero 1100×990, items 760×570,
+about 1100×880). A slot with no photograph shows a plain frame in the brand's colours, so the slots can be
+filled a few at a time.
 
 | Slot | Photograph |
 | --- | --- |
 | `flowers` | a florist bench with wrapped bouquets |
-| `flowers-1` `-2` `-3` | rose bouquet · peonies in a box · dried flowers |
-| `restaurant` | a laid table on a terrace at dusk |
-| `restaurant-1` `-2` `-3` | khachapuri · grilled trout · a glass of wine |
+| `flowers-1` … `-6` | rose bouquet · peony box · dried bunch · tulip armful · wedding posy · plant of the month |
+| `flowers-about` | hands wrapping a bouquet |
+| `restaurant` | a laid table on a terrace at dusk, old-town view |
+| `restaurant-1` … `-6` | Khachapuri · grilled trout · glass of wine · pkhali trio · Mtsvadi · churchkhela sundae |
+| `restaurant-about` | a cook at a clay oven or grill |
 | `pizzeria` | a pizza coming out of a wood oven |
-| `pizzeria-1` `-2` `-3` | margherita · diavola · calzone |
+| `pizzeria-1` … `-6` | Margherita · Diavola · Calzone · quattro formaggi · Funghi · Tiramisu |
+| `pizzeria-about` | dough being stretched |
 | `detailing` | a car being polished in a workshop |
-| `detailing-1` `-2` `-3` | exterior wash · interior cleaning · a finished car |
+| `detailing-1` … `-6` | exterior wash · interior clean · full detail · paint correction · ceramic coating · headlight restore |
+| `detailing-about` | close-up of polish on paint |
 | `bakery` | bread and pastry on a counter |
-| `bakery-1` `-2` `-3` | croissant · sourdough loaf · cinnamon bun |
+| `bakery-1` … `-6` | croissant · sourdough loaf · cinnamon bun · flat white · Penovani · seed rye |
+| `bakery-about` | a baker shaping loaves |
 | `salon` | a hairdresser at the chair |
-| `salon-1` `-2` `-3` | a haircut · colouring · a manicure |
-| `guesthouse` | a sunlit room with an old-town window |
-| `guesthouse-1` `-2` `-3` | a double room · a family room · a studio |
-| `fitness` | weights and a bright training floor |
-| `fitness-1` `-2` `-3` | the floor by the day · a membership card wall · a trainer with a client |
+| `salon-1` … `-6` | haircut · colour · manicure · balayage · blow-dry · brows & lashes |
+| `salon-about` | a stylist mid-cut, face not shown |
+| `guesthouse` | a sunlit room with a carved wooden balcony |
+| `guesthouse-1` … `-6` | double room · family room · studio · single room · balcony suite · airport pickup |
+| `guesthouse-about` | an old Tbilisi street or balcony |
+| `fitness` | a bright training floor with barbells |
+| `fitness-1` … `-6` | day pass · monthly pass · personal training · strength · conditioning · mobility |
+| `fitness-about` | a coach spotting a lift |
 
-Licensing: only photographs we may publish — our own, a client's with their permission, or stock under
-a licence that allows commercial use (Unsplash and Pexels both do). The businesses themselves are
-invented, so the photographs should not show a recognisable real shopfront, sign or person's face.
+Licensing: only photographs we may publish — our own, a client's with their permission, or stock under a
+licence that allows commercial use without attribution (the Unsplash and Pexels licences both do). Keep a
+note of each photo's source page in `SOURCES.md` here all the same. The businesses are invented, so the
+photographs should not show a recognisable real shopfront, sign or person's face.

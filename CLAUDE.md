@@ -12,9 +12,10 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   - `public/assets/` — the 3D app: a minified Vite/React Three Fiber/GSAP build that is edited in place
     (`Experience-*.js` = laptop/phone scene, `index-*.js` = page + scroll triggers, `index-*.css` = styles).
     There is no source for it; keep edits small and check syntax with `node --check` (copy to `.mjs`).
-  - `public/img/demos/` — the photographs the example websites in the gallery show. Slots and subjects are
-    listed in its README; `tools/demo_photos.py <folder>` crops and converts originals into them. A slot
-    with no photograph falls back to the drawn artwork, so the gallery never breaks on a missing file.
+  - `public/img/demos/` — the photographs the example websites in the gallery show (64 slots; subjects in its
+    README). `tools/demo_photos.py <folder>` crops and converts originals into them, and `build_pages.py`
+    writes the list of existing files into `industries.js`, so a missing photo is a plain brand-coloured
+    frame, never a 404. Real photographs only, licence noted in `SOURCES.md` there.
 - `site-src/` — readable sources of the site scripts (theme, language, chat, sounds, cursor, laptop page,
   example-businesses gallery, home-page plans, liquid glass). Edit these, never the minified copies in `public/`.
 - `tools/build_pages.py` — run after any change: minifies `site-src/` into `public/` and generates the
@@ -25,12 +26,15 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
 ## Workflow
 
 1. Edit, then `python3 tools/build_pages.py`.
-   The hero section's height is the scroll the 3D dive takes (now ~55vh, about one flick) — not a layout value.
-   `ox-site.js` snaps that scroll: stop inside the hero and the page finishes the dive, or falls back to the
-   top below a quarter. CSS `scroll-behavior` must stay `auto` (smooth fights it); in-page links glide via JS.
-   The dive value is eased in `index-*.js`: the scroll sets `__oxHeroT` and `E.hero` chases it with a
-   time-based decay (~60ms constant), so wheel notches glide instead of stepping. A numeric GSAP `scrub`
-   does not do this — it smooths an attached animation, and that trigger only writes a value in onUpdate.
+   The hero section's height is the scroll the 3D dive takes (~110vh) — not a layout value. The dive is a
+   plain scrub: it stops wherever the scrolling stops, halfway included (there is no snap any more — it fought
+   the reader's hand and Lenis). Lenis (in `index-*.js`, exposed as `window.__oxLenis`) smooths the wheel;
+   in-page links scroll through it, and the demo dialog stops it while open. On top, `__oxHeroT` → `E.hero`
+   is a ~50ms time-based chase for what Lenis leaves alone (touch, scrollbar drag); under reduced motion the
+   value follows the scroll directly and the camera does not fly in — the scene just crossfades to the page.
+   The camera locks onto the eased value once the dive starts (no second lag). A numeric GSAP `scrub` would
+   not smooth this: it smooths an attached animation, and that trigger only writes a value in onUpdate.
+   CSS `scroll-behavior` must stay `auto`.
 2. Preview locally only when needed, and stop the server + close the preview tab at the end of the round
    (the laptop overheats with the 3D page). Use a no-cache server; the preview browser caches hard.
 3. Commit (author Claude <noreply@anthropic.com>, with `Co-Authored-By: Misho <mishogorgadze@icloud.com>`
@@ -47,6 +51,10 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   scene and the two hero titles only — not for bars, buttons, panels or tints. The demo businesses in
   the gallery keep their own palettes: they are meant to look like other people's brands.
 - Motion is unhurried: 400–600ms with a soft ease-out, and nothing loops on its own.
+- The gallery's example sites (`industries.js`) are complete one-page sites (`.dsite`, styles `.ds-*` in
+  `index-*.css`), laid out at 1280px (390px on a narrow card) and scaled into each card; container queries
+  pick the layout. "View the full site" opens the same page at real size in `.ox-demo`. The businesses are
+  invented: no phone numbers or street addresses on them either.
 - Liquid glass (experiment) is gated on `<html data-glass=on>` from `liquid-glass.js`; `?glass=0` or
   `window.__oxGlass.toggle()` shows the flat site. Its CSS sits at the end of `public/site.css` and of
   `public/assets/index-*.css` — keep the two in step. On the 3D page the glass also needs

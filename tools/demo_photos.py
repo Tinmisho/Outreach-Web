@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Turn a folder of photographs into the demo-gallery images.
 
-The eight example websites in site-src/industries.js each show one photograph in their hero and one
-small photograph per priced item. This script does the cropping, resizing and webp conversion, so the
+The eight example websites in site-src/industries.js each show a hero photograph, one photograph per
+item on offer (six) and one beside their "about" text. This script does the cropping, resizing and webp conversion, so the
 only manual step is dropping the originals in a folder, named after the slot they belong to:
 
-    flowers.jpg  flowers-1.jpg  flowers-2.jpg  flowers-3.jpg
+    flowers.jpg  flowers-1.jpg … flowers-6.jpg  flowers-about.jpg
     restaurant.jpg  restaurant-1.jpg  ...
 
 Any extension Pillow reads works. The slots and the subject each one wants are listed in
@@ -23,16 +23,18 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public" / "img" / "demos"
 IDS = ["flowers", "restaurant", "pizzeria", "detailing", "bakery", "salon", "guesthouse", "fitness"]
-HERO = (480, 360)      # the hero slot measures about 169x127 on a laptop, so this is a little under 3x
-THUMB = (320, 88)      # the item thumbnails are about 96x25
+HERO = (1100, 990)     # 10:9, about 550 px wide at full size, so 2x
+ITEM = (760, 570)      # 4:3, about 380 px wide
+ABOUT = (1100, 880)    # 5:4
 READS = (".jpg", ".jpeg", ".png", ".webp", ".heic", ".tif", ".tiff", ".bmp", ".avif")
 
 
 def slots():
     for i in IDS:
         yield i, HERO
-        for n in (1, 2, 3):
-            yield f"{i}-{n}", THUMB
+        for n in range(1, 7):
+            yield f"{i}-{n}", ITEM
+        yield f"{i}-about", ABOUT
 
 
 def find(src: Path, slot: str):
