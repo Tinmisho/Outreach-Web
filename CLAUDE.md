@@ -19,8 +19,10 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
     its own screen planes (`__lpScreenMesh`) on them; the drawn devices show until they load or if they fail.
     `room.glb` is the wooden desk the laptop stands on (desk top at y = 0), with a lamp, plant, books and mug,
     plus a wall and floor drawn in `__lpRoom`; the props are placed in the `items` table of `models.mjs`, kept
-    right of the headline on desktop, and the plant and books are hidden on phones. The phone is hidden for now
-    (`__lpShowPhone = !1` in `Experience-*.js`); it is still built and can be switched back on or removed.
+    right of the headline on desktop, and the plant and books are hidden on phones. The desk is the default scene;
+    the earlier floating laptop + phone (with the floating shapes and the idle bob) stays as the other one:
+    `?scene=float` / `?scene=desk` picks it and is remembered (`__lpDesk`). The phone only shows in the floating scene
+    for now; it is still built and can be removed later.
   - `public/img/demos/` — the photographs the example websites in the gallery show (64 slots; subjects in its
     README). `tools/demo_photos.py <folder>` crops and converts originals into them, and `build_pages.py`
     writes the list of existing files into `industries.js`, so a missing photo is a plain brand-coloured
