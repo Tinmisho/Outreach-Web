@@ -1,4 +1,5 @@
-// Builds public/assets/gltf-<hash>.js: three's GLTFLoader + meshopt decoder for the 3D scene.
+// Builds public/assets/gltf-<hash>.js: three's GLTFLoader + meshopt decoder for the 3D scene, and points
+// Experience-*.js at it. The models themselves come from models.mjs (public/assets/models).
 // three is not bundled again: every `import ... from 'three'` is pointed at the copy inside r3f-*.js,
 // whose THREE namespace that bundle exports as `T` (one renderer, one set of classes).
 import { build } from 'esbuild';
@@ -38,4 +39,8 @@ const code = out.outputFiles[0].text;
 const name = `gltf-${createHash('sha256').update(code).digest('base64url').slice(0, 8)}.js`;
 for (const f of readdirSync(assets)) if (/^gltf-.*\.js$/.test(f) && f !== name) unlinkSync(join(assets, f));
 writeFileSync(join(assets, name), code);
+// the 3D scene imports the loader by its hashed name
+const exp = readdirSync(assets).find((f) => /^Experience-.*\.js$/.test(f));
+const src2 = readFileSync(join(assets, exp), 'utf8');
+writeFileSync(join(assets, exp), src2.replace(/\.\/gltf-[\w-]+\.js/g, `./${name}`));
 console.log(`${name} ${(code.length / 1024).toFixed(1)} KB`);

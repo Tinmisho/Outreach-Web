@@ -1,9 +1,14 @@
 {
   "private": true,
-  "description": "Builds public/assets/gltf-*.js: three's GLTFLoader + meshopt decoder, wired to the three copy inside r3f-*.js. Run: npm ci && node build.mjs",
+  "description": "Builds the 3D scene's loader (node build.mjs -> public/assets/gltf-*.js) and its models (node models.mjs <macbook.glb> <iphone.glb> -> public/assets/models). npm ci first.",
   "devDependencies": {
     "esbuild": "0.28.2",
     "three": "0.186.1",
-    "@gltf-transform/cli": "4.5.1"
+    "@gltf-transform/cli": "4.5.1",
+    "meshoptimizer": "1.2.0",
+    "sharp": "0.35.5",
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1"
   }
 }

@@ -229,10 +229,10 @@ function __lpPhoneScreen() {
   for (let y = 0; y < 1296; y += 44) { g.beginPath(); g.moveTo(0, y); g.lineTo(600, y); g.stroke(); }
   const glow = g.createRadialGradient(420, 760, 10, 420, 760, 420); glow.addColorStop(0, __oxT.rgba(.20)); glow.addColorStop(1, __oxT.rgba(0));
   g.fillStyle = glow; g.fillRect(0, 0, 600, 1296);
-  // status bar + camera island
+  // status bar
   g.fillStyle = `#1c1612`; g.font = `600 30px system-ui, sans-serif`; g.fillText(`9:41`, 52, 66);
   g.fillRect(500, 44, 46, 22); g.fillStyle = `#faf7f2`; g.fillRect(504, 48, 30, 14); g.fillStyle = `#1c1612`; g.fillRect(546, 50, 4, 10);
-  g.fillStyle = `#0b0b0d`; g.beginPath(); g.roundRect(222, 30, 156, 44, 22); g.fill();
+  // no camera island here: the phone model's notch sits over this spot
   // logo row (real logo once loaded) + menu
   g.fillStyle = __oxT.a; g.beginPath(); g.roundRect(40, 128, 46, 46, 11); g.fill();
   g.fillStyle = `#1c1612`; g.font = `800 36px system-ui, sans-serif`; g.fillText(`Outreach`, 98, 164);
@@ -260,6 +260,16 @@ function __lpPhoneScreen() {
   return cv;
 }
 
+/* Real laptop and phone (public/assets/models, built by tools/gltf/models.mjs). The drawn ones stay until the models
+   arrive, and if they fail to load. Phones never load the laptop: they only show the phone. */
+let __lpGL = null;
+const __lpModels = () => (__lpGL ??= import(`./gltf-zbhD1phr.js`).then(({ GLTFLoader: L, MeshoptDecoder: D }) => {
+  const l = new L(); l.setMeshoptDecoder(D);
+  // same soft finish as the drawn devices: full metal mirrored the coloured light panels
+  const get = (n) => l.loadAsync(new URL(`./models/${n}.glb`, import.meta.url).href).then((g) => { g.scene.traverse((o) => { const m = o.isMesh && o.material; if (!m) return; m.envMapIntensity = 0.35; if (m.metalness > 0.5) { m.metalness = 0.45; m.roughness = Math.max(m.roughness, 0.32); } }); return g.scene; });
+  return Promise.all([__lpIsMobile() ? null : get(`laptop`), get(`phone`)]).then(([lap, ph]) => ({ base: lap?.getObjectByName(`base`), lid: lap?.getObjectByName(`lid`), ph }));
+}).catch((e) => (console.warn(`3D models:`, e), {})));
+const __lpUseModels = () => { const [m, s] = (0, d.useState)(null); (0, d.useEffect)(() => { let on = !0; __lpModels().then((v) => on && s(v)); return () => { on = !1; }; }, []); return m || {}; };
 let __lpPhoneTex = null, __lpPhoneCache = null;
 function __lpPhone() {
   const P = (__lpPhoneCache ??= {
@@ -267,29 +277,30 @@ function __lpPhone() {
     glass: __lpSlab(0.775, 1.595, 0.004, 0.118, 8),
     screen: __lpPhoneScreen(),
   });
-  const M = __lpIsMobile();
+  const M = __lpIsMobile(), G = __lpUseModels().ph, Q = G?.getObjectByName(`phone`)?.userData.screen;
   return (0, f.jsxs)(`group`, {
     position: M ? [0, -0.45, 0.3] : [2.12, 0.8, 0.28], rotation: M ? [0.05, -0.28, 0] : [-0.06, -0.42, 0], scale: M ? 1.05 : 1,
     children: [
+      ...(G ? [(0, f.jsx)(`primitive`, { object: G })] : [
       (0, f.jsxs)(`mesh`, { children: [__lpGeo(P.body), (0, f.jsx)(`meshStandardMaterial`, { color: `#a7abb2`, metalness: 0.5, roughness: 0.3, envMapIntensity: 0.45 })] }),
-      (0, f.jsxs)(`mesh`, { position: [0, 0, 0.0445], children: [__lpGeo(P.glass), (0, f.jsx)(`meshStandardMaterial`, { color: `#060607`, metalness: 0.1, roughness: 0.12 })] }),
+      (0, f.jsxs)(`mesh`, { position: [0, 0, 0.0445], children: [__lpGeo(P.glass), (0, f.jsx)(`meshStandardMaterial`, { color: `#060607`, metalness: 0.1, roughness: 0.12 })] })]),
       (0, f.jsxs)(`mesh`, {
-        position: [0, 0, 0.0475], ref: (o) => { if (M) __lpScreenMesh = o; },
+        position: Q ? [Q[0], Q[1], Q[2]] : [0, 0, 0.0475], ref: (o) => { if (M) __lpScreenMesh = o; },
         children: [
-          (0, f.jsx)(`planeGeometry`, { args: [0.72, 1.555] }),
+          (0, f.jsx)(`planeGeometry`, { args: Q ? [Q[3], Q[4]] : [0.72, 1.555] }),
           (0, f.jsx)(`meshBasicMaterial`, { toneMapped: !1, transparent: !0, children: (0, f.jsx)(`canvasTexture`, { ref: (t) => { __lpPhoneTex = t; }, attach: `map`, args: [P.screen], colorSpace: `srgb`, anisotropy: 4 }) }),
         ],
       }),
-      // side buttons
-      (0, f.jsxs)(`mesh`, { position: [0.395, 0.35, 0], children: [(0, f.jsx)(`boxGeometry`, { args: [0.012, 0.16, 0.03] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#8e939a`, metalness: 0.5, roughness: 0.32 })] }),
+      // side buttons (the model has its own)
+      ...(G ? [] : [(0, f.jsxs)(`mesh`, { position: [0.395, 0.35, 0], children: [(0, f.jsx)(`boxGeometry`, { args: [0.012, 0.16, 0.03] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#8e939a`, metalness: 0.5, roughness: 0.32 })] }),
       (0, f.jsxs)(`mesh`, { position: [-0.395, 0.42, 0], children: [(0, f.jsx)(`boxGeometry`, { args: [0.012, 0.1, 0.03] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#8e939a`, metalness: 0.5, roughness: 0.32 })] }),
-      (0, f.jsxs)(`mesh`, { position: [-0.395, 0.25, 0], children: [(0, f.jsx)(`boxGeometry`, { args: [0.012, 0.1, 0.03] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#8e939a`, metalness: 0.5, roughness: 0.32 })] }),
+      (0, f.jsxs)(`mesh`, { position: [-0.395, 0.25, 0], children: [(0, f.jsx)(`boxGeometry`, { args: [0.012, 0.1, 0.03] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#8e939a`, metalness: 0.5, roughness: 0.32 })] })]),
     ],
   });
 }
 
 function __lpLaptop({ groupRef, reduced }) {
-  const D = __lpData();
+  const D = __lpData(), G = __lpUseModels(), Q = G.lid?.userData.screen; // G.base + G.lid: the model, hinge at the origin, lid shut
   const lid = (0, d.useRef)(null), clock = (0, d.useRef)(0), inner = (0, d.useRef)(null);
   r((st, dt) => {
     clock.current += Math.min(dt, 0.05);
@@ -316,6 +327,7 @@ function __lpLaptop({ groupRef, reduced }) {
       scale: innerWidth >= 900 && innerWidth / innerHeight >= 1.2 ? 0.78 : 0.98,
       children: [
         (0, f.jsx)(__lpPhone, {}),
+        ...(G.base ? [(0, f.jsx)(`primitive`, { object: G.base, position: [0, 0.09, -1.02] })] : [
         __lpMesh(__lpGeo(D.base), alu, { position: [0, 0.045, 0], rotation: [-Math.PI / 2, 0, 0] }),
         __lpMesh(__lpGeo(D.deck), (0, f.jsx)(`meshStandardMaterial`, { color: `#ccd0d6`, roughness: 0.42, metalness: 0.35, envMapIntensity: 0.35 })),
         __lpMesh(__lpGeo(D.keys), (0, f.jsx)(`meshStandardMaterial`, { color: `#202226`, roughness: 0.62, metalness: 0.05 })),
@@ -330,19 +342,20 @@ function __lpLaptop({ groupRef, reduced }) {
         (0, f.jsxs)(`mesh`, {
           position: [0, 0.09, -1.0], rotation: [0, 0, Math.PI / 2],
           children: [(0, f.jsx)(`cylinderGeometry`, { args: [0.042, 0.042, 2.3, 32] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#9ca0a7`, metalness: 0.5, roughness: 0.35 })],
-        }),
+        })]),
         (0, f.jsxs)(`group`, {
           ref: lid, position: [0, 0.09, -1.02],
           children: [
+            ...(G.lid ? [(0, f.jsx)(`primitive`, { object: G.lid })] : [
             __lpMesh(__lpGeo(D.lid), alu, { position: [0, 0.0225, 1.015], rotation: [-Math.PI / 2, 0, 0] }),
             (0, f.jsxs)(`mesh`, {
               position: [0, -0.0008, 1.015], rotation: [Math.PI / 2, 0, 0],
               children: [__lpGeo(__lpBezelGeo ??= __lpSlab(2.94, 1.97, 0.0012, 0.1, 10)), (0, f.jsx)(`meshStandardMaterial`, { color: `#050506`, roughness: 0.12, metalness: 0 })],
-            }),
+            })]),
             (0, f.jsxs)(`mesh`, {
-              ref: (o) => { if (!__lpIsMobile()) __lpScreenMesh = o; }, position: [0, -0.0016, 1.03], rotation: [Math.PI / 2, 0, 0],
+              ref: (o) => { if (!__lpIsMobile()) __lpScreenMesh = o; }, position: Q ? [Q[0], Q[1], Q[2]] : [0, -0.0016, 1.03], rotation: [Math.PI / 2, 0, 0],
               children: [
-                (0, f.jsx)(`planeGeometry`, { args: [2.88, 1.84] }),
+                (0, f.jsx)(`planeGeometry`, { args: Q ? [Q[3], Q[4]] : [2.88, 1.84] }),
                 (0, f.jsx)(`meshBasicMaterial`, {
                   toneMapped: !1, transparent: !0,
                   children: (0, f.jsx)(`canvasTexture`, { ref: (t) => { __lpTex = t; }, attach: `map`, args: [D.screen], colorSpace: `srgb`, anisotropy: 4 }),

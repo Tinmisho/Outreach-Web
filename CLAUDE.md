@@ -12,6 +12,11 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
   - `public/assets/` — the 3D app: a minified Vite/React Three Fiber/GSAP build that is edited in place
     (`Experience-*.js` = laptop/phone scene, `index-*.js` = page + scroll triggers, `index-*.css` = styles).
     There is no source for it; keep edits small and check syntax with `node --check` (copy to `.mjs`).
+  - `public/assets/models/` — the laptop and phone (`laptop.glb`, `phone.glb`, CC BY, credits in `CREDITS.md`),
+    made by `tools/gltf/models.mjs` from the Sketchfab originals: logos and wallpapers removed, lid folded shut
+    at the hinge (the scene opens it), screen rectangle in extras, meshopt-compressed. `Experience-*.js` loads
+    them through `gltf-*.js` (GLTFLoader built by `tools/gltf/build.mjs` on the three inside `r3f-*.js`) and lays
+    its own screen planes (`__lpScreenMesh`) on them; the drawn devices show until they load or if they fail.
   - `public/img/demos/` — the photographs the example websites in the gallery show (64 slots; subjects in its
     README). `tools/demo_photos.py <folder>` crops and converts originals into them, and `build_pages.py`
     writes the list of existing files into `industries.js`, so a missing photo is a plain brand-coloured
