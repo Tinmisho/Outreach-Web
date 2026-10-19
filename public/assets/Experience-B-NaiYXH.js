@@ -260,16 +260,31 @@ function __lpPhoneScreen() {
   return cv;
 }
 
-/* Real laptop and phone (public/assets/models, built by tools/gltf/models.mjs). The drawn ones stay until the models
-   arrive, and if they fail to load. Phones never load the laptop: they only show the phone. */
+/* Real laptop, phone and desk (public/assets/models, built by tools/gltf/models.mjs). The drawn devices stay until the
+   models arrive, and if they fail to load. The phone is hidden for now (__lpShowPhone) and not loaded. */
+const __lpShowPhone = !1;
 let __lpGL = null;
 const __lpModels = () => (__lpGL ??= import(`./gltf-zbhD1phr.js`).then(({ GLTFLoader: L, MeshoptDecoder: D }) => {
   const l = new L(); l.setMeshoptDecoder(D);
   // same soft finish as the drawn devices: full metal mirrored the coloured light panels
-  const get = (n) => l.loadAsync(new URL(`./models/${n}.glb`, import.meta.url).href).then((g) => { g.scene.traverse((o) => { const m = o.isMesh && o.material; if (!m) return; m.envMapIntensity = 0.35; if (m.metalness > 0.5) { m.metalness = 0.45; m.roughness = Math.max(m.roughness, 0.32); } }); return g.scene; });
-  return Promise.all([__lpIsMobile() ? null : get(`laptop`), get(`phone`)]).then(([lap, ph]) => ({ base: lap?.getObjectByName(`base`), lid: lap?.getObjectByName(`lid`), ph }));
+  const get = (n) => l.loadAsync(new URL(`./models/${n}.glb`, import.meta.url).href).then((g) => { g.scene.traverse((o) => { const m = o.isMesh && o.material; if (!m) return; o.castShadow = o.receiveShadow = !0; m.envMapIntensity = 0.35; if (m.metalness > 0.5) { m.metalness = 0.45; m.roughness = Math.max(m.roughness, 0.32); } }); return g.scene; });
+  return Promise.all([get(`laptop`), __lpShowPhone ? get(`phone`) : null, get(`room`)]).then(([lap, ph, room]) => ({ base: lap?.getObjectByName(`base`), lid: lap?.getObjectByName(`lid`), ph, room }));
 }).catch((e) => (console.warn(`3D models:`, e), {})));
 const __lpUseModels = () => { const [m, s] = (0, d.useState)(null); (0, d.useEffect)(() => { let on = !0; __lpModels().then((v) => on && s(v)); return () => { on = !1; }; }, []); return m || {}; };
+function __lpRoom() {
+  const R = __lpUseModels().room;
+  if (!R) return null;
+  // on a phone the back of the desk sits behind the headline: keep it clear there
+  for (const k of [`plant`, `books`]) { const o = R.getObjectByName(k); if (o) o.visible = !__lpIsMobile(); }
+  return (0, f.jsxs)(`group`, {
+    position: [0, -0.02, 0], // desk top under the laptop's feet
+    children: [
+      (0, f.jsx)(`primitive`, { object: R }),
+      (0, f.jsxs)(`mesh`, { position: [0, 4, -5.4], receiveShadow: !0, children: [(0, f.jsx)(`planeGeometry`, { args: [70, 30] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#f1e9df`, roughness: 0.95 })] }),
+      (0, f.jsxs)(`mesh`, { position: [0, -6.33, 10], rotation: [-Math.PI / 2, 0, 0], receiveShadow: !0, children: [(0, f.jsx)(`planeGeometry`, { args: [70, 32] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#dcc6a8`, roughness: 0.85 })] }),
+    ],
+  });
+}
 let __lpPhoneTex = null, __lpPhoneCache = null;
 function __lpPhone() {
   const P = (__lpPhoneCache ??= {
@@ -309,11 +324,10 @@ function __lpLaptop({ groupRef, reduced }) {
     const open = eased * 108 * (1 - 0.92 * u.cta);
     lid.current && (lid.current.rotation.x = -open * __lpDeg);
     const M = __lpIsMobile();
-    if (M && inner.current && !inner.current.userData.phoneOnly) { inner.current.children.forEach((c, i) => { c.visible = i === 0; }); inner.current.userData.phoneOnly = !0; } // phones: only the phone (first child)
     if (inner.current) { // wide screens: devices on the right half, headline on the left (see .hero CSS)
       const wide = innerWidth >= 900 && innerWidth / innerHeight >= 1.2;
       const fit = Math.min(Math.max((innerWidth / innerHeight - 1.2) / 0.7, 0), 1); // 0 = 6:5 window, 1 = very wide
-      const tx = M ? 0 : wide ? 0.95 + 0.5 * fit : -0.38, ts = M ? 1 : wide ? 0.6 + 0.22 * fit : 0.98, k = 1 - Math.exp(-6 * Math.min(dt, 0.05));
+      const tx = M ? 0 : wide ? 0.95 + 0.5 * fit : -0.38, ts = M ? 0.62 : wide ? 0.6 + 0.22 * fit : 0.98, k = 1 - Math.exp(-6 * Math.min(dt, 0.05));
       inner.current.position.x += (tx - inner.current.position.x) * k;
       inner.current.scale.setScalar(inner.current.scale.x + (ts - inner.current.scale.x) * k);
     }
@@ -326,7 +340,8 @@ function __lpLaptop({ groupRef, reduced }) {
       position: [innerWidth >= 900 && innerWidth / innerHeight >= 1.2 ? 1.3 : -0.38, -0.62, 0.1],
       scale: innerWidth >= 900 && innerWidth / innerHeight >= 1.2 ? 0.78 : 0.98,
       children: [
-        (0, f.jsx)(__lpPhone, {}),
+        __lpShowPhone && (0, f.jsx)(__lpPhone, {}),
+        (0, f.jsx)(__lpRoom, {}),
         ...(G.base ? [(0, f.jsx)(`primitive`, { object: G.base, position: [0, 0.09, -1.02] })] : [
         __lpMesh(__lpGeo(D.base), alu, { position: [0, 0.045, 0], rotation: [-Math.PI / 2, 0, 0] }),
         __lpMesh(__lpGeo(D.deck), (0, f.jsx)(`meshStandardMaterial`, { color: `#ccd0d6`, roughness: 0.42, metalness: 0.35, envMapIntensity: 0.35 })),
@@ -353,7 +368,7 @@ function __lpLaptop({ groupRef, reduced }) {
               children: [__lpGeo(__lpBezelGeo ??= __lpSlab(2.94, 1.97, 0.0012, 0.1, 10)), (0, f.jsx)(`meshStandardMaterial`, { color: `#050506`, roughness: 0.12, metalness: 0 })],
             })]),
             (0, f.jsxs)(`mesh`, {
-              ref: (o) => { if (!__lpIsMobile()) __lpScreenMesh = o; }, position: Q ? [Q[0], Q[1], Q[2]] : [0, -0.0016, 1.03], rotation: [Math.PI / 2, 0, 0],
+              ref: (o) => { __lpScreenMesh = o; }, position: Q ? [Q[0], Q[1], Q[2]] : [0, -0.0016, 1.03], rotation: [Math.PI / 2, 0, 0],
               children: [
                 (0, f.jsx)(`planeGeometry`, { args: Q ? [Q[3], Q[4]] : [2.88, 1.84] }),
                 (0, f.jsx)(`meshBasicMaterial`, {
@@ -369,4 +384,4 @@ function __lpLaptop({ groupRef, reduced }) {
   });
 }
 
-function m({reduced:e}){let t=(0,d.useRef)(null),n=(0,d.useRef)(0);return r((r,i)=>{if(!t.current)return;let a=Math.min(i,.05);n.current+=a;let K=e?0:__lpDive(u.hero),o=(-.45+u.progress*Math.PI*1.1)*(1-K);t.current.rotation.y=c.damp(t.current.rotation.y,o,3.2+K*4,a),t.current.rotation.x=c.damp(t.current.rotation.x,(.3+u.showcase*20*p)*(1-K),3.2+K*4,a),e||(t.current.position.y=Math.sin(n.current*.6)*.12*(1-K));let s=c.lerp(1,.68,u.cta);t.current.scale.setScalar(c.damp(t.current.scale.x,s,3,a))}),(0,f.jsx)(__lpLaptop,{groupRef:t,reduced:e})}function h({reduced:e}){let t=(0,d.useRef)(null),i=(0,d.useMemo)(()=>[{pos:[2.9,1.3,-.6],color:__oxT.a,geo:`ico`,size:.28},{pos:[-3,-.9,.4],color:__oxT.b,geo:`oct`,size:.26},{pos:[2.3,-1.8,.9],color:__oxT.c,geo:`tetra`,size:.3},{pos:[-2.4,1.9,-.3],color:__oxT.amber,geo:`box`,size:.24}],[]);return r((n,r)=>{t.current&&!e&&(t.current.rotation.y+=Math.min(r,.05)*.16)}),(0,f.jsx)(`group`,{ref:t,children:i.map((t,r)=>(0,f.jsx)(n,{speed:e?0:1.1+r*.2,rotationIntensity:e?0:.7,floatIntensity:e?0:.8,children:(0,f.jsxs)(`mesh`,{position:t.pos,castShadow:!0,children:[t.geo===`ico`&&(0,f.jsx)(`icosahedronGeometry`,{args:[t.size,0]}),t.geo===`oct`&&(0,f.jsx)(`octahedronGeometry`,{args:[t.size,0]}),t.geo===`tetra`&&(0,f.jsx)(`tetrahedronGeometry`,{args:[t.size,0]}),t.geo===`box`&&(0,f.jsx)(`boxGeometry`,{args:[t.size,t.size,t.size]}),(0,f.jsx)(`meshStandardMaterial`,{color:t.color,emissive:t.color,emissiveIntensity:.55,metalness:.6,roughness:.25})]})},r))})}function g({reduced:e}){return r(({camera:t,pointer:n,setFrameloop:SF},r)=>{let i=Math.min(r,.05),a=u.progress,o=6.2+a*3.4,s=.1+a*1.5,l=e?0:n.x*.55,d=e?0:-n.y*.3;let K=e?0:__lpDive(u.hero),V=t.position.constructor;__lpLook??=new V();let X=l,Y=s+d,Z=o,lx=0,ly=0,lz=0;if(K>0&&__lpScreenMesh){let C=__lpScreenMesh.getWorldPosition(new V()),N=__lpScreenMesh.getWorldDirection(new V()),D=c.lerp(4.4,.85,K);X=c.lerp(l*(1-K),C.x+N.x*D,K),Y=c.lerp(s+d,C.y+N.y*D,K),Z=c.lerp(o,C.z+N.z*D,K),lx=C.x*K,ly=C.y*K,lz=C.z*K}let q=2.4+21.6*Math.min(K/.06,1);t.position.x=c.damp(t.position.x,X,q,i),t.position.y=c.damp(t.position.y,Y,q,i),t.position.z=c.damp(t.position.z,Z,q,i);__lpLook.set(c.damp(__lpLook.x,lx,q,i),c.damp(__lpLook.y,ly,q,i),c.damp(__lpLook.z,lz,q,i)),t.lookAt(__lpLook);__lpLayer??=document.querySelector(`.scene-layer`);let F=Math.min(Math.max((u.hero-.8)/.15,0),1);__lpLayer&&(__lpLayer.style.opacity=String(1-F));__lpBezel??=document.getElementById(`ox-site`);__lpBezel&&(__lpBezel.style.opacity=String(F));__lpBrand??=document.querySelector(`.ox-brand`);__lpBrand&&(__lpBrand.style.opacity=String(1-F),__lpBrand.style.visibility=F>=1?`hidden`:``);if(F>=1&&!__lpPaused&&typeof SF==`function`){__lpPaused=!0,SF(`never`);__lpResume??=(()=>{let w=()=>requestAnimationFrame(()=>{u.hero<.95&&__lpPaused&&(__lpPaused=!1,SF(`always`))});addEventListener(`scroll`,w,{passive:!0});return w})()}}),null}function _({reduced:e}){return(0,f.jsxs)(f.Fragment,{children:[(0,f.jsx)(`fog`,{attach:`fog`,args:[!0?`#faf7f2`:`#07070c`,9,24]}),(0,f.jsx)(`ambientLight`,{intensity:.55}),(0,f.jsx)(`hemisphereLight`,{args:[`#ffffff`,`#e9ddd0`,1.1]}),(0,f.jsx)(`directionalLight`,{position:[-3,2,6],intensity:.9}),(0,f.jsx)(`directionalLight`,{position:[4,6,5],intensity:2.1,}),(0,f.jsx)(`pointLight`,{position:[-5,-2,-3],intensity:8,color:!0?__oxT.c:`#592acb`,distance:16}),(0,f.jsx)(`pointLight`,{position:[5,2,-4],intensity:14,color:__oxT.b,distance:16}),(0,f.jsxs)(l,{resolution:256,children:[(0,f.jsx)(t,{intensity:2.6,position:[0,4,3],scale:[9,9,1],color:__oxT.a}),(0,f.jsx)(t,{intensity:.8,position:[-5,1,2],"rotation-y":Math.PI/2,scale:[6,5,1],color:!0?__oxT.c:`#592acb`}),(0,f.jsx)(t,{intensity:1.4,position:[5,-1,2],"rotation-y":-Math.PI/2,scale:[6,5,1],color:__oxT.b})]}),(0,f.jsx)(m,{reduced:e}),(0,f.jsx)(h,{reduced:e}),!e&&(0,f.jsx)(o,{count:30,scale:[14,8,8],size:1.6,speed:.3,opacity:.5,color:__oxT.spark}),(0,f.jsx)(g,{reduced:e})]})}export{_ as Experience};
+function m({reduced:e}){let t=(0,d.useRef)(null),n=(0,d.useRef)(0);return r((r,i)=>{if(!t.current)return;let a=Math.min(i,.05);n.current+=a;let K=e?0:__lpDive(u.hero),o=(-.45+u.progress*Math.PI*1.1)*(1-K);t.current.rotation.y=c.damp(t.current.rotation.y,o,3.2+K*4,a),t.current.rotation.x=c.damp(t.current.rotation.x,(.3+u.showcase*20*p)*(1-K),3.2+K*4,a);let s=c.lerp(1,.68,u.cta);t.current.scale.setScalar(c.damp(t.current.scale.x,s,3,a))}),(0,f.jsx)(__lpLaptop,{groupRef:t,reduced:e})}function h({reduced:e}){let t=(0,d.useRef)(null),i=(0,d.useMemo)(()=>[{pos:[2.9,1.3,-.6],color:__oxT.a,geo:`ico`,size:.28},{pos:[-3,-.9,.4],color:__oxT.b,geo:`oct`,size:.26},{pos:[2.3,-1.8,.9],color:__oxT.c,geo:`tetra`,size:.3},{pos:[-2.4,1.9,-.3],color:__oxT.amber,geo:`box`,size:.24}],[]);return r((n,r)=>{t.current&&!e&&(t.current.rotation.y+=Math.min(r,.05)*.16)}),(0,f.jsx)(`group`,{ref:t,children:i.map((t,r)=>(0,f.jsx)(n,{speed:e?0:1.1+r*.2,rotationIntensity:e?0:.7,floatIntensity:e?0:.8,children:(0,f.jsxs)(`mesh`,{position:t.pos,castShadow:!0,children:[t.geo===`ico`&&(0,f.jsx)(`icosahedronGeometry`,{args:[t.size,0]}),t.geo===`oct`&&(0,f.jsx)(`octahedronGeometry`,{args:[t.size,0]}),t.geo===`tetra`&&(0,f.jsx)(`tetrahedronGeometry`,{args:[t.size,0]}),t.geo===`box`&&(0,f.jsx)(`boxGeometry`,{args:[t.size,t.size,t.size]}),(0,f.jsx)(`meshStandardMaterial`,{color:t.color,emissive:t.color,emissiveIntensity:.55,metalness:.6,roughness:.25})]})},r))})}function g({reduced:e}){return r(({camera:t,pointer:n,setFrameloop:SF},r)=>{let i=Math.min(r,.05),a=u.progress,o=6.2+a*3.4,s=.1+a*1.5,l=e?0:n.x*.55,d=e?0:-n.y*.3;let K=e?0:__lpDive(u.hero),V=t.position.constructor;__lpLook??=new V();let X=l,Y=s+d,Z=o,lx=0,ly=0,lz=0;if(K>0&&__lpScreenMesh){let C=__lpScreenMesh.getWorldPosition(new V()),N=__lpScreenMesh.getWorldDirection(new V()),D=c.lerp(4.4,.85,K);X=c.lerp(l*(1-K),C.x+N.x*D,K),Y=c.lerp(s+d,C.y+N.y*D,K),Z=c.lerp(o,C.z+N.z*D,K),lx=C.x*K,ly=C.y*K,lz=C.z*K}let q=2.4+21.6*Math.min(K/.06,1);t.position.x=c.damp(t.position.x,X,q,i),t.position.y=c.damp(t.position.y,Y,q,i),t.position.z=c.damp(t.position.z,Z,q,i);__lpLook.set(c.damp(__lpLook.x,lx,q,i),c.damp(__lpLook.y,ly,q,i),c.damp(__lpLook.z,lz,q,i)),t.lookAt(__lpLook);__lpLayer??=document.querySelector(`.scene-layer`);let F=Math.min(Math.max((u.hero-.8)/.15,0),1);__lpLayer&&(__lpLayer.style.opacity=String(1-F));__lpBezel??=document.getElementById(`ox-site`);__lpBezel&&(__lpBezel.style.opacity=String(F));__lpBrand??=document.querySelector(`.ox-brand`);__lpBrand&&(__lpBrand.style.opacity=String(1-F),__lpBrand.style.visibility=F>=1?`hidden`:``);if(F>=1&&!__lpPaused&&typeof SF==`function`){__lpPaused=!0,SF(`never`);__lpResume??=(()=>{let w=()=>requestAnimationFrame(()=>{u.hero<.95&&__lpPaused&&(__lpPaused=!1,SF(`always`))});addEventListener(`scroll`,w,{passive:!0});return w})()}}),null}function _({reduced:e}){return(0,f.jsxs)(f.Fragment,{children:[(0,f.jsx)(`fog`,{attach:`fog`,args:[!0?`#faf7f2`:`#07070c`,9,24]}),(0,f.jsx)(`ambientLight`,{intensity:.55}),(0,f.jsx)(`hemisphereLight`,{args:[`#ffffff`,`#e9ddd0`,1.1]}),(0,f.jsx)(`directionalLight`,{position:[-3,2,6],intensity:.9}),(0,f.jsx)(`directionalLight`,{position:[4,6,5],intensity:2.1,castShadow:!0,"shadow-mapSize":[1024,1024],"shadow-bias":-4e-4,"shadow-normalBias":.03,"shadow-radius":4,"shadow-camera-left":-9,"shadow-camera-right":9,"shadow-camera-top":9,"shadow-camera-bottom":-9,"shadow-camera-near":.5,"shadow-camera-far":30}),(0,f.jsx)(`pointLight`,{position:[-5,-2,-3],intensity:8,color:!0?__oxT.c:`#592acb`,distance:16}),(0,f.jsx)(`pointLight`,{position:[5,2,-4],intensity:14,color:__oxT.b,distance:16}),(0,f.jsxs)(l,{resolution:256,children:[(0,f.jsx)(t,{intensity:2.6,position:[0,4,3],scale:[9,9,1],color:__oxT.a}),(0,f.jsx)(t,{intensity:.8,position:[-5,1,2],"rotation-y":Math.PI/2,scale:[6,5,1],color:!0?__oxT.c:`#592acb`}),(0,f.jsx)(t,{intensity:1.4,position:[5,-1,2],"rotation-y":-Math.PI/2,scale:[6,5,1],color:__oxT.b})]}),(0,f.jsx)(m,{reduced:e}),!e&&(0,f.jsx)(o,{count:30,scale:[14,8,8],size:1.6,speed:.3,opacity:.5,color:__oxT.spark}),(0,f.jsx)(g,{reduced:e})]})}export{_ as Experience};

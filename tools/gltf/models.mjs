@@ -1,10 +1,18 @@
-// Prepares the laptop and phone models for the 3D hero: public/assets/models/{laptop,phone}.glb.
+// Prepares the models for the 3D hero: public/assets/models/{laptop,phone,room}.glb.
 //
-//   node models.mjs <macbook.glb> <iphone.glb>
+//   node models.mjs <macbook.glb> <iphone.glb> <desk.glb> <lamp.glb> <plant.glb> <mug.glb> <books.glb>
 //
 // Sources (Sketchfab, CC Attribution 4.0, credits in public/assets/models/CREDITS.md):
-//   "macbook pro M3 16 inch 2024" by jackbaeten — 8e34fc2b303144f78490007d91ff57c4
-//   "Apple iPhone 13 Pro Max" by DatSketch       — 4328dea00e47497dbeac73c556121bc9
+//   "macbook pro M3 16 inch 2024" by jackbaeten              — 8e34fc2b303144f78490007d91ff57c4
+//   "Apple iPhone 13 Pro Max" by DatSketch                    — 4328dea00e47497dbeac73c556121bc9
+//   "Wooden Computer Desk" by Aaden (aadenhelan)              — 7ae65baca1ed448a885a40dcfa7ab1d0
+//   "Tomons Desk Lamp" by chris (ekupixels)                   — cd14b790cb4b47daa9d54422799ca95a
+//   "Potted plant" by Second Studio (kayaaku)                 — b9bbb7b0c02f4fb29976bb1d004cb2d9
+//   "Coffee Mug (School Project)" by Ole Gunnar Isager (FrenchBaguette) — 5f5ccee1514c440887c072fae8e0d699
+//   "Stack of Books" by AJH2                                  — 83d623341f164753b825d1050be009d9
+//
+// room.glb is the desk the laptop stands on, with the props on it, in the laptop's units (1 m = 8.43) and
+// space: desk top at y = 0, the laptop's footprint around the origin.
 //
 // What it does: drops the brand logos, the stock wallpapers (the scene draws its own screens) and the phone's
 // back camera, joins parts that share a material, bakes
@@ -13,7 +21,7 @@
 // own screen plane there, then welds, quantizes and meshopt-compresses, with webp textures at 1024 px.
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
-import { dedup, prune, weld, join, simplify, quantize, meshopt, textureCompress, transformMesh, getBounds } from '@gltf-transform/functions';
+import { dedup, prune, weld, join, simplify, mergeDocuments, metalRough, unpartition, quantize, meshopt, textureCompress, transformMesh, getBounds } from '@gltf-transform/functions';
 import { MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
 import sharp from 'sharp';
 import { mkdirSync } from 'node:fs';
@@ -54,13 +62,13 @@ function regroup(doc, scene, nodes, name, m) {
   return group;
 }
 
-async function finish(doc, file) {
+async function finish(doc, file, { ratio = 0.6, error = 0.0004 } = {}) {
   await doc.transform(
     dedup(), prune(), weld(), join({ keepNamed: false }), // one draw per material instead of one per part
-    simplify({ simplifier: MeshoptSimplifier, ratio: 0.6, error: 0.0004, lockBorder: true }),
+    simplify({ simplifier: MeshoptSimplifier, ratio, error, lockBorder: true }),
     quantize(), meshopt({ encoder: MeshoptEncoder, level: 'medium' }),
     textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [1024, 1024] }),
-    prune(),
+    prune(), unpartition(), // merged sources arrive with a buffer each; a .glb holds one
   );
   mkdirSync(OUT, { recursive: true });
   await io.write(pathJoin(OUT, file), doc);
@@ -129,6 +137,49 @@ async function phone(src) {
   console.log('phone', { scale: s.toFixed(4), screen: screen.map((v) => +v.toFixed(4)) });
 }
 
+const M = 8.43; // scene units per metre (the laptop is 35.6 cm and 3.0 units wide)
+
+/** Desk + props. Each source is scaled to a real size, turned, and set down on the desk top (y = 0). */
+async function room([desk, lamp, plant, mug, books]) {
+  const doc = await io.read(desk);
+  await doc.transform(metalRough()); // the desk uses the old spec/gloss materials three no longer reads
+  const scene = doc.getRoot().getDefaultScene();
+  const groups = [];
+  // name, source doc (desk is the base), real size along `axis` in metres, turn about Y, target [x, z], drop node names
+  const items = [
+    ['desk', null, 0.75, 'y', 0, [0, -0.72], null],
+    ['lamp', lamp, 0.4, 'y', 3.9, [2.9, -3.6], /^(Backdrop|LightPanels)/],
+    ['plant', plant, 0.36, 'y', 0, [-3.6, -3.0], null],
+    ['mug', mug, 0.095, 'y', -0.6, [2.3, 0.75], null],
+    ['books', books, 0.24, 'xz', -0.25, [-2.0, -2.55], null],
+  ];
+  for (const [name, src, size, axis, turn, [x, z], drop] of items) {
+    let nodes;
+    if (src) {
+      const other = await io.read(src);
+      await other.transform(metalRough());
+      const before = new Set(doc.getRoot().listNodes());
+      mergeDocuments(doc, other);
+      nodes = doc.getRoot().listNodes().filter((n) => !before.has(n) && n.getMesh());
+      // merged scenes come in as extra scenes: hang their roots under the default scene
+      for (const sc of doc.getRoot().listScenes()) if (sc !== scene) { sc.listChildren().forEach((c) => scene.addChild(c)); sc.dispose(); }
+    } else nodes = scene.listChildren().flatMap((n) => meshNodes(n));
+    if (drop) nodes = nodes.filter((n) => { if (drop.test(n.getName())) { n.setMesh(null); return false; } return true; });
+    const b = box(nodes.flatMap(points));
+    const ext = axis === 'y' ? b.max[1] - b.min[1] : Math.max(b.max[0] - b.min[0], b.max[2] - b.min[2]);
+    const s = (size * M) / ext;
+    const c = [(b.min[0] + b.max[0]) / 2, (b.min[2] + b.max[2]) / 2];
+    // centre on the footprint, sit on y = 0 (the desk hangs below it), turn, move to its spot
+    const lift = name === 'desk' ? -b.max[1] : -b.min[1];
+    const m = mul(T(x, 0, z), mul(RY(turn), mul(S(s), T(-c[0], lift, -c[1]))));
+    groups.push(regroup(doc, scene, nodes, name, m));
+  }
+  for (const n of [...scene.listChildren()]) if (!groups.includes(n)) n.dispose();
+  await finish(doc, 'room.glb', { ratio: 0.3, error: 0.002 });
+  console.log('room', groups.map((g) => g.getName()).join(' '));
+}
+
 await MeshoptEncoder.ready; await MeshoptSimplifier.ready;
 await laptop(process.argv[2]);
 await phone(process.argv[3]);
+if (process.argv.length > 4) await room(process.argv.slice(4, 9));
