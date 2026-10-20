@@ -27,6 +27,9 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
     README). `tools/demo_photos.py <folder>` crops and converts originals into them, and `build_pages.py`
     writes the list of existing files into `industries.js`, so a missing photo is a plain brand-coloured
     frame, never a 404. Real photographs only, licence noted in `SOURCES.md` there.
+- `public/vendor/gsap/SplitText.min.js` — GSAP's SplitText (3.15.0, same version as the bundled GSAP, which
+  `index-*.js` exposes as `window.__oxGsap`). `site-src/headline.js` uses it to bring the hero headline in
+  letter by letter, then reverts the split. Add other GSAP plugins the same way, only when a feature needs one.
 - `site-src/` — readable sources of the site scripts (theme, language, chat, sounds, cursor, laptop page,
   example-businesses gallery, home-page plans, liquid glass). Edit these, never the minified copies in `public/`.
 - `tools/build_pages.py` — run after any change: minifies `site-src/` into `public/` and generates the
