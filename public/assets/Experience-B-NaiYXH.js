@@ -276,6 +276,7 @@ const __lpModels = () => (__lpGL ??= import(`./gltf-zbhD1phr.js`).then(({ GLTFLo
   return Promise.all([!__lpDesk && __lpIsMobile() ? null : get(`laptop`), __lpShowPhone ? get(`phone`) : null, __lpDesk ? get(`room`) : null]).then(([lap, ph, room]) => ({ base: lap?.getObjectByName(`base`), lid: lap?.getObjectByName(`lid`), ph, room }));
 }).catch((e) => (console.warn(`3D models:`, e), {})));
 const __lpUseModels = () => { const [m, s] = (0, d.useState)(null); (0, d.useEffect)(() => { let on = !0; __lpModels().then((v) => on && s(v)); return () => { on = !1; }; }, []); return m || {}; };
+const __lpRoomW = 7.4; // half the room's width: the desk (±6.24) stands in an alcove, side walls at x = ±7.4, back wall at z = -5.4
 function __lpRoom() {
   const R = __lpUseModels().room;
   if (!R) return null;
@@ -287,6 +288,11 @@ function __lpRoom() {
       (0, f.jsx)(`primitive`, { object: R }),
       (0, f.jsxs)(`mesh`, { position: [0, 4, -5.4], receiveShadow: !0, children: [(0, f.jsx)(`planeGeometry`, { args: [70, 30] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#f1e9df`, roughness: 0.95 })] }),
       (0, f.jsxs)(`mesh`, { position: [0, -6.33, 10], rotation: [-Math.PI / 2, 0, 0], receiveShadow: !0, children: [(0, f.jsx)(`planeGeometry`, { args: [70, 32] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#dcc6a8`, roughness: 0.85 })] }),
+      // side walls: the desk stands in the room's back half, so both back corners show
+      ...[-1, 1].map((k) => (0, f.jsxs)(`mesh`, { key: `w${k}`, position: [k * __lpRoomW, 4, 4.6], rotation: [0, -k * Math.PI / 2, 0], receiveShadow: !0, children: [(0, f.jsx)(`planeGeometry`, { args: [20, 30] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#e8dccd`, roughness: 0.95 })] })),
+      // skirting board along the three walls
+      (0, f.jsxs)(`mesh`, { position: [0, -6.0, -5.32], receiveShadow: !0, children: [(0, f.jsx)(`boxGeometry`, { args: [2 * __lpRoomW, 0.66, 0.16] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#fbf8f3`, roughness: 0.6 })] }),
+      ...[-1, 1].map((k) => (0, f.jsxs)(`mesh`, { key: `s${k}`, position: [k * (__lpRoomW - 0.08), -6.0, 4.6], receiveShadow: !0, children: [(0, f.jsx)(`boxGeometry`, { args: [0.16, 0.66, 20] }), (0, f.jsx)(`meshStandardMaterial`, { color: `#fbf8f3`, roughness: 0.6 })] })),
     ],
   });
 }

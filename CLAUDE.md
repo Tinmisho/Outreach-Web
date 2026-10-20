@@ -18,7 +18,7 @@ The public Outreach website: a 3D scroll-driven home page plus light content pag
     them through `gltf-*.js` (GLTFLoader built by `tools/gltf/build.mjs` on the three inside `r3f-*.js`) and lays
     its own screen planes (`__lpScreenMesh`) on them; the drawn devices show until they load or if they fail.
     `room.glb` is the wooden desk the laptop stands on (desk top at y = 0), with a lamp, plant, books and mug,
-    plus a wall and floor drawn in `__lpRoom`; the props are placed in the `items` table of `models.mjs`, kept
+    plus the walls (back and both sides, `__lpRoomW`, with a skirting board) and floor drawn in `__lpRoom`; the props are placed in the `items` table of `models.mjs`, kept
     right of the headline on desktop, and the plant and books are hidden on phones. The desk is the default scene;
     the earlier floating laptop + phone (with the floating shapes and the idle bob) stays as the other one:
     `?scene=float` / `?scene=desk` picks it and is remembered (`__lpDesk`). The phone only shows in the floating scene
